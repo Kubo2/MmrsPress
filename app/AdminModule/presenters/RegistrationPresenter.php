@@ -1,5 +1,7 @@
 <?php
+
 namespace AdminModule;
+
 /**
  *
  * @author Dušan Vala as rellik
@@ -102,39 +104,49 @@ class RegistrationPresenter extends \BasePresenter {
             $this->redirect('this');
         }
     }
-    
+
     // nastavení knihy jako veřejné
     public function handleVerejna($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '1'
-            ));
-            $this->flashMessage('Registrace uživatelů byla povolena.');
-            $this->redirect('this');
+        if ($this->user_role == 1) {
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '1'
+                ));
+                $this->flashMessage('Registrace uživatelů byla povolena.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'user',
+                    'public' => '1'
+                ));
+                $this->flashMessage('Registrace uživatelů byla povolena.');
+                $this->redirect('this');
+            }
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'user',
-                'public' => '1'
-            ));
-            $this->flashMessage('Registrace uživatelů byla povolena.');
+            $this->flashMessage('Pro tuto operaci musíte mít práva hlavního administrátora.');
             $this->redirect('this');
         }
     }
 
 // nastavení knihy jako skryté
     public function handleSkryta($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '0'
-            ));
-            $this->flashMessage('Registrace uživatelů byla zakázána.');
-            $this->redirect('this');
+        if ($this->user_role == 1) {
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '0'
+                ));
+                $this->flashMessage('Registrace uživatelů byla zakázána.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'user',
+                    'public' => '0'
+                ));
+                $this->flashMessage('Registrace uživatelů byla zakázána.');
+                $this->redirect('this');
+            }
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'user',
-                'public' => '0'
-            ));
-            $this->flashMessage('Registrace uživatelů byla zakázána.');
+            $this->flashMessage('Pro tuto operaci musíte mít práva hlavního administrátora.');
             $this->redirect('this');
         }
     }
