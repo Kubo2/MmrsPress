@@ -105,7 +105,7 @@ class RegistrationPresenter extends \BasePresenter {
         }
     }
 
-    // nastavení knihy jako veřejné
+    // Povolení uživatelů
     public function handleVerejna($id) {
         if ($this->user_role == 1) {
             if (isset($id)) {
@@ -128,7 +128,7 @@ class RegistrationPresenter extends \BasePresenter {
         }
     }
 
-// nastavení knihy jako skryté
+// Zakázání registrace uživatelů
     public function handleSkryta($id) {
         if ($this->user_role == 1) {
             if (isset($id)) {
