@@ -1,0 +1,573 @@
+/* 
+    Document   : screen.css (static css)
+    Created on : 25.2.2012, 10:22:35
+    Author     : Dušan Vala as rellik
+    Home page  : http://mmrspress.eu
+    Description: Purpose of the stylesheet follows.
+*/
+
+/******************** rozložení stránky *************/
+body {
+    margin: 0;
+    padding: 0;
+    font: 12px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+img, a img {
+    border: none;
+}
+#header {
+    background-repeat: repeat-x;
+    border-radius: 12px 12px 0 0;
+}
+#header div.title {
+    padding-top: 25px;
+    float: left;
+    font-size: 300%;
+}
+#header a , #login{
+    color: #FFF;
+    text-decoration: none;
+}
+#header div.user {
+    padding: 12px 1em;
+    float: right;
+    color: #FFF;
+}
+#header div.user span {
+    font-weight: bold;
+}
+#header-inner {
+    width: 100%;
+    border-radius: 9px 9px 0 0;
+}
+#login {
+    float: right;
+    margin: 5px 10px;
+}
+#page {
+    min-width: 800px;
+    margin: 0px auto;
+    border: 1px solid #333;
+    position: relative;
+    border-radius: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, .1);
+}
+#container {
+    margin: 0 auto;
+}
+#sidebar {
+    float: left;
+    width: 210px;
+}
+#sidebar_right {
+    float: right;
+    width: 210px;
+}
+.rubriky_layout {
+    border-radius: 5px;
+    margin: 3px;
+}
+.center {
+    text-align: center;
+    margin-top: 3px;
+    display: block;
+}
+.rubriky, rubriky logged-in, rubriky icon {
+    display: block;
+    padding-left: 3px;
+    font-weight: bold;
+    font-size: 110%;
+    border-radius: 5px 5px 0 0;
+}
+.rubriky img {
+    padding-top: 3px;
+    margin-right: 5px;
+}
+.rubriky_layout a {
+    padding-left: 10px;
+    }
+.rss {
+    float: right;
+    margin: 5px 10px 0 0;
+    position: relative;
+    }
+.rss_menu {
+    padding-left: 5px;
+    display: block;
+    }
+#sidebar div.title {
+    font-weight: bold;
+    margin: 1em 0 1ex;
+    font-size: 120%;
+}
+#content {
+    border-left: 1px solid #eee;
+    padding: 10px;
+    border-radius: 12px; 
+    box-shadow: 0 10px 10px rgba(0, 0, 0, .1);
+}
+#footer {
+    height: 30px;
+    width: 100%;
+    text-align: center;
+    margin-top: 1ex;
+    border-radius:  0 0 12px 12px;
+    clear: both;
+    vertical-align: top;
+    line-height: 2;
+}
+#viewAdmin {
+    width: 100%;
+    height: 25px;
+    background-color: #444;
+    color: #BFBFBF;
+    border-bottom: 2px solid #999;
+    font-size: 110%;
+}
+#viewAdmin a:hover {
+    text-decoration: underline;
+}
+#viewAdmin div {
+    float: right;
+    width: auto;
+    padding-right: 10px;
+}
+#viewAdmin .mmrs {
+    padding-left: 10px;
+}
+#viewAdmin:first-letter {
+    color: #0099cc;
+}
+#viewAdmin a {
+    color: #C1D2E1;
+    text-decoration: none;
+}
+/*********************** Navigace. ******************/
+/*********************** levé menu ******************/
+div.task-lists ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+}
+div.task-lists li {
+    display: block;
+    margin: 1ex;
+}
+.mainMenu a {
+    text-decoration: none;
+    display: block;
+    font-size: 120%;
+    padding: 0 1ex 1px;
+    text-align: left;
+}
+.rubrikyMenu {
+    list-style: none;
+}
+.rubrikyMenu a {
+    text-decoration: none;
+    font-size: 120%;
+}
+.rubrikyMenu a:hover {
+    font-size: 120%;
+    text-decoration: underline;
+}
+.podmenu {
+    font-size: 80%;
+}
+/************* horizontální menu *******************/
+#sidebarTop {
+    width: 100%;
+    font-size: 110%;
+}
+/* Author: Craig Erskine Description: Dynamic Menu System - Horizontal/Vertical */ 
+#mainMenuTop {
+    width:100%;
+    height: 35px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#mainMenuTop ul { 
+    width: 160px;
+    /* Sub Menu Width */ 
+    margin: 0;
+    list-style: none;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+} 
+ul#mainMenuTop ul ul,ul#mainMenuTop ul ul ul {
+    top: 0;
+    left: 100%;
+}
+#mainMenuTop li {
+    float: left;
+    display: inline;
+    position: relative;
+}
+ul#mainMenuTop ul li {
+    width: 100%;
+    display: block;
+
+}
+/* Root Menu */ 
+ul#mainMenuTop a { 
+    width: 125px;
+    display: block;
+    height: 35px;
+    line-height: 2.2;
+    font-size: 110%;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}
+/* 2nd Menu */ 
+ul#mainMenuTop li:hover li a,ul#mainMenuTop li.iehover li a {
+    float: none;
+    font-weight: normal;
+    width: 150px;
+    padding-left: 3px;
+    text-align: left;
+    border-radius:  0 5px 5px 0;
+}
+/* Hover Function - Do Not Move */ 
+ul#mainMenuTop li:hover ul ul,ul#mainMenuTop li:hover ul ul ul,ul#mainMenuTop li.iehover ul ul,ul#mainMenuTop li.iehover ul ul ul { 
+    display: none;
+}
+ul#mainMenuTop li:hover ul,ul#mainMenuTop ul li:hover ul,ul#mainMenuTop ul ul li:hover ul,ul#mainMenuTop li.iehover ul,ul#mainMenuTop ul li.iehover ul,ul#mainMenuTop ul ul li.iehover ul { 
+    display: block;
+}
+#sidebarTop .current {
+    background-image: url("../images/active.png");
+    background-repeat: no-repeat;
+    z-index: 10;
+}
+/************************ Titulky *******************/
+h1 {
+    font-size: 150%;
+    padding: 0 0 4px;
+    margin: 0 0 1em;
+}
+h2 {
+    font-size: 110%;
+    margin: 1.5em 0 1ex;
+}
+/************************ Tabulky *******************/
+table {
+    width: 100%;
+    border-collapse: separate;
+    text-align: left;
+    margin-bottom: 1.4em;
+}
+thead th {
+    font-size: 112%;
+}
+th, td {
+    padding: 5px 6px 4px;
+}
+tr.even {
+    background-color: #FAFAFA;
+}
+tr.odd {
+    background-color: #eaeaea;
+}
+table.tasks tr.done {
+    color: #888;
+    text-decoration: line-through;
+}
+table.tasks .created {
+    font-size: smaller;
+    width: 70px;
+    text-align: right;
+}
+table.tasks .tasklist {
+    width: 65px;
+}
+table.tasks .user {
+    font-size: smaller;
+}
+table.tasks .action {
+    width: 75px;
+}
+tr.notice td {
+    text-align: center;
+    border: 1px solid #c0c0c0;
+    background-color: #f6f6f6;
+    padding: 1em;
+}
+#news label {
+    font-size: 80%;
+}
+.counter {
+    font-weight: bold;
+    line-height: 0.8;
+}
+/******************************** Formuláře *********************/
+fieldset {
+    border-top: 1px solid #bbb;
+    border-width: 1px 0;
+    margin: 1.5em 0;
+    padding: 1ex 0;
+}
+legend {
+    font-weight: bold;
+    color: #105CB6;
+    margin-left: 1em;
+}
+label {
+    font-weight: bold;
+}
+form div.pair {
+    margin-bottom: 1ex;
+}
+form div.pair label {
+    display: block;
+    width: 130px;
+    text-align: right;
+    float: left;
+    line-height: 2;
+    vertical-align: middle;
+}
+form div.pair div.input {
+    margin-left: 150px;
+}
+form div.pair div.input label {
+    width: auto;
+    display: inline;
+    float: none;
+    line-height: normal;
+}
+form ul.error {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+form ul.error li {
+    display: block;
+    padding: .8em;
+    margin-bottom: 1em;
+    border: 2px solid #FBC2C4;
+    background: #FBE3E4;
+    color: #8a1f11;
+}
+input[type=checkbox] {
+    vertical-align: middle;
+}
+.task-form input[type=submit] {
+    float: right;
+}
+/******************* Flash zprávičky ******************/
+div.flash {
+    padding: .8em;
+    margin-bottom: 1em;
+    border: 2px solid #ddd;
+}
+div.flash.success {
+    background: #E6EFC2;
+    color: #264409;
+    border-color: #C6D880;
+}
+div.flash.info {
+    background: #FFF6BF;
+    color: #514721;
+    border-color: #FFD324;
+}
+div.flash.error {
+    background: #FBE3E4;
+    color: #8a1f11;
+    border-color: #FBC2C4;
+}
+/********************** Ikonky *************************/
+.icon {
+    padding-left: 24px;
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+}
+.icon.tick {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAWVJREFUeNpi/P//PwNdgVsnw38QJkuzYxvD/3c/JoIxiE2y5idfmv/P2sQAxk+/NoJdwkKs5sV5zQzbj9QyMLAyMDACxb7/f4eqyB1omjsWvzkBNd/+XPR/1h6G/zOBePZehv+XPsX/d4J4wRiu6MqnOCCGS0DEW4GKPyb8n30Q6OwDQM2HQJoTUDWDbD37we//7GNABUcZ/p967//foZkBjEFskPgsoPgcIH36gz+qZiBggfuHmYHhH1Dqwq2NDLVpNmBJEJuBCehnIFZTsWOomLaRYV8VgwlQ6izMAJB+Y5c2hjOlqboMj59cZvj3j4EBlrYYgbJMQM2yMroMXbMvM+xF0wwCQHsZnt/by7DlheCrNAd7WYYfPz4x/AfZCpRhBsaRiIQsw4Q5t7FqRgcgl/xf+Zz7/9wbDGAMYrug+ZkQMHYFalj9khuMXUnUDDfEExgznp3kaYYbQqxmRkqzM0CAAQBWbMG1YQFlxwAAAABJRU5ErkJggg==");
+}
+.icon.user {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAfNJREFUeNqcU89rE0EYfZNsto1rbdUmofUgmoOWQIm/EOtB7aUIpfRWL148eVOwf0FO4g8oWIpHvRhPQvHeixSRWooptVVIrEnRpkk2+yM7s7PdzbpJKIaykeCD4YNv3nvzzcz3Edd1cQBCSDM+unk8TgQsRwfDMZO7kGVeDAXd60+XqtnGfrsmAB/sO1i8cmkwlkyexbmROELSQEyrYdGP62vQEyYJUZQQEE8gGIogQCRYNhJdG1jcxs8dDdQSMXI5gYnpMTi240eF4JekhokHC8/BC79RlVVIx4JwLIauK+CmlUapBKWiQJUVL8oQROdl1wYr9pnU8koeVNfADB1beQOvM/VUVwYTL7bTY6m1TRa9he8/dvFp7RsKQhL332m/bs9vv/3nG9x4/GXvzgUpcvV8P4YqFF9zDo6GOIZ6dzE13oePG3zGfJIZ96hRX4PhvkBk9FQY6XWGexcnce3uJEYpxUaR4U2GY/r0Eei6Gel4harKkC1zr/NqmFsqATZD3Vvp9ToqZR25sgXDoJ2vUFIoCvI+NI2h8e0zr4wWyTtGCBLkK71g1OxsUCiqWM1VcXJAQrPdD1qetObkc1YBY7yzAc19ePi+Rp85bivfpm/CK8J291Zngam/A3hoGvu9EG/THEaDnPU0qq/B/+CPAAMAQ2jaR3QERSQAAAAASUVORK5CYII=");
+}
+.icon.edit {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAXxJREFUeNqU0s1LAkEYBvDHsK4FJXmQOmR1iaLyov9Ah4g+Dt3qVEJU9xCkIFAp6LAlBIYQ3oMIukhKSUaFH+mlukggRWuipeLX2jS7ZGDaMg3swszu79l93xngH+Nhy0eitjNSnRNC0MSK161W0jrUC9KlRnTb8xPCFGCy7JKVpWXsh53I81nEsxUEzUeEKeDaPEJMc33g7E6Mj03A/XmOcqYMIclLzxVy2G/WE/20CkjEEWtZgOuWYHBAC++VF9ymTUd7EFDI4hk1wL8BKXplXhFpW8VhSIEdy4aOvhIQm6iQx0mKU0D2na4W4AprML8XlPCfu1CPP2ihAg4i/TW44S40xmU47rRY5Hx1uCbgUgYbuYuGWBxK8eZb0xHDlOq7YWlmLAUkjidJx7AeeHQDSRqQy9H/EpiwVAIpVmhMJ0rds0BRoF8uMmMp4OS+HaeeJyhLeUBjgCPUw4ylEmJ8CS/PN9Cmm1EoKGG0+5lx9SiP/lpjxuJB+hJgAG9My8C+hsJpAAAAAElFTkSuQmCC");
+}
+/********************* Stránkování *********************/
+.paginator {
+    margin: 1em 0;
+    font-size: 90%;
+    width: 100%;
+    text-align: center;
+}
+.paginator a, .paginator span {
+    margin-right: 0.1em;
+    padding: 0.2em 0.5em;
+    color: #aaaaaa;
+}
+.paginator a {
+    text-decoration: none;
+    color: #666;
+}
+.paginator span.button {
+    border: 1px solid #ddd;
+    color: #ddd;
+}
+.paginator .current {
+    font-weight: bold;
+}
+/********************* formátování obsahu *********************/
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}
+.poznamka {
+    border-top: 1px solid #dcdcdc;
+    font-size: 90%;
+    color: #7F7F7F;
+}
+#logged-in {
+    padding-left: 5px;
+    color: #333;
+}
+#logged-in a {
+    padding-left: 5px;
+    color: #333;
+}
+#help {
+    visibility: hidden; 
+    position: absolute; 
+    z-index: 2; 
+    background-color: White;
+    padding: 4px;
+    border: 1px solid;
+}
+.red {
+    color: #EE0000;
+}
+.green {
+    color: #00EE00;
+}
+.blue {
+    color: #0000EE;
+}
+.greyblue {
+    color: #366097;
+}
+pre { font-size: 12px; 
+      line-height: 1; 
+      padding: 5px; 
+      margin: 1.3em 0; 
+      overflow: auto; 
+      max-height: 500px; 
+      background: #F1F5FB; 
+      border-radius: 5px; 
+      box-shadow: 0 1px 1px rgba(0, 0, 0, .1); 
+}
+code {
+    white-space: nowrap;
+    display: block;   
+    border: none;
+    padding: 5px;
+}
+
+.bookUser {
+    padding: 3px;
+    border-radius: 5px;
+    float: left;
+    width: 130px;
+    height: 80px;
+    margin-right: 10px;
+}
+.bookUser img {
+    margin-right: 5px;
+}
+.bookUser a {
+    text-decoration: none;
+}
+.bookWiew {
+    margin-bottom: 10px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
+    min-height: 65px;
+}
+/******************* Fotogalerie *********************/
+#aktuality td {
+    border-bottom: 2px solid #cdcdcd;
+    padding-bottom: 10px; 
+}
+.galerie {
+    width: 100%;
+}
+.galerie td {
+    width: 25%;
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid #888;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+.galerie a {
+    font-size: 110%;
+    font-weight: bold;
+    text-decoration: none;
+}
+.users {
+    border: 1px solid #bbaacc;
+    border-radius: 5px; 
+    background-color: #F1F5FB;
+}
+/*------------------POPUPS------------------------*/
+.zobraz {
+    margin: 0;
+    padding: 0;
+    visibility: hidden; 
+    position: absolute; 
+    top: 20%;
+    z-index: 1; 
+    background-color: #dcdcdc;
+    border: 2px solid #999999;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: right;
+    box-shadow: rgba(0, 0, 0, 0.5) 10px 10px 20px;
+}
+.zobraz a {
+    padding: 0px 3px 3px 3px;
+    float: right;
+    margin: 5px;
+    text-decoration: none;
+}
+
+
+#ajax-spinner {
+	margin: 15px 0 0 15px;
+	padding: 13px;
+	background: white url('../images/spinner.gif') no-repeat 50% 50%;
+	font-size: 0;
+	z-index: 123456;
+	display: none;
+}
+
+div.flash {
+	color: black;
+	background: #FFF9D7;
+	border: 1px solid #E2C822;
+	padding: 1em;
+	margin: 1em 0;
+}
+
+a[href^="error:"] {
+	background: red;
+	color: white;
+}
+.small {
+    font-size: 80%;
+}

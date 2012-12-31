@@ -1,0 +1,9 @@
+{var title='Editace popisu fotky'} {* nastavení měnícího se titulku stránky*}
+
+{block content}
+<h1><i class="mmrs-icon-photo-gallery"></i> Změna popisu fotky</h1>
+    <p>Pro fotku: <br />
+        {foreach $foto as $file} <img src="{$basePath}/gallery/{$file->folder}/nahledy/{$file->photo}" alt="" />{/foreach}
+    </p>
+    {control descriptionImageForm}
+{/block}

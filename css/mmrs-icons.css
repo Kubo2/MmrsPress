@@ -1,0 +1,240 @@
+/* 
+    Document   : mmrs-icons.css
+    Created on : 16.12.2012, 16:52:56
+    Author     : rellik
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.mmrs-icon-edit {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) 0 0 no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-preview {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -25px 0 no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-eye {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -50px 0 no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-eye-disabled {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -75px 0 no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-plus {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) 0 -20px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-minus {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -25px -20px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-ok {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -50px -20px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-disabled {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -75px -20px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-delete {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) 0 -40px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-foto {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -25px -40px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-foto-plus {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -50px -40px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-user-1, .mmrs-icon-user {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -75px -40px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-user-2 {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) 0 -60px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-user-3 {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -25px -60px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-users {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -50px -60px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-calendar {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -75px -60px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-settings {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) 0 -80px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-pdf {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -25px -80px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-alert {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -50px -80px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-camera {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -75px -80px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-home {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) 0px -100px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-email {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -25px -100px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-calendar-green {
+    width: 20px;
+    height: 20px; 
+    background: url(images/mmrs_20_20_icons.png) -50px -100px no-repeat;
+    display: inline-block;
+    padding-right: 10px;
+}
+.mmrs-icon-mark {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_20_20_icons.png) 0 -140px no-repeat;
+    display: inline-block;
+}
+.mmrs-icon-files {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_20_20_icons.png) -25px -140px no-repeat;
+    display: inline-block;
+}
+.mmrs-icon-book {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_20_20_icons.png) -50px -140px no-repeat;
+    display: inline-block;
+}
+.mmrs-icon-edit-book {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_20_20_icons.png) -75px -140px no-repeat;
+    display: inline-block;
+}
+.mmrs-icon-photo-gallery {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_20_20_icons.png) 0 -165px no-repeat;
+    display: inline-block;
+}
+.mmrs-icon-bookmarks {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_20_20_icons.png) -25px -165px no-repeat;
+    display: inline-block;
+}
+.mmrs-icon-images {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_20_20_icons.png) -50px -165px no-repeat;
+    display: inline-block;
+}
+.mmrs-icon-rss {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_20_20_icons.png) -75px -165px no-repeat;
+    display: inline-block;
+}
+.mmrs-icon-geometry {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_20_20_icons.png) 0 -190px no-repeat;
+    display: inline-block;
+}
+.mmrs-icon-block {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_20_20_icons.png) -25px -190px no-repeat;
+    display: inline-block;
+}
+.mmrs-icon-calc {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_20_20_icons.png) -50px -190px no-repeat;
+    display: inline-block;
+}
+.mmrs-icon-usercards {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_20_20_icons.png) -75px -190px no-repeat;
+    display: inline-block;
+}

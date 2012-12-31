@@ -1,0 +1,98 @@
+{var title='Nová aktualita'} {* nastavení měnícího se titulku stránky*}
+
+{block content}
+<h1><i class="mmrs-icon-edit-book"></i> Nová aktualita</h1>
+<a href="#" id="dialog_lnk"><i class="mmrs-icon-mark"></i>Nápověda</a>
+<a href="#" id="prilohy_lnk"><i class="mmrs-icon-files"></i>Přílohy</a>
+<div id="dialog" title="Nápověda pro psaní příspěvků">
+    <p>
+        Do článku jde pouhým přetažením přidat obrázek, nebo jiný dokument s 
+        nabídky v pravém sloupci (viz. použití příloh). Přiložené obrázky jsou ve výchozím nastavení o velikosti 
+        500px na šířku, tudíž je možno obrázky v textu tyto obrázky zvětšit až na tuto velikost. 
+        Velikost vkládaných obrázků lze nastavit v nastavení médií.
+    </p>
+    <p>Položka "<strong>Název</strong>" je budoucí položka v menu a je tudíž nutné její vyplnění.</p>
+    <p>Položka "<strong>Datum zveřejnění</strong>" složí pro zadání data, od kdy má být článek zveřejněn. Pokud toto políčko 
+        nebude vyplněno, nastaví se aktuální datum a článek bude veřejný hned po jeho publikování.</p>
+    <h2>Použití příloh</h2>
+<p>Do článku lze přidat obrázek nebo jinou přílohu jejím pouhým přetažením (tato funkce 
+    nefunguje v Internet Exporeru), nebo kliknutím na fotku. U vložení s náhledem se 
+    fotka vloží jako odkaz na skutečný snímek stejně jako fotky ve fotogalerii. Je tak možné
+    v nastavení médií povolit větší rozměr vkládaných příloh a ty pak vkládat tímto způsobem.</p>
+
+<h2>Vložení videa</h2>
+<p>Do článku jde přidat video, které je umístěno na youtube, streamu nebo na jiném serveru, 
+    kde je možné získat kód pro vložení na stránky. U youtube stačí zkopírovat adresu videa 
+    a tu následně pomocí formátovacího tlačítka (ikonka filmového pásu) vložit video do stránky. 
+    U streamu je postup trochu jiný. Pod videem na streamu je odkaz "Více a embed". Po jeho 
+    odkliknutí se zobrazí mimo jiné i kód pro vložení na stránky (web). Tento k stačí zkopírovat 
+    (ctl+c) a v editoru článku ho pomocí "hmtl" tlačítka <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAABHNCSVQICAgIfAhkiAAAAGpJREFUKFNjYKAyYASZJ+vU8v/xvhoUNkgMZhdIzjL5EJwPEz8+144xouX+/xU1imC9IMAEY6DTMAtgNEgeZAAyja4HxGeBCSK7CJtCYsXgLgS5BNk1xBqArg6nl9EV4uODwhGE8akhWw4A/bknIO1gbG4AAAAASUVORK5CYII=" alt="HTML"> vložit (ctrl+v). Tento druhý 
+    způsob je možné použít i pro videa z youtube (kód na youtube se dá získat po kliknutí na 
+    video pravým tlačítkem).</p>
+
+<h2>Upozornění</h2>
+<ul>
+    <li>Nově vytvořené aktuality jsou nastaveny jako neveřejné (koncept). 
+        Jejich zobrazení na webu je nutné povolit ve správě aktualit.</li>
+    <li>Pokud z nabídky příloh, 
+        odstraníte nějakou položku, projeví se to i v článku, kde je tato příloha použita!</li>
+</ul>
+<p>Jelikož je přihlášení uživatele omezeno při nečinnosti pouze na 20 minut, je možné, že při 
+    psaní delšího článku tento limit překročíte. pokud by se tak stalo, tak po odeslání článku 
+    budete přesměrováni na přihlašovací stránku a celý napsaný článek bude nenávratně ztracen.
+    Pokud chcete napsat delší článek, tak si ho připravte třeba v <strong>Open Office</strong>,
+    nebo <strong>Ms Office</strong>.</p>
+</div>
+            {control addNewsForm}
+
+<div id="prilohy" title="Dostupné přílohy pro aktuality">
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Obrázky</a></li>
+            <li><a href="#tabs-2">Dokumenty</a></li>
+            <li><a href="{link :Admin:AddFile:news select=>news, id=>$id}">Přidat soubor</a></li>
+        </ul>
+        <div id="tabs-1">
+            <table>
+                <tr>
+        {foreach $images as $img}
+            {if $img != "s"}
+                    {var $size = getimagesize(WWW_DIR.'/news/'.$img)}
+                    <td><a href="#" onclick="tinyMCE.execCommand('mceInsertContent',false,'<img alt=\'{!$img}\' src=\'{!$basePath}/news/{!$img}\' {if $size[0] >= '501'}width=\'500\'{/if}>');"><img src="{$basePath}/news/{$img}" width="100" alt="{$img}" title="{$img}"></a>
+                        <span  class="buttons"><a href="#" onclick="tinyMCE.execCommand('mceInsertContent',false,'<a href=\'{!$basePath}/news/{!$img}\' class=\'lightbox[1]\'><img alt=\'{!$img}\' src=\'{!$basePath}/news/{!$img}\' {if $size[0] >= '501'}width=\'500\'{/if}></a>');">Vložit s náhledem</a></span>
+                        <br><span class="small">{substr($img, 0,15)}</span> <a href="{link deleteImg! $img}" onclick="return confirm('Smazání obrázku se projeví i v článku ve kterém je použit!\n Opravdu chcete soubor smazat?')" title="Smazat" class="delete"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAABFJJREFUOE+NVG1MW2UUfk4/KG2BUqwUxLFgFhDNJERpaICwTTCLZMwMFmM0wWVz/kKzP/thYrIfU3/MJYpLnKJmy7LNQIaDzbIoEOYPGGHIhoYNZLjJHEJoYbS3pS29x3MLJWxziW9y733vue/7vOd5znMusDquAo7lnTungps3f6KFGNAlvv3Xcz9gjO7YcT3sdn/7yPdfgSeXGxrmuK+P1VOnOOB0fvzIopUArcYN4d27h7mnh7mlhUMu15m19W8DyVxV9Td3d7Pa2qpyRwfz8eOs5OY2PQbUENm1a5TPnWO1rU1VOzpUPnuWlzIyvtHW6waADT1dXXa0twOqSpidZaSksOXAgUYlLy8Ouo6+PlJTM2KsrS3kxUWV5udBS0vgkydxwudzxwGfAGLnAX1PUxPo8mXZKwA+HyE5mS179zYGs7KOCk9VWxuuqrpq3L69kP1+FYHACv3mZnx96RJGgCVtr/4vIFAIlN4FNhkGB/GMzUaUlQUsLAAmExkLCtwHx8Ych0pKDiVVV7/I0ShTKERkMACnT9NXvb00LkByfToB9CdEztwDnN8AuLdKglvq68FFRYRgUI7Ux8jv18NsBut08UxJ5vB4+Lv+fpokwhXmI93AwXiG2k2Gcg24UACUSV65utFR2mgygRwOyT9ApNcTolEgEpHtMjwenBkcpD9lOggc+XkVTPuUAIyDDgHtzwJFAY3+xIT6dGYmyGolhMMQQCadWHN4GK0DAxCpqA843Al8oG1OjIfN6/0SeE149T5fXKyD3a7RZiwvaxcQCslRm8idn0+jwGce4MP1YNo8oeFaXLJ7wVpZeQV5eWaOxWQFMWlEDQaSuaYjSFGAoaE/bt+86cqT8q0HfQBwzmp92W61dlF2NiQ7wGbTKCM6PQ2DFIJEV7GU5gAWGUiNRr2TgYArf2ZmUvymHctrgF6b7XW7xfI9WSxgk4nFhyTV5IjYo7evj8wSrygrY8RixJGIViAWU5MqMsz4/SVPTU3J72CV8v20tMY0q7UJqakQezCnpIDEjyGZD3R20v1gUBXX6dIdDi6trSW9UGZNT0WJe1K6BnN+f03mnTsevS8t7a10s7mZLRam1FRijZrTScGMDB65eFHkUvAR8J4X+L0wGCz33buHzPJy1huNJNkKTyEpNyvRm+9arT16VzS6Z2NqamlSejriYDk5tChgYy0ttBAIRN8H3hCPnhgGuhbFlcWK8srC+DjZKyrYKJ0knUNiJ5HWR55bt67r5lWVR0T0JVVdAXM6+ba0lFdRwu8AdWNAa6KK0vNHDwP7Fa8XY8eOkWK3M+Xmwi8sRm7cgF9VY6gDXv1JqnPNYODZhgZ1NCmJfwSmRbPKhz2WeBfz13VJtr+Jxv/s26dKt/AP8l4GvBRfIy1X/4tOF52uruY2QHoczz0ObF28TIw9c3fbNpbnfUlgywN7tsqpX+TktEhQfj7/e7g+z85uyweqEjv+BdsH11fbQysTAAAAAElFTkSuQmCC" alt="Smazat"></a></td>
+            {/if}
+            {if $iterator->isLast(4)}
+
+                </tr>
+                <tr>
+            {/if}
+        {/foreach}
+                </tr>
+            </table>
+        </div>
+        <div id="tabs-2">
+            <table>
+                <tr>
+        {foreach $doc as $document}
+            {if $document != ""}
+            {var $slozka = WWW_DIR.'/'}
+                    {var $type = mime_content_type(WWW_DIR.'/news/'.$document)}
+                    <td>{if $type == 'application/pdf'}
+                        <a href="#" onclick="tinyMCE.execCommand('mceInsertContent',false,'<a href=\'{!$basePath}/pdf.php?dir=news&amp;file={!$document}\'>{!$document}</a> (<a href=\'{!$basePath}/news/{!$document}\'>Stáhnout</a>)');">{$document}</a>
+                        {else}
+                        <a href="#" onclick="tinyMCE.execCommand('mceInsertContent',false,'<a href=\'{!$basePath}/news/{!$document}\'>{!$document}</a>');">{$document}</a>
+                        {/if}
+                        <br><a href="{link deleteImg! $document}" onclick="return confirm('Smazání dokumentu se projeví i v článku ve kterém je použit!\n Opravdu chcete soubor smazat?')" title="Smazat"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAABFJJREFUOE+NVG1MW2UUfk4/KG2BUqwUxLFgFhDNJERpaICwTTCLZMwMFmM0wWVz/kKzP/thYrIfU3/MJYpLnKJmy7LNQIaDzbIoEOYPGGHIhoYNZLjJHEJoYbS3pS29x3MLJWxziW9y733vue/7vOd5znMusDquAo7lnTungps3f6KFGNAlvv3Xcz9gjO7YcT3sdn/7yPdfgSeXGxrmuK+P1VOnOOB0fvzIopUArcYN4d27h7mnh7mlhUMu15m19W8DyVxV9Td3d7Pa2qpyRwfz8eOs5OY2PQbUENm1a5TPnWO1rU1VOzpUPnuWlzIyvtHW6waADT1dXXa0twOqSpidZaSksOXAgUYlLy8Ouo6+PlJTM2KsrS3kxUWV5udBS0vgkydxwudzxwGfAGLnAX1PUxPo8mXZKwA+HyE5mS179zYGs7KOCk9VWxuuqrpq3L69kP1+FYHACv3mZnx96RJGgCVtr/4vIFAIlN4FNhkGB/GMzUaUlQUsLAAmExkLCtwHx8Ych0pKDiVVV7/I0ShTKERkMACnT9NXvb00LkByfToB9CdEztwDnN8AuLdKglvq68FFRYRgUI7Ux8jv18NsBut08UxJ5vB4+Lv+fpokwhXmI93AwXiG2k2Gcg24UACUSV65utFR2mgygRwOyT9ApNcTolEgEpHtMjwenBkcpD9lOggc+XkVTPuUAIyDDgHtzwJFAY3+xIT6dGYmyGolhMMQQCadWHN4GK0DAxCpqA843Al8oG1OjIfN6/0SeE149T5fXKyD3a7RZiwvaxcQCslRm8idn0+jwGce4MP1YNo8oeFaXLJ7wVpZeQV5eWaOxWQFMWlEDQaSuaYjSFGAoaE/bt+86cqT8q0HfQBwzmp92W61dlF2NiQ7wGbTKCM6PQ2DFIJEV7GU5gAWGUiNRr2TgYArf2ZmUvymHctrgF6b7XW7xfI9WSxgk4nFhyTV5IjYo7evj8wSrygrY8RixJGIViAWU5MqMsz4/SVPTU3J72CV8v20tMY0q7UJqakQezCnpIDEjyGZD3R20v1gUBXX6dIdDi6trSW9UGZNT0WJe1K6BnN+f03mnTsevS8t7a10s7mZLRam1FRijZrTScGMDB65eFHkUvAR8J4X+L0wGCz33buHzPJy1huNJNkKTyEpNyvRm+9arT16VzS6Z2NqamlSejriYDk5tChgYy0ttBAIRN8H3hCPnhgGuhbFlcWK8srC+DjZKyrYKJ0knUNiJ5HWR55bt67r5lWVR0T0JVVdAXM6+ba0lFdRwu8AdWNAa6KK0vNHDwP7Fa8XY8eOkWK3M+Xmwi8sRm7cgF9VY6gDXv1JqnPNYODZhgZ1NCmJfwSmRbPKhz2WeBfz13VJtr+Jxv/s26dKt/AP8l4GvBRfIy1X/4tOF52uruY2QHoczz0ObF28TIw9c3fbNpbnfUlgywN7tsqpX+TktEhQfj7/e7g+z85uyweqEjv+BdsH11fbQysTAAAAAElFTkSuQmCC" alt="Smazat"></a></td>
+            {/if}
+            {if $iterator->isLast(4)}
+                </tr>
+                <tr>
+            {/if}
+        {/foreach}
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{/block}

@@ -1,0 +1,62 @@
+{var $title="Správa stránek"}
+{block content}
+<h1><i class="mmrs-icon-edit-book"></i> Stránky</h1>
+<p>Seznam vytvořených stránek s přehledem o jejich nastavení a možnostech.</p>
+<p>Pokud má být stránka veřejně dostupná, musí být nastavena jako "Veřejná". 
+    Skryté stránky mohou posloužit jako koncept, pro budoucí článek, je tedy možné 
+    uložit rozpracovaný článek a posléze ho dopsat a zveřejnit.</p>
+<h2>Omezení</h2>
+<p>Hlavní administrátor (moderátor), který má všechny práva může spravovat všechny stránky. 
+    Ostatní uživatelé s omezenými právy, mají možnost spravovat pouze stránky vlastní, přičemž 
+    stránku nemohou nastavit jako veřejnou. Stránku má právo zveřejnit pouze moderátor.</p>
+<p><a href="{link AddSection:}" class="newPage"><i class="mmrs-icon-plus"></i>Přidat rubriku</a></p>
+
+<p><a href="{link AddNews:page}" class="newPage"><i class="mmrs-icon-plus"></i>Vytvořit stránku</a></p>
+
+<table class="addGalerie" cellspacing="0">
+    <tr class="bookUser">
+        <td>Název</td>
+        <td>Rubrika</td>
+        <td>Nastavení</td>
+        <td>Akce</td>
+        <td>Autor</td>
+        <td>Publikováno</td>
+    </tr>
+    {foreach $pages as $task}
+    {if $task->autor == $user->identity->users or $userRole == 1}
+    <tr n:class="$iterator->odd ? odd, $iterator->last ? even">
+        <td>
+            <a href="{link :Front:Page:default wiew=>$task->id}" title="Náhled"><i class="mmrs-icon-preview"></i>{$task->menu}</a>
+        </td>
+        <td>
+            {var $rubrika_wiew = $task->section}
+            {var $rubrika_wiew = str_replace('page','Stránka', $rubrika_wiew)}
+            {$rubrika_wiew}
+        </td>
+        {if $task->public == '1'}<td>Veřejná<i class="mmrs-icon-ok"></i>{else}<td>Skrytá<i class="mmrs-icon-disabled"></i>{/if}</td>
+        <td>
+            {if $user->identity->users == $task->autor or $user->identity->role == 1}
+                {if $userRole == 1}
+                    {if $task->public == '0'}
+            <a href="{link public! $task->id}" onclick="return confirm('Nastavit stránku jako veřejnou?\nStránka bude na webu dostupná.')" title="Nastavit jako veřejnou"><i class="mmrs-icon-eye"></i></a> 
+                    {else}
+            <a href="{link hidden! $task->id}" onclick="return confirm('Nastavit stránku jako skrytou?\nStránka nebude dostupná.')" title="Nastavit jako skrytou"><i class="mmrs-icon-eye-disabled"></i></a> 
+                    {/if}
+                {/if}
+            <a href="{link :Front:Page:default wiew=>$task->id}" title="Náhled"><i class="mmrs-icon-preview"></i></a>
+            <a href="{link AddNews:page id=>$task->id}" title="Editovat"><i class="mmrs-icon-edit"></i></a> 
+            <a href="{link delete! $task->id}" onclick="return confirm('Smazat?')" title="Smazat"><i class="mmrs-icon-delete"></i></a> 
+            {/if}
+        </td>
+        <td>
+            <i class="mmrs-icon-user"></i><strong>{$task->autor}</strong>
+        </td>
+        <td>
+                <i class="mmrs-icon-calendar"></i>{$task->date|date:'j. n. Y'}
+        </td>
+    </tr>
+    {/if}
+    {/foreach}
+</table>
+{control vp}
+{/block}

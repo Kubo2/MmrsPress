@@ -1,0 +1,73 @@
+{var $title="Aktuální přehled"}
+{block content}
+<h1><i class="mmrs-icon-bookmarks"></i> Aktuální přehled</h1>
+Jste přihlášen jako: <strong>{$user->identity->users}</strong> {if $info_user[0] == 3} <span class="red">Demo mód - Je omezená funkčnost některých operací!</span>{/if}
+<table class="addGalerie" cellspacing="0">
+    <tr class="bookUser">
+        <td>Obsah</td><td>Komentáře</td>
+    </tr>
+    <tr>
+        <td>
+            <span><a n:href="SetNews:">Nastavení</a> aktualit: 
+                {if $set_aktual > 0}
+                    <strong class="green">Veřejná</strong>
+                {else}
+                    <strong class="red">Skrytá</strong>
+                {/if}
+            </span>
+        </td>
+        <td>
+            <span><a n:href="SetBook:">Nastavení</a> knihy návštěv: 
+                {if $set_book > 0}
+                    <strong class="green">Veřejná</strong>
+                {else}
+                    <strong class="red">Skrytá</strong>
+                {/if}
+            </span>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span n:inner-foreach="$datum as $task_date">Poslední aktualita / článek: <strong class="green">{$task_date->date|date:'j. n. Y'}</strong> vložil: <strong class="green">{$task_date->autor}</strong></span>
+        </td>
+        <td>
+            <span>Počet příspěvků v knize návštěv: <strong class="green">{$tasks_kniha}</strong></span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span>Celkový počet <a n:href="AddNews:">aktualit</a>: <strong class="green">{$tasks_aktuality}</strong> z toho konceptů nebo ke zveřejnění: <strong class="red">{$tasks_aktuality - $isNews->count('*')}<s/trong></span>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <span>Celkový počet <a n:href="Pages:">stránek</a>: <strong class="green">{$tasks_clanky}</strong> z toho konceptů: <strong class="red">{$publicPage}<s/trong></span>
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span>Celkový počet <a n:href="AddSection:">rubrik</a>: <strong class="green">{$sectionCount}</strong></span>
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span>Celkový počet <a n:href="SetGallery:">galerií</a>: <strong class="green">{$tasks_gallery}</strong> z toho skrytých <strong class="red">{$set_gallery}<s/trong></span>
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span>Celkový počet <a n:href="SetGallery:">fotografií</a>: <strong class="green">{$tasks_foto}</strong></span>
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
+{/block}

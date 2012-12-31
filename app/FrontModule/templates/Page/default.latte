@@ -1,0 +1,19 @@
+{foreach $wiewMenu as $taska}
+    {var title=$taska->menu}
+{/foreach}
+{block content}
+    {foreach $wiewMenu as $task}
+                {if $user->loggedIn}
+                {if $user->identity->users == $task->autor or $user->identity->role == 1}
+<span class="right">
+    <a href="{link :Admin:AddNews:page id=>$task->id}" title="Editovat"><i class="mmrs-icon-edit"></i></a>  
+    <a href="{link delete! $task->id}" onclick="return confirm('Smazat?')" title="Smazat"><i class="mmrs-icon-delete"></i></a>
+</span>
+                {/if}
+                {else}
+                 {/if}
+                {var $news = html_entity_decode($task->content)}
+                {var $news = str_replace('../../','../',$news)}
+                {!$news}
+    {/foreach}
+{/block}

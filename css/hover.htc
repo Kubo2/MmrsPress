@@ -1,0 +1,15 @@
+<PUBLIC:ATTACH EVENT="onmouseover" ONEVENT="hoverRollOver()" />
+<PUBLIC:ATTACH EVENT="onmouseout" ONEVENT="hoverRollOff()" />
+<script language="JavaScript" type="text/javascript">
+function hoverRollOver() {
+ element.origClassName = element.className;
+ var tempClassStr = element.className;
+ tempClassStr += "Hover";
+ tempClassStr = tempClassStr.replace(/s/g,"Hover ");
+ tempClassStr += " hover";
+ element.className = element.className + " " + tempClassStr;
+}
+function hoverRollOff() {
+element.className = element.origClassName;
+}
+</script>

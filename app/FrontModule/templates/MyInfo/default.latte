@@ -1,0 +1,83 @@
+{var $title = "Můj profil"}
+{block content}
+<script>
+$(function(){
+    // Tabs
+                        $('#babs').tabs();
+        // Dialog
+        $('#dialog').dialog({
+                autoOpen: false,
+                width: 650,
+                height: 550,
+                buttons: {
+                        "Zavřít": function() {
+                                $(this).dialog("close");
+                        },
+                }
+        });
+                        
+        // Dialog Link
+        $('#dialog_lnk').click(function(){
+                $('#dialog').dialog('open');
+                return false;
+        });
+
+
+});
+</script>
+<h1>Profil uživatele</h1>
+<table>
+    <tr>
+        <td>
+        {if !empty($user->identity->avatar)}
+            <img src="{$basePath}/avatar/{$user->identity->avatar}" alt=""><br>
+        {/if}
+            <ul>
+                <li><a href="#" id="dialog_lnk">Editovat profil</a></li>             
+            </ul>
+        </td>
+        <td>
+            <strong>Jméno: </strong><br>
+            <strong>Email: </strong><br>
+            <strong>Web: </strong><br>
+            <strong>Zařazení: </strong><br>
+        </td>
+        <td>
+            {$user->identity->users}<br>
+            {if empty($user->identity->email)}
+            -<br>
+            {else}
+            <a href="mailto:{$user->identity->email}">{$user->identity->email}</a><br>
+            {/if}
+            {if empty($user->identity->web)}
+            -<br>
+            {else}
+            <a href="http://{$user->identity->web}">{$user->identity->web}</a><br>
+            {/if}
+            {if $userRole == 1} <span class="green">Hlavní admin</span> {/if}
+            {if $userRole == 2} <span class="greyblue">Uživatel</span> {/if}
+            {if $userRole == 3} <span class="red">Demo</span>  {/if}<br>
+        </td>
+    </tr>
+</table>
+<h2>Můj přehled</h2>
+<table class="bookWiew">
+    <tr>
+        <td>Počet aktualit</td><td>{$newsCount}</td>
+    </tr><tr>
+        <td>Počet článků</td><td>{$pageCount}</td>
+    </tr><tr>
+        <td>Počet galerií</td><td>{$galleryCount}</td>
+    </tr><tr>
+        <td>Počet příspěvků v knize návštěv</td><td>{$bookCount}</td>
+    </tr>
+</table>
+<div id="dialog" title="Editace profilu">
+    <div id="babs">
+        <ul>
+            <li><a n:href="Registration:edit id=>$user->identity->id">Editace profilu</a></li>
+            <li><a n:href="NewPsw:new">Změna hesla</a></li>
+        </ul>
+    </div>
+</div>
+{/block}

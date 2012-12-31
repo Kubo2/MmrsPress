@@ -1,0 +1,20 @@
+{var title=$rubriky_nazev}
+
+{block content}
+    {*<h1>{$rubriky_nazev}</h1>*}
+    {if $rubriky_page->count('*') > 0}
+{*
+    <ul class="rubrikyMenu">
+    {foreach $rubriky_page as $rubriky_task}
+        <li><a n:href="Page: wiew=>$rubriky_task->id">{$rubriky_task->menu}</a></li>
+    {/foreach}
+    </ul> *}
+    {foreach $rubriky_page->limit('1') as $clanek}
+    {var $news = html_entity_decode($clanek->content)}
+                {var $news = str_replace('../../','../',$news)}
+       {!$news}
+    {/foreach}
+    {else}
+        <p>V této sekci není zatím žádný článek</p>
+     {/if}
+{/block}

@@ -1,0 +1,33 @@
+{var title='Fotogalerie'}
+
+{block content}
+{if $photoPanel > 0}
+<h1>Nejnovější fotky z galerie</h1>
+<table class="galerie">
+    <tr>
+    {foreach $photo_last as $photo}
+        <td><a href="{link PhotoWiew: gallery=>$photo->folder}"><img src="{$basePath}/gallery/{$photo->folder}/nahledy/{$photo->photo}" alt="{$photo->photo}"></a></td>
+    {/foreach}
+    </tr>
+</table>
+
+<h2>Galerie</h2>
+{else}
+<h1>Galerie</h1>
+{/if}
+<table class="galerie">
+    <tr>
+    {foreach $galerie as $gal}
+        <td> 
+            <a href="{link PhotoWiew: gallery=>$gal->folder}">{$gal->name}</a><br />
+                {$gal->label}<br />
+            <a href="{link PhotoWiew: gallery=>$gal->folder}"><img src="{$basePath}/gallery/{$gal->folder}/nahledy/{randImage($gal->folder)}" alt="{randImage($gal->folder)}"></a>
+        </td>
+        {if $iterator->isLast(4) and !$iterator->isLast()}
+    </tr>
+    <tr>
+       {/if}
+    {/foreach}
+    </tr>
+</table>
+{/block}

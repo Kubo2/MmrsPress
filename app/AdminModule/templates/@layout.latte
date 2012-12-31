@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {block head}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="description" content="MmrsPress - Jednoduchý redakční systém">
+        <meta name="robots" content="{$robots}" n:ifset="$robots">
+        <title>{ifset $title}{$title} &ndash; {/ifset}{$set_title}</title>
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen_admin.css" type="text/css">
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/admin.css" type="text/css">
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/mmrs-icons.css" type="text/css">
+        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css" type="text/css">
+        <link rel="shortcut icon" href="{$basePath}/images/web.gif" type="image/x-icon">
+        <link rel="stylesheet" href="{$basePath}/css/lightbox.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+        <link rel="stylesheet" media="screen" type="text/css" href="{$basePath}/css/jquery.miniColors.css">
+        <script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>
+        <script type="text/javascript" src="{$basePath}/js/format.js"></script>
+        <script type="text/javascript" src="{$basePath}/js/tiny_mce.js"></script>
+        <script type="text/javascript" src="{$basePath}/js/js.js"></script>
+        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+        <script type="text/javascript" src="{$basePath}/js/jquery.miniColors.js"></script>
+        <script>
+                $(function(){
+                    // nastavení dialogového okna po refreši jako otevřeného
+                    hash = false;
+                    if(window.location.hash) {
+                            url = window.location.hash;
+                            h_arr = url.split("#");
+                            hash = h_arr[1];
+                            }
+ 
+                    if(hash) {
+                            my_val = true;
+                             } else {
+                                    my_val = false;
+                                    }
+                                    
+                       // inputy, na kterých se má aktivovat kalendář
+                        $( "#frmaddNewsForm-publicDate" ).datepicker({ dateFormat: "yy-mm-dd" });
+                        
+
+                    // frmuploadForm-create
+                    $('#loader').dialog({
+                                autoOpen: false,
+                                width: 100,
+                                height: 180,
+
+                        });
+                        
+                        // frmuploadForm-create
+                        $('#frmuploadForm-create').click(function(){
+                                $('#loader').dialog('open');
+                                return true;
+                        });
+                                    
+                        // Tabs
+                        $('#tabs').tabs();
+
+                        // Dialog
+                        $('#dialog').dialog({
+                                autoOpen: false,
+                                width: 900,
+                                height: 500,
+                                buttons: {
+                                        "Zavřít": function() {
+                                                $(this).dialog("close");
+                                        },
+                                }
+                        });
+                        
+                        // Dialog Link
+                        $('#dialog_lnk').click(function(){
+                                $('#dialog').dialog('open');
+                                return false;
+                        });
+
+                        // Prilohy
+                        $('#prilohy').dialog({
+                                autoOpen: my_val,
+                                width: 650,
+                                height: 650,
+                                buttons: {
+                                        "Zavřít": function() {
+                                                $(this).dialog("close");
+                                        },
+                                        //"Cancel": function() {
+                                        //	$(this).dialog("close");
+                                        //}
+                                }
+                        });
+                        
+                        // Přílohy Link
+                        $('#prilohy_lnk').click(function(){
+                                $('#prilohy').dialog('open');
+                                return false;
+                        });
+
+                        //hover states on the static widgets
+                        $('#dialog_link, ul#icons li').hover(
+                                function() { $(this).addClass('ui-state-hover'); },
+                                function() { $(this).removeClass('ui-state-hover'); }
+                        );     
+                            
+                        $( document ).tooltip();
+        });
+
+			
+                $(document).ready( function() {
+				
+                        function init() {
+					
+                                // Attach callbacks
+                                $('.colorPicker').miniColors({
+                                        change: function(hex, rgba) {
+                                                $('#console').prepend('change: ' + hex + ', rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')<br>');
+                                        },
+                                        open: function(hex, rgba) {
+                                                $('#console').prepend('open: ' + hex + ', rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')<br>');
+                                        },
+                                        close: function(hex, rgba) {
+                                                $('#console').prepend('close: ' + hex + ', rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')<br>');
+                                        }
+                                });
+					
+                        }
+				
+                        init();
+				
+							
+                });
+			
+        </script>
+    {/block}
+    </head>
+    <body>
+        <div id="viewAdmin">
+            <strong class="mmrs"><a href="http://mmrspress.eu"> MmrsPress</a></strong> | 
+            <a n:href=":Front:News:news" title="Zobrazit web">{$set_title}</a> | 
+            <div>
+                <strong class="icon user">{$user->identity->users}</strong> |
+                <a n:href=":Front:MyInfo:">Můj profil</a> |
+                <a n:href=":Front:Sign:out">Odhlásit</a></span>
+            </div> 
+        </div>
+        <div id="page">
+            <div id="container">
+                <div id="sidebar">
+                    <div class="task-lists">
+                        <div id="menuAdmin">
+                            <span class="adminSet"><i class="mmrs-icon-edit"></i>Aktuality / Stránky</span>
+                            <ul class="mainMenu">
+                                <li><a href="{link AddNews:}">Aktuality</a></li>
+                                <li><a href="{link Pages:}">Stránky</a></li>
+                                <li><a href="{link AddSection:}">Rubriky</a></li>
+                            </ul>
+                            <span class="adminSet"><i class="mmrs-icon-camera"></i>Fotogalerie</span>
+                            <ul class="mainMenu">
+                                <li><a href="{link :Admin:SetGallery:}">Správa fotogalerií</a></li>
+                            </ul>
+                           {if $user->identity->role == 1}
+                            <span class="adminSet"><i class="mmrs-icon-settings"></i>Nastavení webu</span>
+                            <ul class="mainMenu">
+                            {foreach $menuSettings as $item => $link}
+                                <li><a n:href="$link">{$item}</a></li>
+                            {/foreach}
+                            </ul>
+                           {/if}
+                        </div>
+                    </div>
+                </div>
+                <div id="content">
+                    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{!$flash->message}</div>
+                    <!--vložení bloku content-->
+                    {include #content}
+                </div>
+                <div id="footer">
+                    <p>
+                        2005-2012 
+                       © <a href="http://mmrspress.eu">MmrsPress</a> by 
+                        <a href="mailto:rellik@rellik.eu">Rellik</a> 
+                    </p>    
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

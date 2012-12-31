@@ -1,0 +1,53 @@
+body {
+	font: 16px/1.5 "Trebuchet MS", "Geneva CE", lucida, sans-serif;
+	color: #333;
+	background-color: #fff;
+}
+
+h1 {
+	font-size: 150%;
+	color: #3484D2;
+}
+
+#ajax-spinner {
+	margin: 15px 0 0 15px;
+	padding: 13px;
+	background: white url('../images/spinner.gif') no-repeat 50% 50%;
+	font-size: 0;
+	z-index: 123456;
+	display: none;
+}
+
+div.flash {
+	color: black;
+	background: #FFF9D7;
+	border: 1px solid #E2C822;
+	padding: 1em;
+	margin: 1em 0;
+}
+
+a[href^="error:"] {
+	background: red;
+	color: white;
+}
+.btn-success i {
+    color: #51a351;
+    float: right;
+}
+.btn-success_all i, .btn-success_all {
+    color: #51a351;
+    float: none;
+    font-weight: bold;
+}
+.btn-error i {
+    color: #C22;
+    float: right;
+}
+.btn-error_all i, .btn-error_all {
+    color: #C22;
+    float: none;
+    font-weight: bold;
+}
+.btn span {
+    font-weight: bold;
+}

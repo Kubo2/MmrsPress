@@ -1,0 +1,84 @@
+{var $title = "Registrace"}
+{block content}
+<script>
+$(function(){
+    // Tabs
+                        $('#tabs').tabs();
+        // Dialog
+        $('#dialog').dialog({
+                autoOpen: false,
+                width: 800,
+                height: 600,
+                buttons: {
+                        "OK": function() {
+                                $(this).dialog("close");
+                        },
+                }
+        });
+                        
+        // Dialog Link
+        $('#dialog_lnk').click(function(){
+                $('#dialog').dialog('open');
+                return false;
+        });
+
+// frmuploadForm-create
+                        $('#frmnewUserForm-verify').click(function(){
+                                $('#dialog').dialog('open');
+                                return true;
+                        });
+});
+
+</script>
+{if $user->loggedIn}
+<h1>Editace profilu</h1>
+    {control editUserForm}
+{else}
+<h1>Registrace</h1>
+    {control newUserForm}
+{/if}
+<a href="#" id="dialog_lnk">Podmínky</a>
+<div id="dialog" title="Podmínky">
+ 
+        <p>1.1 - Chování na stránkách</p>
+        <ul>
+            <li>1.1.1 - Dodržujte základní pravidla slušného chování na internetu.</li>
+            <li>1.1.2 - V knize návštěv i v článcích nepoužívejte neslušné výrazy. V krajních případech lze použít hvězdiček pro zakrytí hlavních částí slova. Moderátor má právo neslušné výrazy editovat, nebo příspěvek smazat.</li>
+            <li>1.1.3 - Každý uživatel je zodpovědný za své příspěvky na těchto stránkách! Při porušení pravidel bude jeho příspěvek bez upozornění upraven, přesunut, nebo odstraněn.</li>
+            <li>1.1.4 - Je zakázáno vytvářet si a využívat na tomto webu více profilů. Porušení tohoto může mít za následek udělení BANu.</li>
+        </ul>
+        <p>1.2 - Příspěvky ani další obsah zadaný uživatelem (např. podpis nebo avatar) nesmí zahrnovat:</p>
+        <ul>
+            <li>1.2.1 - Reklamu, propagaci nebo komerční obsah neschválený administrátory fóra (mezi to patří i odkazy na konkurenční servery).</li>
+            <li>1.2.2 - Obsah (nebo odkazy na něj) vulgární, osočující, urážlivý, rasistický či jinak pobuřující, odporující zákonným normám a nařízením (warez apod.) nebo dobrým mravům.</li>
+            <li>1.2.3 - Obsah, jehož účelem je pouze vytvořit flamewar.</li>
+            <li>1.2.4 - Příspěvky se zjevnými nebo skrytými urážkami osob postižených, vyznávajících jiné náboženství nebo příslušníků jiné rasy apod.</li>
+            <li>1.2.5 - Obsah, jehož hlavním smyslem je posthunting (umělé zvyšování počtu příspěvků).</li>
+        </ul>
+        <p>1.3 - Moderátoři a administrátoři fóra</p>
+        <ul>
+            <li>1.3.1 - O tom, zda příspěvky nebo další obsah zadaný uživatelem vyhovuje výše uvedeným podmínkám, rozhodují moderátoři nebo administrátoři stránek.</li>
+            <li>1.3.2 - Moderátoři a administrátoři mají právo editovat, mazat a přesouvat příspěvky, které podle jejich názoru porušují výše uvedená pravidla. Při častém nebo soustavném porušování pravidel má moderátor nebo administrátor právo uživatele napomenout. Administrátor pak má právo na základě vlastního uvážení nebo na návrh moderátora uživateli snížit jeho hodnocení nebo mu udělit ban.</li>
+            <li>1.3.3 - Rozhodnutí moderátorů a administrátorů tohoto fóra je konečné.</li>
+            <li>1.3.4 - Jakékoli stížnosti, případně reklamace, na jednání moderátorů nebo administrátorů tohoto fóra jsou povoleny pouze formou e-mailu adresovaných moderátorům nebo administrátorům stránek. Jakákoliv veřejná polemika na toto téma v rámci těchto stránek se nepřipouští a je považována za porušení výše uvedených pravidel.</li>
+        </ul>
+        <p>1.4 - Udržování pořádku na stránkách</p>
+        <p>Pokud příspěvky nebo jiný obsah zadaný uživatelem nevyhovuje výše uvedeným podmínkám, mají moderátoři a administrátoři právo:</p>
+        <ul>
+            <li>1.4.1 - Závadnou část příspěvku smazat nebo editovat.</li>
+            <li>1.4.2 - Smazat nebo přesunout celý příspěvek se závadným obsahem.</li>
+            <li>1.4.3 - Varovat uživatele porušujícího pravidla (žlutá karta).</li>
+            <li>1.4.4 - Napomenout uživatele porušujícího pravidla (červená karta) a udělit mu odpovídající počet trestných bodů, které mohou mít pro uživatele za následek omezení přístupu k funkcím fóra (odkaz na stránku s definicí systému udělování trestných bodů).</li>
+            <li>1.4.5 - Zamezit přístupu uživatele na stránky (ban).</li>
+        </ul>
+{*<p>Pokud podle názoru uživatele obsah některého z příspěvků na stránkách porušuje výše uvedená pravidla, může využít možnost oznámení příspěvku, kterého se problém týká, vedení fóra (toto oznámení bude dostupné všem moderátorům a administrátorům, kteří posléze stížnost hromadně posoudí).</p>*}
+        <p>1.5 - Pravidla fotogalerie</p>
+        <ul>
+            <li>1.5.1 - Maximální rozlišení fotky není omezené, ale při uploadu bude automaticky vytvořena zmenšenina fotografie podle nastavení v administraci (Výchozí šířka je 800px).</li>
+            <li>1.5.2 - Vkládat lze jen soubory s příponou jpg, jpeg, png a gif, jejichž název nesmí být delší než 50 znaků a obsahovat více než 1 tečku před příponou souboru.</li>
+            <li>1.5.3 - Přidané fotografie do galerie může jejich autor kdykoli smazat.</li>
+            <li>1.5.4 - Fotografie nesmí porušovat obecná pravidla těchto stránek (odstavec 1.2).</li>
+            <li>1.5.5 - Do galerie lze přidávat pouze své vlastní fotografie. Při zjištění porušení autorských práv uploadováním fotografie, na kterou nemá dotyčný autorská práva, dojde k jejímu smazání a udělení trestných bodů dotyčnému uživateli, což může vyústit v dočasné omezení jeho aktivit na těchto stránkách.</li>
+        </ul>
+</div>
+{/block}

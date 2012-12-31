@@ -1,0 +1,80 @@
+{var title='Uživatelé'} {* nastavení měnícího se titulku stránky*}
+
+{block content}
+<h1><i class="mmrs-icon-usercards"></i> Správa uživatelů</h1>
+<p>Registrace nového uživatele pro správu systému je rozdělena do tří kategorií:</p>
+<ul>
+    <li><strong>Omezené oprávnění</strong> - Uživatel po přihlášení má právo psát 
+        nové aktuality a články, vytvářet fotogalerie a vkládat do nic fotky.</li>
+    <li><strong>Kompletní oprávnění</strong> - Uživatel má navíc možnost přidávat 
+        nové uživatele a mazat příspěvky v knize návštěv.</li>
+    <li><strong>Demo</strong> - Slouží pro demo ukázku webu - uživatel má přístup do 
+        administrace, ale má omezené možnosti pro různé akce.</li>
+</ul>
+<h2>Registrace nových uživatelů</h2>
+<p>Povolením registrace uživatelů budou mít návštěvníci stránek se zaregistrovat z veřejné část stránek a 
+    budou mít přístup do administrace. Budou mít omezené práva na vytváření aktualit, článků a fotogalerií. 
+    přičemž, je nemohou sami zveřejnit. Zveřejnění provádí pouze hlavní administrátor, případně další uživatel 
+    s právy administrátora. Registrovaný uživatel uvidí v adimistraci pouze své články a fotogalerie, které může 
+    upravovat, nebo mazat.</p>
+{if $settings->where('select','user')->count('*') > 0}
+    {foreach $settings->where('select','user') as $set}
+        {if $set->public == 0}
+            <p><strong class="red">Registrace uživateů je zakázána</strong><i class="mmrs-icon-disabled"></i></p> 
+            <a href="{link verejna! $set->id}" onclick="return confirm('Povolit registraci nových uživatelů?')">Povolit registraci</a> 
+        {else}
+            <p><strong  class="green">Registrace uživateů je povolena</strong><i class="mmrs-icon-ok"></i></p>
+            <a href="{link skryta! $set->id}" onclick="return confirm('Zakázat registraci nových uživatelů?')">Zakázat registraci</a> 
+        {/if}
+    {/foreach}
+{else}
+    <p><strong class="red">Registrace uživateů je zakázánaá</strong><i class="mmrs-icon-disabled"></i></p> 
+            <a href="{link verejna!}" onclick="return confirm('Povolit registraci nových uživatelů?')">Povolit registraci</a>{/if}
+<p>Kompletní oprávnění udělujte jen kompetentním uživatelům!</p>
+    {control registrationForm}
+
+<table class="users" cellspacing="0">
+    <tr class="bookUser">
+        <td><strong>Jméno</strong></td><td><strong>Email</strong></td><td><strong>Web</strong></td><td><strong>Oprávnění</strong></td><td><strong>Akce</strong></td><td><strong>Nové heslo</strong></td>
+    </tr>
+    <tr>
+    {foreach $userWiews as $usrw}
+    <tr n:class="$iterator->odd ? odd, $iterator->last ? even">
+        <td>
+            <i class="mmrs-icon-user-{$usrw->role}"></i><strong>{$usrw->users}</strong>
+        </td>
+        <td>
+            <a href="mailto:{$usrw->email}">{$usrw->email}</a>
+        </td>
+        <td>
+            <a href="http://{$usrw->web}">{$usrw->web}</a>
+        </td>
+            {if $usrw->role == 1}
+        <td>
+            <i class="mmrs-icon-ok"></i>Kompletní
+        </td>
+            {/if}
+        {if $usrw->role == 2}
+        <td>
+            <i class="mmrs-icon-minus"></i>Omezené
+        </td>
+            {/if}
+            {if $usrw->role == 3}
+        <td>
+            <i class="mmrs-icon-disabled"></i>Omezené - Demo mód
+        </td>
+            {/if}
+        <td>
+                {if $usrw->role == '0' OR $usrw->users != "Admin"}
+            <a href="{link delete! $usrw->id}" onclick="return confirm('Smazat?')">SMAZAT</a>
+                {else}
+            <strong title="Správce nelze smazat.">Správce.</strong>
+                {/if}
+        </td>
+        <td>
+            <a href="{link NewPass:default id=>$usrw->id}">ZMĚNIT HESLO</a>
+        </td>
+    </tr>
+    {/foreach}
+</table>
+{/block}

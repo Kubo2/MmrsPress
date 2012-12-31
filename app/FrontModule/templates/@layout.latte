@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {block head}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="description" content="{$set_title} - {$description}">
+        <meta name="robots" content="{$basePath}/robots.txt">
+        {foreach $setRss as $rss}
+            {if $rss->news == 1 AND $isNews->count('*') >= 1 AND $set_aktual > 0}
+        <link rel="alternate" type="application/rss+xml" title="Rss aktualit" n:href="Rss:rss">
+            {/if}
+            {if $rss->pages == 1 AND $menuPage->count('*') >= 1}
+        <link rel="alternate" type="application/rss+xml" title="Rss článků" n:href="Rss:page">
+            {/if}
+            {if $rss->book == 1 AND $set_book > 0}
+        <link rel="alternate" type="application/rss+xml" title="Rss knihy návštěv" n:href="Rss:book">
+            {/if}
+        {/foreach}
+        <title>{ifset $title}{$title} &ndash; {/ifset}{$set_title}</title>
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css" type="text/css">
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/back.php?css={$css64}" type="text/css">
+        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css" type="text/css">
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/mmrs-icons.css" type="text/css">
+        <link rel="shortcut icon" href="{$basePath}/images/web.gif" type="image/x-icon">
+        <link rel="stylesheet" href="{$basePath}/css/lightbox.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+        <script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>
+        <script type="text/javascript" src="{$basePath}/js/format.js"></script>
+        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+        <script type="text/javascript" src="{$basePath}/js/lightbox.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                            $("#mainMenuTop li").hover(function() {
+                                $(this).addClass("iehover"); },
+                            function() {
+                                $(this).removeClass("iehover"); }
+                                );
+                             $(".galerie td").hover(function() {
+                                $(this).addClass("iehover"); },
+                            function() {
+                                $(this).removeClass("iehover"); }
+                                );
+                            });
+          $(function(){
+                                                                 
+                        // Tabs
+                        $('#tabs').tabs();
+
+                        // Dialog
+                        $('#profil').dialog({
+                                autoOpen: false,
+                                width: 900,
+                                height: 500,
+                                buttons: {
+                                        "Zavřít": function() {
+                                                $(this).dialog("close");
+                                        },
+                                }
+                        });
+                        
+                        // Dialog Link
+                        $('#profil_lnk').click(function(){
+                                $('#profil').dialog('open');
+                                return false;
+                        });
+
+                        // Prilohy
+                        $('#heslo').dialog({
+                                autoOpen: false,
+                                width: 650,
+                                height: 650,
+                                buttons: {
+                                        "Zavřít": function() {
+                                                $(this).dialog("close");
+                                        },
+                                        //"Cancel": function() {
+                                        //	$(this).dialog("close");
+                                        //}
+                                }
+                        });
+                        
+                        // Přílohy Link
+                        $('#heslo_lnk').click(function(){
+                                $('#heslo').dialog('open');
+                                return false;
+                        });
+
+   
+                            
+
+        });
+        </script>
+    {/block}
+    </head>
+    <body>
+        {if $user->loggedIn}
+        <div id="viewAdmin">
+            <strong class="mmrs"><a href="http://mmrspress.eu"> MmrsPress</a></strong> |
+            <a n:href=":Admin:AddNews:news" title="Nová aktualita">+Aktualita</a> |
+            <a n:href=":Admin:AddNews:page" title="Nová stránka">+Stránka</a> |
+            <a n:href=":Admin:SetGallery:" title="Galerie">Galerie</a> |
+            <div>
+                <strong class="icon user">{$user->identity->users}</strong> |
+                <a n:href="MyInfo:">Můj profil</a> | 
+                <a n:href=":Admin:Info:default">Administrace</a> | 
+                <a n:href="Sign:out">Odhlásit</a></span>
+            </div> 
+        </div>
+        {/if}
+        <div id="page">
+            <div id="header">
+                <a href="{link News:news}"><div id="header-inner">
+                        <div class="title">
+                        {$set_title}
+                        </div>
+                        {if $menuLeft == 0}
+                        <div id="login">
+                        {if $user->loggedIn}
+                            {if !empty($user->identity->avatar)}
+                            <img src="{$basePath}/avatar/{$user->identity->avatar}" alt="">
+                            {/if}  
+                           {else}
+                            <a n:href="Sign:">Přihlásit</a>  {if $set_registration == 1}<a n:href="Registration:">Registrovat</a>{/if}
+                         {/if}
+                        </div>
+                        {/if}
+                    </div></a>
+            </div>
+            <div id="container">
+                {if $menu == 1 or $menuLeft == 0}
+                <div id="sidebarTop">
+                    <ul id="mainMenuTop">
+                        {if $isNews->count('*') > 0 AND $set_aktual > 0}                          
+                        <li {ifCurrent News:news}class="current"{/ifCurrent}><a href="{link News:news}">Aktuality</a></li>                           
+                        {/if}
+                        {foreach $menuPage as $set}
+                        <li {ifCurrent Page: wiew=>$set->id}class="current"{/ifCurrent}><a n:href="Page: wiew=>$set->id">{$set->menu}</a></li>
+                        {/foreach}
+                        {foreach $rubriky->where('public','1') as $rubriky_pages}
+                                {var $pages = $rubriky_pages->section}
+                                {var $pages = str_replace(' ', '_',$pages)}
+                        {if $rubriky_menu->where('section', $rubriky_pages->section)->count('*') >= "1"  AND $rubriky_menu->where(array('section' => $rubriky_pages->section, 'public' => '1'))->count('*') >=1}
+                        <li><a href="{link Rubriky: page=>$pages}">{$rubriky_pages->section} +</a>
+                            {if $rubriky_nazev == $rubriky_pages->section or $podmenu == $rubriky_pages->section}
+                            <ul>   
+                                {foreach $rubriky_menu->where('section', $rubriky_pages->section) as $podmenu}
+                                <li {ifCurrent Page: wiew=>$podmenu->id}class="current"{/ifCurrent}><a n:href="Page: wiew=>$podmenu->id">{$podmenu->menu}</a></li>
+                                {/foreach}
+                            </ul>
+                        </li>
+                            {else}
+                        </li>
+                       {/if}
+                        {/if}
+                        {/foreach}
+                        {if $isGallery->count('*') >= 1}
+                        <li {ifCurrent Gallery:default}class="current"{/ifCurrent}><a href="{link Gallery:default}">Fotogalerie</a></li>
+                        {/if}
+                        {if $settings->where(array('select'=>'book','public'=>'1'))->count('*') == 1}
+                        <li {ifCurrent Book:default}class="current"{/ifCurrent}><a href="{link Book:default}">Kniha návštěv</a></li>
+                        {/if}
+                    </ul>
+                </div>
+                {/if}
+                {if $menuLeft > 0 }
+                <div id="sidebar">
+                    <div class="task-lists">
+                        {* začátkek menu*}
+                        {if $menu == 0}
+                        <div class="rubriky_layout">
+                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt="" /> Hlavní menu</span>
+                            <ul class="mainMenu">
+                        {if $isNews->count('*') > 0 AND $set_aktual > 0}                          
+                                <li {ifCurrent News:news}class="current"{/ifCurrent}><a href="{link News:news}">Aktuality</a></li>                           
+                        {/if}
+                        {foreach $menuPage as $set}
+                                <li {ifCurrent Page: wiew=>$set->id}class="current"{/ifCurrent}><a n:href="Page: wiew=>$set->id">{$set->menu}</a></li>
+                        {/foreach}
+                        {foreach $rubriky->where('public','1') as $rubriky_pages}
+                                {var $pages = $rubriky_pages->section}
+                                {var $pages = str_replace(' ', '_',$pages)}
+                                <li><a href="{link Rubriky: page=>$pages}">{$rubriky_pages->section}</a>
+                            {if $rubriky_nazev == $rubriky_pages->section or $podmenu == $rubriky_pages->section}
+                                    <ul class="podmenu">   
+                                {foreach $rubriky_menu->where('section', $rubriky_pages->section) as $podmenu}
+                                        <li {ifCurrent Page: wiew=>$podmenu->id}class="current"{/ifCurrent}><a n:href="Page: wiew=>$podmenu->id">{$podmenu->menu}</a></li>
+                                {/foreach}
+                                    </ul>
+                            {/if}
+                        {/foreach}
+                        {if $isGallery->count('*') >= 1}
+                                <li {ifCurrent Gallery:default}class="current"{/ifCurrent}><a href="{link Gallery:default}">Fotogalerie</a></li>
+                        {/if}
+                        {if $settings->where(array('select'=>'book','public'=>'1'))->count('*') == 1}
+                                <li {ifCurrent Book:default}class="current"{/ifCurrent}><a href="{link Book:default}">Kniha návštěv</a></li>
+                        {/if}
+                            </ul>
+                        </div>
+                        {/if}
+                        {*Konec menu*}
+                        {if $isGallery->count('*') >= 1}
+                        <div class="rubriky_layout">
+                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt="" /> Z fotogalerie</span>
+                            {foreach $photosMenu as $link}
+                            <a href="{link PhotoWiew: gallery=>$link->folder}" class="center"><img src="{$basePath}/gallery/{$link->folder}/nahledy/{$link->photo}" alt="{$link->photo}"></a>
+                            {/foreach}
+
+                        </div>
+                        {/if}
+                        {if $settings_counter->where(array('select'=>'counter','public'=>'1'))->count('*') == 1 }
+                        <div class="rubriky_layout">
+                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt="" /> Návštěvy</span>
+                            <table class="counter">
+                                <tr>
+                                    <td>Celkem: {$counter_all}</td>
+                                </tr>
+                                <tr>
+                                    <td>Dnes: {$counter->where('date',date("Y-m-d"))->count('*')}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        {/if}
+                        <div class="rubriky_layout">
+                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt="" /> Různé</span>
+                                {if $user->loggedIn}
+                            {if !empty($user->identity->avatar)}
+                            <img src="{$basePath}/avatar/{$user->identity->avatar}" alt="">
+                            {/if}
+                            <strong>{$user->identity->users}</strong><br>
+                            <a n:href="MyInfo:">Můj profil</a>
+                                 {else}
+                            <a n:href="Sign:">Přihlásit</a>  {if $set_registration == 1}<a n:href="Registration:">Registrovat</a>{/if}
+                                 {/if}
+                            <br>
+                            {foreach $setRss as $rss}
+                            {if $rss->news == 1 AND $isNews->count('*') > 0 AND $set_aktual > 0}
+                            <a n:href="Rss:rss" class="rss_menu">RSS aktualit</a>
+                            {/if}
+                            {if $rss->pages == 1 AND $menuPage->count('*') >= 1}
+                            <a n:href="Rss:page" class="rss_menu">RSS článků</a>
+                            {/if}
+                            {if $rss->book == 1 AND $set_book > 0}
+                            <a n:href="Rss:book" class="rss_menu">RSS Kniha návštěv</a>
+                            {/if}
+                            {/foreach}
+                            <strong>Vyhledat:</strong>
+                            {control searchForm}
+                        </div>
+                    </div>
+                </div>
+                {/if}
+                {if $rightBlock == 1}
+                <div id="sidebar_right">
+                    <div class="task-lists">
+                        {if $isNews->count('*') > 0 AND $set_aktual > 0}
+                        <div class="rubriky_layout">
+                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt="" /> Nové příspěvky</span>
+                            <ul class="mainMenu">
+                            {foreach $isNews->limit(4)->order('id DESC') as $last}    
+                                <li><a n:href="Page: wiew=>$last->id">{$last->menu}</a></li>
+                            {/foreach}
+                            </ul>
+                        </div>
+                        {/if}
+                        {if $isGallery->count('*') >= 1}
+                        <div class="rubriky_layout">
+                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt="" /> Nové galerie</span>
+                            <ul class="mainMenu">
+                            {foreach $isGallery->limit(4)->order('id DESC') as $galleryMenu}
+                                <li><a href="{link PhotoWiew: gallery=>$galleryMenu->folder}">{$galleryMenu->name}</a><li>
+                             {/foreach}
+                            </ul>
+                        </div>
+                        {/if}
+                    </div>
+                </div>
+                {/if}
+                <div id="content">
+                    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{!$flash->message}</div>
+                    {include #content}
+                </div>
+                <div id="footer">
+                    © {$set_title} 2005-2012 <a href="mailto:{$admin}">{$admin}</a> | <a href="http://mmrspress.eu">MmrsPress</a> |
+                    {if $menuLeft == 0 }<a n:href=":Admin:Info:default">Administrace</a>{/if}
+                    {foreach $setRss as $rss}
+                        {if $rss->news == 1 AND $isNews->count('*') > 0 AND $set_aktual > 0}
+                    <a n:href="Rss:rss"  class="rss"><img src="{$basePath}/images/rss.png" alt="RSS aktualit"></a>
+                        {/if}
+                        {if $rss->pages == 1 AND $menuPage->count('*') >= 1 AND $rss->news == 0}
+                    <a n:href="Rss:page"  class="rss"><img src="{$basePath}/images/rss.png" alt="RSS článků"></a>
+                        {/if}
+                    {/foreach}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

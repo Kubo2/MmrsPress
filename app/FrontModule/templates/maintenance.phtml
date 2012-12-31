@@ -1,0 +1,43 @@
+<?php
+
+header('HTTP/1.1 503 Service Unavailable');
+header('Retry-After: 300'); // 5 minutes in seconds
+
+?>
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name=robots content=noindex>
+<meta name=generator content='Nette Framework'>
+
+<style>
+	body { color: #333; background: white; width: 500px; margin: 30px auto }
+	h1 { font: bold 47px/1.5 sans-serif; margin: .6em 0 }
+	p { font: 21px/1.5 Georgia,serif; margin: 1.5em 0 }
+</style>
+
+<title>Stránky jsou dočasně nedostupné</title>
+
+<h1>Omlouváme se</h1>
+<table>
+    <tr>
+        <td><p>Tyto stránky jsou dočasně mimo provoz z důvodu údržby. Zkuste to prosím znovu za několik minut.</p></td>
+        <td><img src="./images/construction.png" alt="Ve výstavbě." /></td>
+    </tr>
+</table>
+<p>Můžete si zkrátit chvíli u hry "Vetřelci"</p>
+<object
+  classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+  codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0"
+  width="550" height="400">
+  <param name="movie" value="./images/invaders.swf" />
+  <param name="quality" value="high" />
+  <embed src="./images/invaders.swf" quality="high" bgcolor="#000000" width="550" height="400"
+    type="application/x-shockwave-flash"
+    pluginspage="http://www.macromedia.com/go/getflashplayer">
+  </embed>
+</object>
+
+
+<?php
+
+exit;

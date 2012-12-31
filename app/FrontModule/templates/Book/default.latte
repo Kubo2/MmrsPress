@@ -1,0 +1,128 @@
+{var title='Kniha návštěv'} {* nastavení měnícího se titulku stránky*}
+
+{block content}
+<script>
+$(function(){
+        // Dialog
+        $('#dialog').dialog({
+                autoOpen: false,
+                width: 650,
+                height: 650,
+                buttons: {
+                        "Zavřít": function() {
+                                $(this).dialog("close");
+                        },
+                }
+        });
+                        
+        // Dialog Link
+        $('#dialog_lnk').click(function(){
+                $('#dialog').dialog('open');
+                return false;
+        });
+
+        //hover states on the static widgets
+        $('#dialog_link, ul#icons li').hover(
+                function() { $(this).addClass('ui-state-hover'); },
+                function() { $(this).removeClass('ui-state-hover'); }
+        );
+
+});
+</script>
+<h1>Kniha návštěv</h1>
+<a href="#" id="dialog_lnk">Přidat příspěvek</a><br /><br />
+<div id="dialog" title="Nový příspěvek">
+    {form bookForm}
+    <fieldset>
+        <legend>Nevhodné příspěvky budou mazány!</legend>
+        <table>
+            <tr class="required">
+                <th>{label jmeno /}</th>
+                <td>{input jmeno}</td>
+            </tr>
+            <tr>
+                <th>{label email /}</th>
+                <td>{input email}</td>
+            </tr>
+            <tr>
+                <th>{label web /}</th>
+                <td>{input web}</td>
+            </tr>
+            <tr class="required">
+                <th>{label zprava /}</th>
+                <td>{input zprava}</td>
+            </tr>
+            <tr>
+                <th>Formátování:</th>
+                <td><a href="#" onclick="return insertSmiley(1002);"><img class="smaj-i" name="PS2" src="{$basePath}/images/bold.png" border="0" alt="[b]"></a>
+                    <a href="#" onclick="return insertSmiley(1004);"><img class="smaj-i" name="PS4" src="{$basePath}/images/i.png" border="0" alt="[i]"></a>
+                    <a href="#" onclick="return insertSmiley(1006);"><img class="smaj-i" name="PS6" src="{$basePath}/images/r.png" border="0" alt="[red]"></a>
+                    <a href="#" onclick="return insertSmiley(1008);"><img class="smaj-i" name="PS8" src="{$basePath}/images/g.png" border="0" alt="[green]"></a>
+                    <a href="#" onclick="return insertSmiley(1010);"><img class="smaj-i" name="PS10" src="{$basePath}/images/b.png" border="0" alt="[blau]"></a>
+
+                    <a href="#" onmouseover="document.getElementById('help').style.visibility='visible'" onmouseout="document.getElementById('help').style.visibility='hidden'">Nápověda</a><br />
+                    <div id="help"><b>Formátování textu:</b><br />
+                        Při prvním klepnutí se přidá do textu začátek <br />
+                        kódu pro formátování textu a při druhém klepnutí <br />
+                        se uzavře formátování. Dokud není formátování <br />
+                        ukončeno příslušné tlačítko je zvýrazněno.<br />
+                        <b>Vysvětlivky:</b><br />
+                        <b>B</b> = Tučné písmo <br />
+                        <i>i</i> = Kurzíva<br />
+                        <span class="red">R</span> = <span class="red">Červené písmo</span><br />
+                        <span class="green">G</span> = <span class="green">Zelené písmo</span><br />
+                        <span class="blue">B</span> = <span class="blue">Modré písmo</span><br />
+                        Slovo začínající na http:// nebo www. a emailová adresa<br />
+                        ve tvaru "neco@neco.xx" se automaticky změní na odkaz.
+                    </div></td>
+            </tr>
+        </table>
+    </fieldset>
+{if !$user->loggedIn}  
+    <fieldset>
+        <legend>Antispam</legend>
+{/if}
+        <table>
+    {if !$user->loggedIn}
+            <tr class="required">
+                <th>{label cpta /}</th>
+                <td>{input cpta}</td>
+            </tr>
+    {/if}
+            <tr>
+                <th>{label create /}</th>
+                <td>{input create}</td>
+            </tr>
+        </table>
+{if !$user->loggedIn}
+    </fieldset>
+{/if}
+{/form bookForm}
+</div>
+    {control vp}
+
+    {foreach $tasks as $task}
+    <div class="bookUser">
+        .::<strong>{$task->name}</strong>::.
+        <br>
+        {if !empty($task->avatar) AND file_exists(WWW_DIR.'/avatar/'.$task->avatar)}
+            <img src="{$basePath}/avatar/{$task->avatar}" alt="" class="left">
+            {else}
+            <img src="{$basePath}/avatar/avatar.png" alt="" class="left">
+        {/if}
+        <a n:if="$task->email" href="mailto:{$task->email}"><i class="mmrs-icon-email"></i></a>
+        <a n:if="$task->web" href="{$task->web}"><i class="mmrs-icon-home"></i></a><br>
+        <span class="small">{$task->date|date:'j. n. Y'}</span>
+                    
+        
+    </div>
+    <div class="bookWiew">
+        {if $user->loggedIn}
+                        {if $user->identity->role == 1}<span class="right"><a href="{link delete! $task->id}" onclick="return confirm('Smazat?')"><i class="mmrs-icon-delete"></i></a></span>{/if}
+                    {/if}
+                {! formatovani($task->mesage) |nl2br}
+    </div>
+    {/foreach}
+
+{control vp}
+{/block}

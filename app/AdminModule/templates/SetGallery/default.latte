@@ -1,0 +1,51 @@
+{var title='Fotogalerie'} {* nastavení měnícího se titulku stránky*}
+
+{block content}
+<h1><i class="mmrs-icon-photo-gallery"></i> Fotogalerie</h1>
+<p>Vytvoření nové fotogalerie. Je možné vytvořit neomezené* množství fotogalerií. 
+    Po vytvoření nové fotogalerie, je tato galerie nastavena jako skrytá. To znamená, 
+    že není na webu viditelná. Aby byla galerie dostupná, tak po přidání fotek 
+    stačí fotogalerii nastavit jako veřejnou. Tím se fotogalerie zpřístupní ve veřejné 
+    části webu.</p>
+<p>Pokud omylem zveřejníte galerii, která neobsahuje žádné fotky, bude tato galerie 
+    veřejně dostupná, ale místo fotek bude u galerie nápis, že v galerii nejsou žádné fotky.</p>
+    {control addGalleryForm}
+
+    {control vp}
+<table class="addGalerie" cellspacing="0">
+    <tr class="bookUser">
+        <td>Název galerie</td>
+        <td>Počet fotek</td>
+        <td>Nastavení</td>
+        <td>Akce</td>
+        <td>Autor</td>
+    </tr>
+    {foreach $tasks as $task}
+    {if $task->autor == $user->identity->users or $userRole == 1}
+    <tr n:class="$iterator->isOdd() ? odd : even">
+        <td><a href="{link :Front:PhotoWiew:default gallery=>$task->folder}" title="Náhled"><i class="mmrs-icon-preview"></i>{$task->name}</a></td>
+        <td>{pocetImage($task->folder)}</td>
+            {if $task->public == '1'}<td>Veřejná<i class="mmrs-icon-ok"></i>{else}<td>Skrytá<i class="mmrs-icon-disabled"></i>{/if}</td>
+        <td>
+            {if $userRole == 1}
+                {if $task->public == '0'}
+            <a href="{link verejna! $task->id}" onclick="return confirm('Nastavit galerii jako veřejnou?\nGalerie bude na webu dostupná.')" title="Nastavit jako veřejnou"><i class="mmrs-icon-eye"></i></a> 
+                {else}
+            <a href="{link skryta! $task->id}" onclick="return confirm('Nastavit galerii jako skrytou?\nGalerie nebude na stránce dostupná.')" title="Nastavit jako skrytou"><i class="mmrs-icon-eye-disabled"></i></a> 
+                {/if}
+            {/if}
+            <a href="{link :Front:PhotoWiew:default gallery=>$task->folder}" title="Náhled"><i class="mmrs-icon-preview"></i></a>
+            <a href="{link Photos:default folder=>$task->folder}" title="Fotky"><i class="mmrs-icon-foto"></i></a> 
+            <a href="{link Uploader:default folder=>$task->folder}" title="Přidat fotky"><i class="mmrs-icon-foto-plus"></i></a> 
+            <a href="{link EditGallery:default id=>$task->id}" title="Editovat"><i class="mmrs-icon-edit"></i></a> 
+            <a href="{link delete! $task->id}" onclick="return confirm('Smazat?')" title="Smazat"><i class="mmrs-icon-delete"></i></a> 
+        </td>
+        <td class="btn">
+            <i class="mmrs-icon-user"></i><span>{$task->autor}</span>
+        </td>
+    </tr>
+    {/if}
+    {/foreach}
+</table>
+<span class="poznamka">* podle dostupného místa příslušného webhostingu</span>
+{/block}

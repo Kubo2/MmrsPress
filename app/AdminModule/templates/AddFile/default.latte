@@ -1,0 +1,19 @@
+{var title='Upload'} {* nastavení měnícího se titulku stránky*}
+
+{block content}
+    <h1><i class="mmrs-icon-files"></i> Soubory</h1>
+    <p>Zde je možné přidávat soubory pro použití v aktualitách, nebo stránkách. </p>
+    <p>Nahrávané obrázky se automaticky zmenší / zvětší na šířku 500px - pokud není v 
+        nastavení médií nastavena jiná hodnota.</p>
+        <strong>Povolené soubory:</strong>
+    <ul>
+        <li>Ms Word - doc</li>
+        <li>Ms Exel - xls</li>
+        <li>Open office Writer - odt</li>
+        <li>Open office Calc - ods</li>
+        <li>Adobe - pdf</li>
+        <li>Plain text - txt</li>
+        <li>Obrázky - jpg, png, gif</li>
+    </ul>
+    {control uploadForm}
+{/block}

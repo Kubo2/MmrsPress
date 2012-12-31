@@ -1,0 +1,11 @@
+{var title='Výsledky hledání'} {* nastavení měnícího se titulku stránky*}
+{block content}
+<h1>Výsledky hledání</h1>
+<strong>Hledaný text:</strong> {!$findText}
+<h2>Počet nalezených výsledků: {$finds->count('*')}</h2>
+{foreach $finds as $find}
+<a href="{link Page:default wiew=>$find->id}"><h3>{$find->menu}</h3></a>
+    
+<hr />
+{/foreach}
+{/block}

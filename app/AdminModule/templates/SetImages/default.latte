@@ -1,0 +1,33 @@
+{var $title="Nastavení médií"}
+{block content}
+<h1><i class="mmrs-icon-images"></i> Nastavení médií</h1>
+<p>U fotogalerie je možné nastavit velikost miniatur a velikost původních snímků.<br />
+    U miniatur je nastavení možné v rozmezí 50-200px šířky fotogarefie. U původních snímků 
+    je možné nastavení v rozmezí <strong>300-1024px</strong> šířky fotografie. Výchozí 
+    hodnoty jsou <strong>150px</strong> pro miniatury a <strong>800px</strong> pro původní 
+    sníkmy.</p>
+<p>U obrázkových příloh aktualit a stránek je možné vybrat z rozmezí velikosti šířky 
+    obrázku <strong>50-1024px</strong>. Výchozí hodnota je <strong>500px</strong>.</p>
+<p class="red">Fotografie / obrázek po uploadu na web není možné zmenšit, ani zvětšit! Pokud 
+    změníte nastavení po nějaké době, kdy už existuje nějaká galerie s fotografiemi, případně 
+    obrázková příloha nebude mít toto nastavení na ni vliv!</p>
+    {control setImgForm}
+
+<h2>Nastavení fotogalerie</h2>
+    <p>U fotogalerie je možné zobrazit nebo skrýt panel se zobrazením čtyř posledních 
+        nahraných fotografií.</p>
+    {if $settings->where('select','photoPanel')->count('*') > 0}
+    {foreach $settings->where('select','photoPanel') as $set}
+        {if $set->public == 0}
+            <p><strong class="red">Panel je nastaven jako skrytý</strong><i class="mmrs-icon-disabled"></i></p> 
+            <a href="{link verejna! $set->id}" onclick="return confirm('Nastavit panel jako veřejný?\nPanel bude na webu zobrazen.')">NASTAVIT PANEL JAKO VEŘEJNÝ</a> 
+        {else}
+            <p><strong  class="green">Panel je nastaven jako veřejný</strong><i class="mmrs-icon-ok"></i></p>
+            <a href="{link skryta! $set->id}" onclick="return confirm('Nastavit panel jako skrytý?\nPanel nebude na stránce viditelný.')">NASTAVIT PANEL JAKO SKRYTÝ</a> 
+        {/if}
+    {/foreach}
+{else}
+    <p><strong class="red">Panel je nastaven jako skrytý</strong><i class="mmrs-icon-disabled"></i></p> 
+            <a href="{link verejna!}" onclick="return confirm('Nastavit panel jako veřejný?\nPanel bude na webu zobrazen.')">NASTAVIT PANEL JAKO VEŘEJNÝ</a>{/if}
+
+{/block}

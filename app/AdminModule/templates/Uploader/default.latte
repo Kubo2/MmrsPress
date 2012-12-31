@@ -1,0 +1,35 @@
+{var title='Upload'} {* nastavení měnícího se titulku stránky*}
+
+{block content}
+<h1><i class="mmrs-icon-photo-gallery"></i> Upload fotek - {foreach $galerie as $gal }{$gal->name}{/foreach}</h1>
+<p> Upload fotek je omezen pouze pro formáty obrázků "jpg" a "png". 
+    Do jedné galerie nemůže být nahráno více obrázků se stejným názvem. Při 
+    uploadu obrázku se stejným názvem, se tento obrázek nenahraje. Je možné 
+    nahrát více stejných obrázků, ale musí být v rozlišných galeriích.</p>
+<p>Obrázky je lepší zmenšit v PC již před uploadem na <a href="{link SetImages:default}">nastavené rozlišení</a>.
+    Sníží se tím doba čekání při uploadu a navíc nedojde k nežádoucí ztrátě 
+    kvality při zmenšování až na serveru.</p>
+<p><span class="red"><strong>Je možné nahrávat soubrory do maximální velikosti {ini_get('post_max_size')}b. 
+            Při překročení tohoto omezení může dojít k chybě.</strong></span></p>
+    {control uploadForm}
+            <div id="loader" title="Nahrávám">
+    <div id="floatingCirclesG">
+        <div class="f_circleG" id="frotateG_01">
+        </div>
+        <div class="f_circleG" id="frotateG_02">
+        </div>
+        <div class="f_circleG" id="frotateG_03">
+        </div>
+        <div class="f_circleG" id="frotateG_04">
+        </div>
+        <div class="f_circleG" id="frotateG_05">
+        </div>
+        <div class="f_circleG" id="frotateG_06">
+        </div>
+        <div class="f_circleG" id="frotateG_07">
+        </div>
+        <div class="f_circleG" id="frotateG_08">
+        </div>
+    </div>
+</div>
+{/block}
