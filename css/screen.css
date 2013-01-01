@@ -569,8 +569,7 @@ a[href^="error:"] {
 }
 /************* kontaktní formulář ****************/
 .toggler {
-    width: 500px;
-    height: 450px;
+
     margin-top: 20px;
     z-index: 100;
     position: absolute;
