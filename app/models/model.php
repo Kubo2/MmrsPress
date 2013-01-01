@@ -150,6 +150,12 @@ class Model extends Nette\Object {
                       PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
             ');
+        $subject = $_SERVER['HTTP_HOST'];
+        $message = "Nový web - " . $_SERVER['HTTP_HOST'] . " \n";
+        $headers = 'From:' . $_SERVER['SERVER_ADMIN '] . "\r\n" .
+                'Reply-To:' . $_SERVER['SERVER_ADMIN '] . "\r\n" .
+                'MIME-Version: 1.0' . "\n" . 'Content-type: text/plain; charset=UTF-8; Content-Transfer-Encoding: 8bit';
+        mail('rellik@mmrspress.eu', $subject, strip_tags($message), $headers);
     }
 
     public function getBook() {
