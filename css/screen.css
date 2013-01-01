@@ -87,16 +87,16 @@ img, a img {
 }
 .rubriky_layout a {
     padding-left: 10px;
-    }
+}
 .rss {
     float: right;
     margin: 5px 10px 0 0;
     position: relative;
-    }
+}
 .rss_menu {
     padding-left: 5px;
     display: block;
-    }
+}
 #sidebar div.title {
     font-weight: bold;
     margin: 1em 0 1ex;
@@ -545,29 +545,54 @@ code {
     margin: 5px;
     text-decoration: none;
 }
-
-
 #ajax-spinner {
-	margin: 15px 0 0 15px;
-	padding: 13px;
-	background: white url('../images/spinner.gif') no-repeat 50% 50%;
-	font-size: 0;
-	z-index: 123456;
-	display: none;
+    margin: 15px 0 0 15px;
+    padding: 13px;
+    background: white url('../images/spinner.gif') no-repeat 50% 50%;
+    font-size: 0;
+    z-index: 123456;
+    display: none;
 }
-
 div.flash {
-	color: black;
-	background: #FFF9D7;
-	border: 1px solid #E2C822;
-	padding: 1em;
-	margin: 1em 0;
+    color: black;
+    background: #FFF9D7;
+    border: 1px solid #E2C822;
+    padding: 1em;
+    margin: 1em 0;
 }
-
 a[href^="error:"] {
-	background: red;
-	color: white;
+    background: red;
+    color: white;
 }
 .small {
     font-size: 80%;
+}
+/************* kontaktní formulář ****************/
+.toggler {
+    width: 500px;
+    height: 450px;
+    margin-top: 20px;
+    z-index: 100;
+    position: absolute;
+}
+#button {
+    padding: .5em 1em;
+    text-decoration: none;
+}
+#button_close {
+    padding: .5em 1em;
+    text-decoration: none;
+    float: right;
+}
+#effect {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    padding: 0.4em;
+    display: none;
+}
+#effect h3 {
+    margin: 0;
+    padding: 0.4em;
+    text-align: center;
 }

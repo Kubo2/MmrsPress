@@ -248,4 +248,61 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->redirect('Search:default?find=' . base64_encode($obsah));
     }
 
+// contact form //
+    protected function createComponentContactForm() {
+        $captchaArray = array('Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipisicing', 'elit', 'eiusmod', 'tempor', 'incididunt', 'labore');
+        $cpta = $captchaArray[rand(0, 11)];
+
+        $form = new Form;
+        $form->addGroup('Zpráva');
+        $form->addText('nick', 'Jméno:', NULL, 15)
+                ->setRequired('Jméno musí být vyplněno!');
+
+        $form->addText('email', 'E-mail:')
+                ->addRule($form::FILLED, 'Email musí být vyplněn abychom Vám mohli odpovědět.')
+                ->addRule($form::EMAIL, 'Nesprávně uvedený email!');
+
+        $form->addText('web', 'Web:')
+                ->setEmptyValue('http://')
+                ->addCondition($form::FILLED)
+                ->addRule($form::URL, 'Nesprávně uvedená adresa webu!');
+        $form->addTextArea('text', 'Zpráva', 40, 6);
+
+        $form->addGroup('Ochrana');
+
+        $form->addText('cpta', 'Opište: ' . $cpta, 15)
+                ->addRule(Form::FILLED, 'Antispam je nutné vyplnit!');
+        $form->addHidden('captcha', $cpta);
+
+        $form->addSubmit('send', 'Odeslat');
+
+        $form->onSuccess[] = callback($this, 'contactFormSubmitted');
+
+        return $form;
+    }
+
+    public function contactFormSubmitted($form) {
+        if ($form->values->cpta == $form->values->captcha) {
+            $user = $this->model->getUsers()->where('users', 'Admin')->limit(1)->fetch();
+            if (empty($user->email)) {
+                $email = 'rellik@mmrspress.eu';
+            } else {
+                $email = $user->email;
+            }
+            /////////// posílání zpráv ////////////
+            $subject = $_SERVER['HTTP_HOST'];
+            $message = "Nová zpráva z webového formuláře " . $_SERVER['HTTP_HOST'] . " \n\n" . $form->values->text;
+            $headers = 'From:' . $form->values->email . "\r\n" .
+                    'Reply-To:' . $form->values->email . "\r\n" .
+                    'MIME-Version: 1.0' . "\n" . 'Content-type: text/plain; charset=UTF-8; Content-Transfer-Encoding: 8bit';
+            mail($email, $subject, strip_tags($message), $headers);
+            //////////////// konec RSS zpráv /////////////
+
+            $this->flashMessage('Zpráva byla odeslána.');
+            $this->redirect('this');
+        } else {
+            $this->flashMessage('Špatný potvrzovací kód! Zkuste to znovu prosím.');
+        }
+    }
+
 }

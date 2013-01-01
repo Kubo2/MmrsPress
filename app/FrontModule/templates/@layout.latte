@@ -86,7 +86,29 @@
                                 return false;
                         });
 
-   
+   // run the currently selected effect
+        function runEffect() {
+            // get effect type from
+            var selectedEffect = $( "#effectTypes" ).val('slide');
+ 
+            // most effect types need no options passed by default
+            var options = {};
+
+ 
+            // run the effect
+            $( "#effect" ).toggle( selectedEffect, options, 500 );
+        };
+ 
+        // set effect from select menu value
+        $( "#button" ).click(function() {
+            runEffect();
+            return false;
+        });
+        // set effect from select menu value
+        $( "#button_close" ).click(function() {
+            runEffect();
+            return false;
+        });
                             
 
         });
@@ -108,6 +130,16 @@
             </div> 
         </div>
         {/if}
+        <a href="#" id="button" class="ui-state-default ui-corner-all">Napište nám</a>
+        <div class="toggler">
+            <div id="effect" class="ui-widget-content ui-corner-all">
+                <a href="#" id="button_close">X</a>
+                <h3 class="ui-widget-header ui-corner-all">Napište nám</h3>
+                <p>
+                    {control contactForm}
+                </p>
+            </div>
+        </div>
         <div id="page">
             <div id="header">
                 <a href="{link News:news}"><div id="header-inner">
