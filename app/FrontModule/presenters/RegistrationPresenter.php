@@ -222,50 +222,55 @@ class RegistrationPresenter extends \BasePresenter {
     }
 
     public function handleDelete($id) {
-        if ($this->getUser()->getIdentity()->users != 'Admin') {
-            if (file_exists(WWW_DIR . '/avatar/' . $this->getUser()->getIdentity()->avatar)) {
-                unlink(WWW_DIR . '/avatar/' . $this->getUser()->getIdentity()->avatar);
-            }
-            $gallery = $this->model->getGallery()->where('autor', $this->getUser()->getIdentity()->users);
+        if ($this->getUser()->getIdentity()->role != 3) {
+            if ($this->getUser()->getIdentity()->users != 'Admin') {
+                if (file_exists(WWW_DIR . '/avatar/' . $this->getUser()->getIdentity()->avatar)) {
+                    unlink(WWW_DIR . '/avatar/' . $this->getUser()->getIdentity()->avatar);
+                }
+                $gallery = $this->model->getGallery()->where('autor', $this->getUser()->getIdentity()->users);
 
-            function rmdirTree($dirname) {
-                if (is_dir($dirname)) {
-                    $result = array();
-                    if (substr($dirname, -1) != '/') {
-                        $dirname.='/';
-                    }
-                    $handle = opendir($dirname);
-                    while (false !== ($file = readdir($handle))) {
-                        if ($file != '.' && $file != '..') {
-                            $path = $dirname . $file;
-                            if (is_dir($path)) {
-                                $result = array_merge($result, rmdirtree($path));
-                            } else {
-                                unlink($path);
-                                $result[].=$path;
+                function rmdirTree($dirname) {
+                    if (is_dir($dirname)) {
+                        $result = array();
+                        if (substr($dirname, -1) != '/') {
+                            $dirname.='/';
+                        }
+                        $handle = opendir($dirname);
+                        while (false !== ($file = readdir($handle))) {
+                            if ($file != '.' && $file != '..') {
+                                $path = $dirname . $file;
+                                if (is_dir($path)) {
+                                    $result = array_merge($result, rmdirtree($path));
+                                } else {
+                                    unlink($path);
+                                    $result[].=$path;
+                                }
                             }
                         }
+                        closedir($handle);
+                        rmdir($dirname);
+                        $result[].=$dirname;
+                        return $result;
+                    } else {
+                        return false;
                     }
-                    closedir($handle);
-                    rmdir($dirname);
-                    $result[].=$dirname;
-                    return $result;
-                } else {
-                    return false;
                 }
-            }
 
-            foreach ($gallery as $delGallery) {
-                rmdirTree(WWW_DIR . '/gallery/' . $delGallery->folder);
-                $this->model->getPhotos()->where('folder', $delGallery->folder)->delete();
+                foreach ($gallery as $delGallery) {
+                    rmdirTree(WWW_DIR . '/gallery/' . $delGallery->folder);
+                    $this->model->getPhotos()->where('folder', $delGallery->folder)->delete();
+                }
+                $this->model->getGallery()->where('autor', $this->getUser()->getIdentity()->users)->delete();
+                $this->model->getUsers()->where('users', $this->getUser()->getIdentity()->users)->delete();
+                $this->model->getNews()->where('autor', $this->getUser()->getIdentity()->users)->delete();
+                $this->flashMessage('Uživatelský účet byl odstraněn.');
+                $this->redirect('Sign:out');
+            } else {
+                $this->flashMessage('Hlavního administrátora nelze odstranit!');
+                $this->redirect('MyInfo:default');
             }
-            $this->model->getGallery()->where('autor', $this->getUser()->getIdentity()->users)->delete();
-            $this->model->getUsers()->where('users', $this->getUser()->getIdentity()->users)->delete();
-            $this->model->getNews()->where('autor', $this->getUser()->getIdentity()->users)->delete();
-            $this->flashMessage('Uživatelský účet byl odstraněn.');
-            $this->redirect('Sign:out');
         } else {
-            $this->flashMessage('Hlavního administrátora nelze odstranit!');
+            $this->flashMessage('V demo módu nelze uživatele odstranit!');
             $this->redirect('MyInfo:default');
         }
     }

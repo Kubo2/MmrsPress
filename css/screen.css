@@ -569,14 +569,14 @@ a[href^="error:"] {
 }
 /************* kontaktní formulář ****************/
 .toggler {
-
-    margin-top: 20px;
+     margin-top: 40px;
     z-index: 100;
     position: absolute;
 }
 #button {
     padding: .5em 1em;
     text-decoration: none;
+    float: left;
 }
 #button_close {
     padding: .5em 1em;
