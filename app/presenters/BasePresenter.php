@@ -61,6 +61,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
             'Aktuální přehled' => ':Admin:Info:',
             'Vzhled' => ':Admin:SetLayout:',
             'Aktuality' => ':Admin:SetNews:',
+            'Kontaktní formulář' => ':Admin:ContactForm:',
             'Rss' => ':Admin:Rss:',
             'Média' => ':Admin:SetImages:',
             'Kniha návštěv' => ':Admin:SetBook:',
@@ -114,7 +115,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         } else {
             $this->template->admin = $user->email;
         }
-
 
 // pages links
         $this->template->menuPage = $this->model->getNews()->where(array('section' => 'page', 'public' => '1'));
@@ -208,6 +208,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         }
 // daily data erase counter when the data are older than the current date
         $this->model->getCounter()->where('date <> ?', date("Y-m-d"))->delete('*');
+
+        // contact form settings //
+        $isFormSet = $this->model->getSettings()->where('select', 'contact')->fetch();
+        if ($isFormSet == false) {
+            $this->template->contactForm = 0;
+        } else {
+            $this->template->contactForm = $isFormSet->public;
+        }
     }
 
 //searching //
@@ -249,6 +257,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     }
 
 // contact form //
+
     protected function createComponentContactForm() {
         $captchaArray = array('Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipisicing', 'elit', 'eiusmod', 'tempor', 'incididunt', 'labore');
         $cpta = $captchaArray[rand(0, 11)];
@@ -283,12 +292,23 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     public function contactFormSubmitted($form) {
         if ($form->values->cpta == $form->values->captcha) {
-            $user = $this->model->getUsers()->where('users', 'Admin')->limit(1)->fetch();
-            if (empty($user->email)) {
-                $email = 'rellik@mmrspress.eu';
+            $isFormSet = $this->model->getSettings()->where('select', 'contact')->fetch();
+            if ($isFormSet == false) {
+                $user = $this->model->getUsers()->where('users', 'Admin')->limit(1)->fetch();
+                if (empty($user->email)) {
+                    $email = 'rellik@mmrspress.eu';
+                } else {
+                    $email = $user->email;
+                }
             } else {
-                $email = $user->email;
+                $user = $this->model->getUsers()->where('id', $isFormSet->count)->limit(1)->fetch();
+                if (empty($user->email)) {
+                    $email = 'rellik@mmrspress.eu';
+                } else {
+                    $email = $user->email;
+                }
             }
+
             /////////// posílání zpráv ////////////
             $subject = $_SERVER['HTTP_HOST'];
             $message = "Nová zpráva z webového formuláře " . $_SERVER['HTTP_HOST'] . " \n\n" . $form->values->text;
@@ -299,7 +319,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
             //////////////// konec RSS zpráv /////////////
 
             $this->flashMessage('Zpráva byla odeslána.');
-            $this->redirect('this');
+            $this->redirect('News:news');
         } else {
             $this->flashMessage('Špatný potvrzovací kód! Zkuste to znovu prosím.');
         }
