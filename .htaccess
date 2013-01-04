@@ -1,0 +1,13 @@
+# Apache configuration file (see httpd.apache.org/docs/2.2/mod/quickreference.html)
+
+# disable directory listing
+Options -Indexes
+
+# enable cool URL
+RewriteEngine On
+<IfModule mod_rewrite.c>
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule !\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\.gz)$ index.php [L]
+        SetEnv NETTE_HTACCESS ok
+</IfModule>
