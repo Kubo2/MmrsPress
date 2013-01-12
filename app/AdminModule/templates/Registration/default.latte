@@ -1,7 +1,7 @@
 {var title='Uživatelé'} {* nastavení měnícího se titulku stránky*}
 
 {block content}
-<h1><i class="mmrs-icon-usercards"></i> Správa uživatelů</h1>
+<h1><i class="mmrs-icon-25-usercards"></i> Správa uživatelů</h1>
 <p>Registrace nového uživatele pro správu systému je rozdělena do tří kategorií:</p>
 <ul>
     <li><strong>Omezené oprávnění</strong> - Uživatel po přihlášení má právo psát 
@@ -20,15 +20,15 @@
 {if $settings->where('select','user')->count('*') > 0}
     {foreach $settings->where('select','user') as $set}
         {if $set->public == 0}
-            <p><strong class="red">Registrace uživateů je zakázána</strong><i class="mmrs-icon-disabled"></i></p> 
+            <p><strong class="red">Registrace uživateů je zakázána</strong><i class="mmrs-icon-20-disabled"></i></p> 
             <a href="{link verejna! $set->id}" onclick="return confirm('Povolit registraci nových uživatelů?')">Povolit registraci</a> 
         {else}
-            <p><strong  class="green">Registrace uživateů je povolena</strong><i class="mmrs-icon-ok"></i></p>
+            <p><strong  class="green">Registrace uživateů je povolena</strong><i class="mmrs-icon-20-ok"></i></p>
             <a href="{link skryta! $set->id}" onclick="return confirm('Zakázat registraci nových uživatelů?')">Zakázat registraci</a> 
         {/if}
     {/foreach}
 {else}
-    <p><strong class="red">Registrace uživateů je zakázánaá</strong><i class="mmrs-icon-disabled"></i></p> 
+    <p><strong class="red">Registrace uživateů je zakázánaá</strong><i class="mmrs-icon-20-disabled"></i></p> 
             <a href="{link verejna!}" onclick="return confirm('Povolit registraci nových uživatelů?')">Povolit registraci</a>{/if}
 <p>Kompletní oprávnění udělujte jen kompetentním uživatelům!</p>
     {control registrationForm}
@@ -41,7 +41,7 @@
     {foreach $userWiews as $usrw}
     <tr n:class="$iterator->odd ? odd, $iterator->last ? even">
         <td>
-            <i class="mmrs-icon-user-{$usrw->role}"></i><strong>{$usrw->users}</strong>
+            <i class="mmrs-icon-20-user-{$usrw->role}"></i><strong>{$usrw->users}</strong>
         </td>
         <td>
             <a href="mailto:{$usrw->email}">{$usrw->email}</a>
@@ -51,17 +51,17 @@
         </td>
             {if $usrw->role == 1}
         <td>
-            <i class="mmrs-icon-ok"></i>Kompletní
+            <i class="mmrs-icon-20-ok"></i>Kompletní
         </td>
             {/if}
         {if $usrw->role == 2}
         <td>
-            <i class="mmrs-icon-minus"></i>Omezené
+            <i class="mmrs-icon-20-minus"></i>Omezené
         </td>
             {/if}
             {if $usrw->role == 3}
         <td>
-            <i class="mmrs-icon-disabled"></i>Omezené - Demo mód
+            <i class="mmrs-icon-20-disabled"></i>Omezené - Demo mód
         </td>
             {/if}
         <td>

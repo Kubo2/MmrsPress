@@ -8,7 +8,8 @@
         <title>{ifset $title}{$title} &ndash; {/ifset}{$set_title}</title>
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen_admin.css" type="text/css">
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/admin.css" type="text/css">
-        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/mmrs-icons.css" type="text/css">
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/mmrs-icons-20-20.css" type="text/css">
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/mmrs-icons-25-25.css" type="text/css">
         <link rel="stylesheet" media="print" href="{$basePath}/css/print.css" type="text/css">
         <link rel="shortcut icon" href="{$basePath}/images/web.gif" type="image/x-icon">
         <link rel="stylesheet" href="{$basePath}/css/lightbox.css" type="text/css" media="screen">
@@ -149,24 +150,24 @@
                 <div id="sidebar">
                     <div class="task-lists">
                         <div id="menuAdmin">
-                            <span class="adminSet"><i class="mmrs-icon-edit"></i>Aktuality / Stránky</span>
+                            <span class="adminSet"><i class="mmrs-icon-20-edit"></i>Aktuality / Stránky</span>
                             <ul class="mainMenu">
                                 <li><a href="{link AddNews:}">Aktuality</a></li>
                                 <li><a href="{link Pages:}">Stránky</a></li>
                                 <li><a href="{link AddSection:}">Rubriky</a></li>
                             </ul>
-                            <span class="adminSet"><i class="mmrs-icon-camera"></i>Fotogalerie</span>
+                            <span class="adminSet"><i class="mmrs-icon-20-camera"></i>Fotogalerie</span>
                             <ul class="mainMenu">
                                 <li><a href="{link :Admin:SetGallery:}">Správa fotogalerií</a></li>
                             </ul>
                            {if $user->identity->role == 1}
-                            <span class="adminSet"><i class="mmrs-icon-settings"></i>Nastavení webu</span>
+                            <span class="adminSet"><i class="mmrs-icon-20-settings"></i>Nastavení webu</span>
                             <ul class="mainMenu">
                             {foreach $menuSettings as $item => $link}
                                 <li><a n:href="$link">{$item}</a></li>
                             {/foreach}
                             </ul>
-                           {/if}
+                            {/if}
                         </div>
                     </div>
                 </div>

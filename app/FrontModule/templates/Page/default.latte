@@ -2,6 +2,9 @@
     {var title=$taska->menu}
 {/foreach}
 {block content}
+{if $settings_fb->where('select','facebook')->count('*') >= 1 AND $settings_fb->where(array('select' => 'facebook', 'public' => '1'))->count('*') == 1}
+<div class="fb-like fb" data-href="http://{$_SERVER['SERVER_NAME'].'/?'.$_SERVER['QUERY_STRING']}" data-send="true" data-layout="button_count" data-width="210" data-show-faces="true" data-colorscheme="dark"></div>
+{/if}
     {foreach $wiewMenu as $task}
                 {if $user->loggedIn}
                 {if $user->identity->users == $task->autor or $user->identity->role == 1}

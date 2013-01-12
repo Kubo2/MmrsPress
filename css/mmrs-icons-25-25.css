@@ -1,0 +1,30 @@
+/* 
+    Document   : mmrs-icons.css
+    Created on : 16.12.2012, 16:52:56
+    Author     : rellik
+    Description:
+        Purpose of the stylesheet follows.
+
+*/
+
+[class^=mmrs-icon-25-],
+[class*=mmrs-icon-25-] {
+    width: 25px;
+    height: 25px; 
+    background: url(images/mmrs_25_25_icons.png) no-repeat;
+    display: inline-block;
+}
+
+.mmrs-icon-25-mark { background-position: 0 0; }
+.mmrs-icon-25-files { background-position: -25px 0; }
+.mmrs-icon-25-book { background-position: -50px 0; }
+.mmrs-icon-25-edit-book { background-position: -75px 0; }
+.mmrs-icon-25-photo-gallery { background-position: 0 -25px; }
+.mmrs-icon-25-bookmarks { background-position: -25px -25px; }
+.mmrs-icon-25-images { background-position: -50px -25px; }
+.mmrs-icon-25-rss { background-position: -75px -25px; }
+.mmrs-icon-25-geometry { background-position: 0 -50px; }
+.mmrs-icon-25-block { background-position: -25px -50px; }
+.mmrs-icon-25-calc { background-position: -50px -50px; }
+.mmrs-icon-25-usercards { background-position: -75px -50px; }
+.mmrs-icon-25-fb { background-position: 0 -75px; }

@@ -1,6 +1,9 @@
 {var title=$rubriky_nazev}
 
 {block content}
+{if $settings_fb->where('select','facebook')->count('*') >= 1 AND $settings_fb->where(array('select' => 'facebook', 'public' => '1'))->count('*') == 1}
+<div class="fb-like fb" data-href="http://{$_SERVER['SERVER_NAME'].'/?'.$_SERVER['QUERY_STRING']}" data-send="true" data-layout="button_count" data-width="210" data-show-faces="true" data-colorscheme="dark"></div>
+{/if}
     {*<h1>{$rubriky_nazev}</h1>*}
     {if $rubriky_page->count('*') > 0}
 {*
@@ -15,6 +18,6 @@
        {!$news}
     {/foreach}
     {else}
-        <p>V této sekci není zatím žádný článek</p>
+<p>V této sekci není zatím žádný článek</p>
      {/if}
 {/block}

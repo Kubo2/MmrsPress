@@ -162,8 +162,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 // settings RSS
         $this->template->setRss = $this->model->getSetRss();
 // section pages
-        $this->template->rubriky = $this->model->getSection();
-        $this->template->rubriky_menu = $this->model->getNews();
+        $this->template->rubriky = $this->model->getSection()->where('public','1');
+        $this->template->rubriky_menu = $this->model->getNews()->where('public', '1');
         $this->template->rubriky_nazev = '';
         if ($this->getParam('wiew') != '') {
             $setPodmenuWiew = $this->model->getNews()->where('id', $this->getParam('wiew'))->fetch();
@@ -179,7 +179,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
             $select = array($pthotoImage->folder);
             $this->template->photosMenu = $this->model->getPhotos()->where(array('folder' => $select))->order('rand()')->limit(1);
         }
-
+// facebook
+        $this->template->settings_fb = $this->model->getSettings();
 // counter
         $isCountAll = $this->model->getCounter_all()->count('*');
         $CountAll = $this->model->getCounter_all()->fetch();

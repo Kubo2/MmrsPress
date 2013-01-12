@@ -1,19 +1,22 @@
 {var $title="Fotogalerie"}
 {block content}
+{if $settings_fb->where('select','facebook')->count('*') >= 1 AND $settings_fb->where(array('select' => 'facebook', 'public' => '1'))->count('*') == 1}
+<div class="fb-like fb" data-href="http://{$_SERVER['SERVER_NAME'].'/?'.$_SERVER['QUERY_STRING']}" data-send="true" data-layout="button_count" data-width="210" data-show-faces="true" data-colorscheme="dark"></div>
+{/if}
 {foreach $gallery as $gal}
 <h1>{$gal->name}</h1>
 {/foreach}
 <table class="galerie">
-        <tr>
+    <tr>
     {foreach $photos as $photo}
-            <td> 
+        <td> 
             <a href="{$basePath}/gallery/{$photo->folder}/{$photo->photo}" class="lightbox[1]" title=" {$photo->label}"><img src="{$basePath}/gallery/{$photo->folder}/nahledy/{$photo->photo}" alt="{$photo->photo}" /></a>
-            </td>
+        </td>
        {if $iterator->isLast(4) and !$iterator->isLast( )}
-        </tr>
-        <tr>
+    </tr>
+    <tr>
        {/if}
     {/foreach}
-        </tr>
+    </tr>
 </table>
 {/block}

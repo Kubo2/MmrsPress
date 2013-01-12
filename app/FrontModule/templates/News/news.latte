@@ -1,26 +1,29 @@
 {var title='Aktuality'} {* nastavení měnícího se titulku stránky*}
 {block content}
-    <table id="aktuality">
+{if $settings_fb->where('select','facebook')->count('*') >= 1 AND $settings_fb->where(array('select' => 'facebook', 'public' => '1'))->count('*') == 1}
+<div class="fb-like fb" data-href="http://{$_SERVER['SERVER_NAME'].'/?'.$_SERVER['QUERY_STRING']}" data-send="true" data-layout="button_count" data-width="210" data-show-faces="true" data-colorscheme="dark"></div>
+{/if}
+<table id="aktuality">
     {foreach $tasks as $task}
-        <tr>
-            <td>
-                
+    <tr>
+        <td>
+
                 {if $user->loggedIn}
                 {if $user->identity->users == $task->autor or $user->identity->role == 1}
-                <span class="right">Vložil: <strong>{$task->autor}</strong> {$task->date|date:'j. n. Y'}
-                    <a href="{link :Admin:AddNews:news id=>$task->id}" title="Editovat"><i class="mmrs-icon-edit"></i></a>  
-                    <a href="{link delete! $task->id}" onclick="return confirm('Smazat?')" title="Smazat"><i class="mmrs-icon-delete"></i></a>
-                </span>
+            <span class="right">Vložil: <strong>{$task->autor}</strong> {$task->date|date:'j. n. Y'}
+                <a href="{link :Admin:AddNews:news id=>$task->id}" title="Editovat"><i class="mmrs-icon-edit"></i></a>  
+                <a href="{link delete! $task->id}" onclick="return confirm('Smazat?')" title="Smazat"><i class="mmrs-icon-delete"></i></a>
+            </span>
                 {/if}
                 {else}
-                <span class="right">Vložil: <strong>{$task->autor}</strong> {$task->date|date:'j. n. Y'}</span>
+            <span class="right">Vložil: <strong>{$task->autor}</strong> {$task->date|date:'j. n. Y'}</span>
                 {/if}
                 {var $news = html_entity_decode($task->content)}
                 {var $news = str_replace('../','',$news)}
                 {!$news}
-            </td>
-        </tr>
+        </td>
+    </tr>
     {/foreach}
-    </table>
+</table>
         {control vp}
 {/block}

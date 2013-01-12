@@ -116,6 +116,14 @@
     {/block}
     </head>
     <body>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/cs_CZ/all.js#xfbml=1";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
         {if $user->loggedIn}
         <div id="viewAdmin">
             <strong class="mmrs"><a href="http://mmrspress.eu"> MmrsPress</a></strong> |
@@ -130,6 +138,7 @@
             </div> 
         </div>
         {/if}
+        {if $contactForm == 1}
         <a href="#" id="button" class="ui-state-default ui-corner-all">Napište nám</a>
         <div class="toggler">
             <div id="effect" class="ui-widget-content ui-corner-all">
@@ -138,6 +147,7 @@
                   {control contactForm}
             </div>
         </div>
+        {/if}
         <div id="page">
             <div id="header">
                 <a href="{link News:news}"><div id="header-inner">
@@ -167,11 +177,11 @@
                         {foreach $menuPage as $set}
                         <li {ifCurrent Page: wiew=>$set->id}class="current"{/ifCurrent}><a n:href="Page: wiew=>$set->id">{$set->menu}</a></li>
                         {/foreach}
-                        {foreach $rubriky->where('public','1') as $rubriky_pages}
+                        {foreach $rubriky as $rubriky_pages}
                                 {var $pages = $rubriky_pages->section}
                                 {var $pages = str_replace(' ', '_',$pages)}
-                        {if $rubriky_menu->where('section', $rubriky_pages->section)->count('*') >= "1"  AND $rubriky_menu->where(array('section' => $rubriky_pages->section, 'public' => '1'))->count('*') >=1}
-                        <li><a href="{link Rubriky: page=>$pages}">{$rubriky_pages->section} +</a>
+                        
+                        <li><a href="{link Rubriky: page=>$pages}">{$rubriky_pages->section}</a>
                             {if $rubriky_nazev == $rubriky_pages->section or $podmenu == $rubriky_pages->section}
                             <ul>   
                                 {foreach $rubriky_menu->where('section', $rubriky_pages->section) as $podmenu}
@@ -182,7 +192,7 @@
                             {else}
                         </li>
                        {/if}
-                        {/if}
+                        
                         {/foreach}
                         {if $isGallery->count('*') >= 1}
                         <li {ifCurrent Gallery:default}class="current"{/ifCurrent}><a href="{link Gallery:default}">Fotogalerie</a></li>

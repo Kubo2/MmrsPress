@@ -1,7 +1,7 @@
 {var title='Nastavení odběru RSS'} {* nastavení měnícího se titulku stránky*}
 
 {block content}
-<h1><i class="mmrs-icon-rss"></i> Nastavení odběru RSS</h1>
+<h1><i class="mmrs-icon-25-rss"></i> Nastavení odběru RSS</h1>
 <p>Je možno nastavit odběr RSS pouze určitým sekcím, nebo RSS odběr úplně vypnout</p>
 <strong>Výběr sekce pro odběr RSS:</strong>
 {control setRssForm}
@@ -13,13 +13,13 @@
     </tr>
     {foreach $setRss as $rss}
     <tr>
-        <td>Aktuality</td> {if $rss->news == 1}<td>Odběr RSS zapnut<i class="mmrs-icon-ok"></i></td>{else}<td>Odběr RSS vypnut<i class="mmrs-icon-disabled"></i></td>{/if}
+        <td>Aktuality</td> {if $rss->news == 1}<td>Odběr RSS zapnut<i class="mmrs-icon-20-ok"></i></td>{else}<td>Odběr RSS vypnut<i class="mmrs-icon-20-disabled"></i></td>{/if}
     </tr>
     <tr>
-        <td>Stránky</td> {if $rss->pages == 1}<td>Odběr RSS zapnut<i class="mmrs-icon-ok"></i></td>{else}<td>Odběr RSS vypnut<i class="mmrs-icon-disabled"></i></td>{/if}
+        <td>Stránky</td> {if $rss->pages == 1}<td>Odběr RSS zapnut<i class="mmrs-icon-20-ok"></i></td>{else}<td>Odběr RSS vypnut<i class="mmrs-icon-20-disabled"></i></td>{/if}
     </tr>
     <tr>
-        <td>Kniha návštěv</td>{if $rss->book == 1}<td>Odběr RSS zapnut<i class="mmrs-icon-ok"></i></td>{else}<td>Odběr RSS vypnut<i class="mmrs-icon-disabled"></i></td>{/if}
+        <td>Kniha návštěv</td>{if $rss->book == 1}<td>Odběr RSS zapnut<i class="mmrs-icon-20-ok"></i></td>{else}<td>Odběr RSS vypnut<i class="mmrs-icon-20-disabled"></i></td>{/if}
     </tr>
     {/foreach}
 </table>

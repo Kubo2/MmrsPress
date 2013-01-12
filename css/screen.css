@@ -53,6 +53,7 @@ img, a img {
     margin-top: 15px;
     margin-bottom: 15px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, .1);
+    overflow: hidden;
 }
 #container {
     margin: 0 auto;
@@ -144,15 +145,20 @@ img, a img {
     color: #C1D2E1;
     text-decoration: none;
 }
+.fb {
+    border: none;
+    width: 210px;
+    float: right;
+}
 /*********************** Navigace. ******************/
 /*********************** levé menu ******************/
-div.task-lists ul {
+.task-lists ul {
     margin: 0;
     padding: 0;
     list-style: none;
     display: block;
 }
-div.task-lists li {
+.task-lists li {
     display: block;
     margin: 1ex;
 }
@@ -193,30 +199,27 @@ div.task-lists li {
 #mainMenuTop ul { 
     width: 160px;
     /* Sub Menu Width */ 
-    margin: 0;
+    margin-left: -40px;
     list-style: none;
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
 } 
-ul#mainMenuTop ul ul,ul#mainMenuTop ul ul ul {
+#mainMenuTop ul ul,#mainMenuTop ul ul ul {
     top: 0;
     left: 100%;
 }
 #mainMenuTop li {
     float: left;
-    display: inline;
-    position: relative;
+    position: relative;    
 }
-ul#mainMenuTop ul li {
+#mainMenuTop ul li {
     width: 100%;
     display: block;
-
 }
 /* Root Menu */ 
-ul#mainMenuTop a { 
-    width: 125px;
+#mainMenuTop a { 
+    width: 155px;
     display: block;
     height: 35px;
     line-height: 2.2;
@@ -226,19 +229,19 @@ ul#mainMenuTop a {
     text-align: center;
 }
 /* 2nd Menu */ 
-ul#mainMenuTop li:hover li a,ul#mainMenuTop li.iehover li a {
+#mainMenuTop li:hover li a,#mainMenuTop li.iehover li a {
     float: none;
     font-weight: normal;
-    width: 150px;
+    width: 160px;
     padding-left: 3px;
     text-align: left;
-    border-radius:  0 5px 5px 0;
+    border-radius: 5px;
 }
 /* Hover Function - Do Not Move */ 
-ul#mainMenuTop li:hover ul ul,ul#mainMenuTop li:hover ul ul ul,ul#mainMenuTop li.iehover ul ul,ul#mainMenuTop li.iehover ul ul ul { 
+#mainMenuTop li:hover ul ul,#mainMenuTop li:hover ul ul ul,#mainMenuTop li.iehover ul ul,#mainMenuTop li.iehover ul ul ul { 
     display: none;
 }
-ul#mainMenuTop li:hover ul,ul#mainMenuTop ul li:hover ul,ul#mainMenuTop ul ul li:hover ul,ul#mainMenuTop li.iehover ul,ul#mainMenuTop ul li.iehover ul,ul#mainMenuTop ul ul li.iehover ul { 
+#mainMenuTop li:hover ul,#mainMenuTop ul li:hover ul,#mainMenuTop ul ul li:hover ul,#mainMenuTop li.iehover ul,#mainMenuTop ul li.iehover ul,#mainMenuTop ul ul li.iehover ul { 
     display: block;
 }
 #sidebarTop .current {
@@ -569,7 +572,7 @@ a[href^="error:"] {
 }
 /************* kontaktní formulář ****************/
 .toggler {
-     margin-top: 40px;
+    margin-top: 40px;
     z-index: 100;
     position: absolute;
 }

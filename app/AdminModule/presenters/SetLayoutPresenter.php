@@ -57,7 +57,7 @@ class SetLayoutPresenter extends \BasePresenter {
             'rp' => 'Opakovat',
         );
         $width = array(
-            '99%' => '99%',
+            '100%' => '100%',
             '90%' => '90%',
             '80%' => '80%',
             '70%' => '70%',
@@ -173,6 +173,35 @@ class SetLayoutPresenter extends \BasePresenter {
         $this->redirect('this');
     }
 
+    // nastavení facebook
+    public function handleFbv($id) {
+        if (isset($id)) {
+            $this->model->getSettings()->where('id', $id)->update(array(
+                'public' => '1'
+            ));
+            $this->flashMessage('Panel facebooku byl nastaven jako viditelný.');
+            $this->redirect('this');
+        } else {
+            $this->model->getSettings()->insert(array(
+                'select' => 'facebook',
+                'public' => '1'
+            ));
+            $this->flashMessage('Panel facebooku byl nastaven jako viditelný.');
+            $this->redirect('this');
+        }
+    }
+
+// nastavení facebook
+    public function handleFbs($id) {
+        if (isset($id)) {
+            $this->model->getSettings()->where('id', $id)->update(array(
+                'public' => '0'
+            ));
+            $this->flashMessage('Panel facebooku byl nastaven jako skrytý.');
+            $this->redirect('this');
+        }
+    }
+    
 // nastavení pravého panelu
     public function handleVerejna($id) {
         if (isset($id)) {

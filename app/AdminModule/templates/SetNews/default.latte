@@ -1,7 +1,7 @@
 {var title='Počet aktualit na stránku'} {* nastavení měnícího se titulku stránky*}
 
 {block content}
-<h1><i class="mmrs-icon-edit-book"></i> Nastavení aktualit</h1>
+<h1><i class="mmrs-icon-25-edit-book"></i> Nastavení aktualit</h1>
 
    {control setNewsForm}
 <p>Aktuality se dají nastavit jako veřejně dostupná a nebo nedostupná. Záleží na 
@@ -9,14 +9,14 @@
 {if $settings->where('select','news')->count('*') > 0}
     {foreach $settings->where('select','news') as $available}
         {if $available->public == 0}
-            <p><strong class="red">Aktuality jsou nastaveny jako skryté</strong><i class="mmrs-icon-disabled"></i></p> 
+            <p><strong class="red">Aktuality jsou nastaveny jako skryté</strong><i class="mmrs-icon-20-disabled"></i></p> 
             <a href="{link public! $available->id}" onclick="return confirm('Nastavit aktuality jako veřejné?\nAktuality budou na webu dostupné.')">NASTAVIT AKTUALITY JAKO VEŘEJNÉ</a> 
         {else}
-            <p><strong  class="green">Aktuality jsou nastaveny jako jako veřejné</strong><i class="mmrs-icon-ok"></i></p>
+            <p><strong  class="green">Aktuality jsou nastaveny jako jako veřejné</strong><i class="mmrs-icon-20-ok"></i></p>
             <a href="{link hidden! $available->id}" onclick="return confirm('Nastavit aktuality jako skryté?\nAktuality nebudou na stránce dostupné.')">NASTAVIT AKTUALITY JAKO SKRYTÉ</a> 
         {/if}
     {/foreach}
 {else}
-    <p><strong class="red">Aktuality jsou nastaveny jako skryté</strong><i class="mmrs-icon-disabled"></i></p> 
+    <p><strong class="red">Aktuality jsou nastaveny jako skryté</strong><i class="mmrs-icon-20-disabled"></i></p> 
             <a href="{link public!}" onclick="return confirm('Nastavit aktuality jako veřejné?\nAktuality budou na webu dostupné.')">NASTAVIT AKTUALITY JAKO VEŘEJNÉ</a>{/if}
 {/block}

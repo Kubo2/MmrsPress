@@ -1,7 +1,7 @@
 {var title='Rubriky'} {* nastavení měnícího se titulku stránky*}
 
 {block content}
-    <h1><i class="mmrs-icon-edit-book"></i> Rubriky</h1>
+    <h1><i class="mmrs-icon-25-edit-book"></i> Rubriky</h1>
 <p>
     Pro články jde vytvářet různé rubriky (skupiny). Do těchto rubrik pak jde přidávat
     libovolné množství podstránek (článků), které budou dostupné v hlavním menu pod
@@ -28,14 +28,14 @@ Smazáním rubriky se odstraní i všechny její podstránky!</p>
     
         <td>{$sekce->section}</td>
         </td>
-        {if $sekce->public == '1'}<td>Veřejná<i class="mmrs-icon-ok"></i>{else}<td>Skrytá<i class="mmrs-icon-disabled"></i>{/if}</td>
+        {if $sekce->public == '1'}<td>Veřejná<i class="mmrs-icon-20-ok"></i>{else}<td>Skrytá<i class="mmrs-icon-20-disabled"></i>{/if}</td>
         <td>
          {if $sekce->public == '0'}
-            <a href="{link public! $sekce->id}" onclick="return confirm('Nastavit stránku jako veřejnou?\nStránka bude na webu dostupná.')" title="Nastavit jako veřejnou"><i class="mmrs-icon-eye"></i></a> 
+            <a href="{link public! $sekce->id}" onclick="return confirm('Nastavit stránku jako veřejnou?\nStránka bude na webu dostupná.')" title="Nastavit jako veřejnou"><i class="mmrs-icon-20-eye"></i></a> 
          {else}
-            <a href="{link hidden! $sekce->id}" onclick="return confirm('Nastavit stránku jako skrytou?\nStránka nebude dostupná.')" title="Nastavit jako skrytou"><i class="mmrs-icon-eye-disabled"></i></a> 
+            <a href="{link hidden! $sekce->id}" onclick="return confirm('Nastavit stránku jako skrytou?\nStránka nebude dostupná.')" title="Nastavit jako skrytou"><i class="mmrs-icon-20-eye-disabled"></i></a> 
          {/if}
-            <a href="{link AddSection:default id=>$sekce->id}" title="Editovat"><i class="mmrs-icon-edit"></i></a> 
+            <a href="{link AddSection:default id=>$sekce->id}" title="Editovat"><i class="mmrs-icon-20-edit"></i></a> 
             <a href="{link delete! base64_encode($sekce->section)}" onclick="return confirm('Smazáním sekce se zároveň smažou i všechny články patřící do této sekce!\nOpravdu chcete sekci smazat?')" title="Smazat"><i class="mmrs-icon-delete"></i></a>
         </td>
     </tr>

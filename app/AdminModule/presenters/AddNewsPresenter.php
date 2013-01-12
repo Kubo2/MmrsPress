@@ -82,7 +82,7 @@ class AddNewsPresenter extends \BasePresenter {
             }
         }
 
-        $form->addText('menu', 'Název:', 15, 15)
+        $form->addText('menu', 'Název:', 20, 20)
                 ->setValue($menu)
                 ->setEmptyValue('Vyplňte odkaz')
                 ->addRule(Form::FILLED, 'Odkaz musí být vyplněn');

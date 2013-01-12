@@ -1,6 +1,6 @@
 {var $title="Správa stránek"}
 {block content}
-<h1><i class="mmrs-icon-edit-book"></i> Správa aktualit</h1>
+<h1><i class="mmrs-icon-25-edit-book"></i> Správa aktualit</h1>
 <p>Seznam vytvořených aktualit s přehledem o jejich nastavení a možnostech.</p>
 <p>Pokud má být aktualita veřejně dostupná, musí být nastavena jako "Veřejná". 
     Skryté aktuality mohou posloužit jako koncept, pro budoucí článek, je tedy možné 
@@ -10,7 +10,7 @@
     Ostatní uživatelé s omezenými právy, mají možnost spravovat pouze stránky vlastní, přičemž 
     stránku nemohou nastavit jako veřejnou. Stránku má právo zveřejnit pouze moderátor.</p>
 
-<p><a href="{link AddNews:news}"  class="newPage"><i class="mmrs-icon-plus"></i> Přidat aktualitu</a></p>
+<p><a href="{link AddNews:news}"  class="newPage"><i class="mmrs-icon-20-plus"></i> Přidat aktualitu</a></p>
 
 <table class="addGalerie" cellspacing="0">
     <tr class="bookUser">
@@ -25,33 +25,33 @@
     {if $task->autor == $user->identity->users or $userRole == 1}
     <tr n:class="$iterator->odd ? odd, $iterator->last ? even">
         <td>
-            <a href="{link :Front:Page:default wiew=>$task->id}" title="Náhled"><i class="mmrs-icon-preview"></i>{$task->menu}</a>
+            <a href="{link :Front:Page:default wiew=>$task->id}" title="Náhled"><i class="mmrs-icon-20-preview"></i>{$task->menu}</a>
         </td>
-            {if $task->public == '1'}<td>Veřejná <i class="mmrs-icon-ok"></i>{else}<td>Skrytá<i class="mmrs-icon-disabled"></i>{/if}</td>
+            {if $task->public == '1'}<td>Veřejná <i class="mmrs-icon-20-ok"></i>{else}<td>Skrytá<i class="mmrs-icon-20-disabled"></i>{/if}</td>
         <td>
                 {if $user->identity->users == $task->autor or $userRole == 1}
                     {if $userRole == 1}
                         {if $task->public == '0'}
-            <a href="{link public! $task->id}" onclick="return confirm('Nastavit stránku jako veřejnou?\nStránka bude na webu dostupná.')" title="Nastavit jako veřejnou"><i class="mmrs-icon-eye"></i></a> 
+            <a href="{link public! $task->id}" onclick="return confirm('Nastavit stránku jako veřejnou?\nStránka bude na webu dostupná.')" title="Nastavit jako veřejnou"><i class="mmrs-icon-20-eye"></i></a> 
                         {else}
-            <a href="{link hidden! $task->id}" onclick="return confirm('Nastavit stránku jako skrytou?\nStránka nebude dostupná.')" title="Nastavit jako skrytou"><i class="mmrs-icon-eye-disabled"></i></a> 
+            <a href="{link hidden! $task->id}" onclick="return confirm('Nastavit stránku jako skrytou?\nStránka nebude dostupná.')" title="Nastavit jako skrytou"><i class="mmrs-icon-20-eye-disabled"></i></a> 
                         {/if}
                     {/if}
-            <a href="{link :Front:Page:default wiew=>$task->id}" title="Náhled"><i class="mmrs-icon-preview"></i></a>
-            <a href="{link AddNews:news id=>$task->id}" title="Editovat"><i class="mmrs-icon-edit"></i></a>
-            <a href="{link delete! $task->id}" onclick="return confirm('Smazat?')" title="Smazat"><i class="mmrs-icon-delete"></i></a>
+            <a href="{link :Front:Page:default wiew=>$task->id}" title="Náhled"><i class="mmrs-icon-20-preview"></i></a>
+            <a href="{link AddNews:news id=>$task->id}" title="Editovat"><i class="mmrs-icon-20-edit"></i></a>
+            <a href="{link delete! $task->id}" onclick="return confirm('Smazat?')" title="Smazat"><i class="mmrs-icon-20-delete"></i></a>
                 {else}
             <b>Nemáte dostatečné oprávnění k akcím.</b>
                 {/if}
         </td>
         <td class="btn">
-            <i class="mmrs-icon-user"></i><span>{$task->autor}</span>
+            <i class="mmrs-icon-20-user"></i><span>{$task->autor}</span>
         </td>
         <td clas="btn">
-                 <i class="mmrs-icon-calendar"></i>{$task->date|date:'j. n. Y'}
+                 <i class="mmrs-icon-20-calendar"></i>{$task->date|date:'j. n. Y'}
         </td>
         <td clas="btn">
-                 <i class="mmrs-icon-calendar-green"></i>{$task->publicDate|date:'j. n. Y'}
+                 <i class="mmrs-icon-20-calendar-green"></i>{$task->publicDate|date:'j. n. Y'}
         </td>
     </tr>
     {/if}

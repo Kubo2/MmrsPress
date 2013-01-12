@@ -1,6 +1,6 @@
 {var title='Nastavení počitadla návštěv'}
 {block content}
-<h1><i class="mmrs-icon-calc"></i> Nastavení počitadla návštěv</h1>
+<h1><i class="mmrs-icon-25-calc"></i> Nastavení počitadla návštěv</h1>
 <p>Počitadlo návštěv se dá nastavit jako veřejně dostupné a nebo nedostupné. Záleží na 
     obsahu stránek, podle kterého lze určit, zda se počitadlo návštěv hodí a nebo ne.</p>
 <p>I když bude počitadlo nastaveno jako skryté, stále bude počíta návštěvníky. Jejich
@@ -8,19 +8,19 @@
 {if $settings->where('select','counter')->count('*') > 0}
     {foreach $settings->where('select','counter') as $set}
         {if $set->public == 0}
-<p><strong class="red">Počitadlo je skryté</strong><i class="mmrs-icon-disabled"></i></p> 
+<p><strong class="red">Počitadlo je skryté</strong><i class="mmrs-icon-20-disabled"></i></p> 
 <a href="{link verejna! $set->id}" onclick="return confirm('Nastavit počitadlo jako veřejné?\nPočitadlo bude na webu dostupné.')">NASTAVIT POČITADLO JAKO VEŘEJNÉ</a> 
         {else}
-<p><strong  class="green">Počitadlo je veřejné</strong><i class="mmrs-icon-ok"></i></p>
+<p><strong  class="green">Počitadlo je veřejné</strong><i class="mmrs-icon-20-ok"></i></p>
 <a href="{link skryta! $set->id}" onclick="return confirm('Nastavit počitadlo jako skryté?\nPočitadlo nebude na webu dostupné.')">NASTAVIT POČITADLO JAKO SKRYTÉ</a> 
         {/if}
     {/foreach}
 {else}
-<p><strong class="red">Počitadlo je skryté</strong><i class="mmrs-icon-disabled"></i></p> 
+<p><strong class="red">Počitadlo je skryté</strong><i class="mmrs-icon-20-disabled"></i></p> 
 <a href="{link verejna!}" onclick="return confirm('Nastavit počitadlo jako veřejné?\nPočitadlo bude na webu dostupné.')">NASTAVIT POČITADLO JAKO VEŘEJNÉ</a>{/if}
 
 <p>
-    <span class="rubriky"><i class="mmrs-icon-users"></i>Návštěvy</span>
+    <span class="rubriky"><i class="mmrs-icon-20-users"></i>Návštěvy</span>
     <table class="counter">
         <tr>
             <td>Celkem: {$counter_all}</td>

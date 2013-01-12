@@ -1,6 +1,9 @@
 {var title='Fotogalerie'}
 
 {block content}
+{if $settings_fb->where('select','facebook')->count('*') >= 1 AND $settings_fb->where(array('select' => 'facebook', 'public' => '1'))->count('*') == 1}
+<div class="fb-like fb" data-href="http://{$_SERVER['SERVER_NAME'].'/?'.$_SERVER['QUERY_STRING']}" data-send="true" data-layout="button_count" data-width="210" data-show-faces="true" data-colorscheme="dark"></div>
+{/if}
 {if $photoPanel > 0}
 <h1>Nejnovější fotky z galerie</h1>
 <table class="galerie">
