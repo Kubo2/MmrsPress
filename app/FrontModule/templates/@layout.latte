@@ -112,6 +112,56 @@
                             
 
         });
+
+    $.fx.speeds._default = 1000;
+$(function(){
+        // Dialog
+        $('#dialog').dialog({
+                autoOpen: false,
+                
+                width: 650,
+                height: 650,
+                show: "scale",
+                hide: "blind",
+                buttons: {
+                        "Zavřít": function() {
+                                $(this).dialog("close");
+                        },
+                }
+        });
+                        
+        // Dialog Link
+        $('#dialog_lnk').click(function(){
+                $('#dialog').dialog('open');
+                return false;
+        });
+
+});
+$(function(){
+        // Dialog
+        $('#search').dialog({
+                autoOpen: false,
+                
+                maxHeight: 200,
+                maxWidth: 510,
+                minHeight: 200,
+                minWidth: 510,
+                show: "scale",
+                hide: "blind",
+                buttons: {
+                        "Zavřít": function() {
+                                $(this).dialog("close");
+                        },
+                }
+        });
+                        
+        // Dialog Link
+        $('#search_lnk').click(function(){
+                $('#search').dialog('open');
+                return false;
+        });
+
+});
         </script>
     {/block}
     </head>
@@ -156,6 +206,8 @@
                         </div>
                         {if $menuLeft == 0}
                         <div id="login">
+                            <a href="#" id="search_lnk" class="search">Vyhledat</a>
+                            <div id="search" title="Vyhledávání">{control searchForm}</div>
                         {if $user->loggedIn}
                             {if !empty($user->identity->avatar)}
                             <img src="{$basePath}/avatar/{$user->identity->avatar}" alt="">
@@ -164,8 +216,8 @@
                             {if $set_registration == 1}<a n:href="Sign:">Přihlásit</a>  <a n:href="Registration:">Registrovat</a>{/if}
                          {/if}
                         </div>
-                        {/if}
-                    </div></a>
+                        {/if}                        
+                    </div></a>               
             </div>
             <div id="container">
                 {if $menu == 1 or $menuLeft == 0}
@@ -180,7 +232,7 @@
                         {foreach $rubriky as $rubriky_pages}
                                 {var $pages = $rubriky_pages->section}
                                 {var $pages = str_replace(' ', '_',$pages)}
-                        
+
                         <li><a href="{link Rubriky: page=>$pages}">{$rubriky_pages->section}</a>
                             {if $rubriky_nazev == $rubriky_pages->section or $podmenu == $rubriky_pages->section}
                             <ul>   
@@ -192,7 +244,7 @@
                             {else}
                         </li>
                        {/if}
-                        
+
                         {/foreach}
                         {if $isGallery->count('*') >= 1}
                         <li {ifCurrent Gallery:default}class="current"{/ifCurrent}><a href="{link Gallery:default}">Fotogalerie</a></li>
@@ -243,7 +295,7 @@
                         <div class="rubriky_layout">
                             <span class="rubriky"><img src="{$basePath}/images/info.png" alt="" /> Z fotogalerie</span>
                             {foreach $photosMenu as $link}
-                            <a href="{link PhotoWiew: gallery=>$link->folder}" class="center"><img src="{$basePath}/gallery/{$link->folder}/nahledy/{$link->photo}" alt="{$link->photo}"></a>
+                            <a href="{link PhotoWiew: gallery=>$link->name}" class="center"><img src="{$basePath}/gallery/{$link->folder}/nahledy/{$link->photo}" alt="{$link->photo}"></a>
                             {/foreach}
 
                         </div>
@@ -284,8 +336,8 @@
                             <a n:href="Rss:book" class="rss_menu">RSS Kniha návštěv</a>
                             {/if}
                             {/foreach}
-                            <strong>Vyhledat:</strong>
-                            {control searchForm}
+                            <a href="#" id="search_lnk">Vyhledat</a>
+                            <div id="search" title="Vyhledávání">{control searchForm}</div>
                         </div>
                     </div>
                 </div>
@@ -321,7 +373,7 @@
                     {include #content}
                 </div>
                 <div id="footer">
-                    © {$set_title} 2005-2012 <a href="mailto:{$admin}">{$admin}</a> | <a href="http://mmrspress.eu">MmrsPress</a> |
+                    © {$set_title} 2005-{date('Y')} <a href="mailto:{$admin}">{$admin}</a> | <a href="http://mmrspress.eu">MmrsPress</a> |
                     {if $menuLeft == 0 }<a n:href=":Admin:Info:default">Administrace</a>{/if}
                     {foreach $setRss as $rss}
                         {if $rss->news == 1 AND $isNews->count('*') > 0 AND $set_aktual > 0}

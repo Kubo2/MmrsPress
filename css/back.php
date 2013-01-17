@@ -45,13 +45,11 @@ if (empty($color)) {
 } else {
     $soubor = '../logo/logo_' . $color . '.png';
 }
-
 if (!$logo) {
     $logo = '../logo/logo_mmrs.png';
 } else {
     $logo = '../logo/logo_' . $logo . '.png';
 }
-
 if ($backgroundRepeat == 'r') {
     $repeat = 'right';
 }
@@ -83,6 +81,7 @@ body {
     border-bottom: 1px solid <?php echo '#'.$ContentColor; ?>;
 }
 #header div.title {
+    background-repeat: <?php echo $repeatX; ?>;
     margin-left: <?php echo $margin; ?>px;
     color: #<?php echo $title[0]; ?>;
     text-shadow: #<?php echo $title[1]; ?> 1px 1px 2px;

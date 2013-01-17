@@ -59,6 +59,7 @@ class UploaderPresenter extends \BasePresenter {
                         if (in_array($_FILES["foto"]["type"][$key], $file_type)) {
                             $size = getimagesize($_FILES["foto"]["tmp_name"][$key]);
                             $width = $size[0];
+                            $height = $size[1];
                             $rename_foto = $this->webalize($_FILES["foto"]["name"][$key]);
                             // nastavení velikosti fotek a miniatur - získání údajů z DB
                             $isExistSet = $this->model->getSetImg()->count('*');
@@ -73,16 +74,22 @@ class UploaderPresenter extends \BasePresenter {
                             }
                             // zjištění zda již galerii neexistuje fotka se stejným názvem
                             $isExist = $this->model->getPhotos()->where(array('photo' => $rename_foto, 'folder' => $form->values->folder))->count('*');
+                            $galleryName = $this->model->getGallery()->where('folder',$form->values->folder)->fetch();
                             if ($isExist == 0) {
                                 $this->model->getPhotos()->insert(array(
                                     'photo' => $rename_foto,
                                     'folder' => $form->values->folder,
-                                    'label' => $form->values->foto['label' . $cykle]
+                                    'label' => $form->values->foto['label' . $cykle],
+                                    'name' => $galleryName->name
                                 ));
                                 // vytvoření miniatur a zmenšení fotek
-                                if ($width >= $wiews) {
+                                if ($width >= $wiews or $height >= $wiews) {
                                     $image = Image::fromFile($_FILES["foto"]["tmp_name"][$key]);
-                                    $image->resize($wiews, NULL);
+                                    if ($width > $height) {
+                                        $image->resize($wiews, NULL);
+                                    } else {
+                                        $image->resize(NULL, $wiews);
+                                    }
                                     $image->sharpen();
                                     $image->save(WWW_DIR . '/gallery/' . $form->values->folder . '/' . $rename_foto, 100);
                                     $imgThumb = WWW_DIR . '/gallery/' . $form->values->folder . '/' . $rename_foto;

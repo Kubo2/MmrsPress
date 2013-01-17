@@ -223,7 +223,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     protected function createComponentSearchForm() {
         $form = new Form();
 
-        $form->addText('search', '', 10, 100)
+        $form->addText('search', '', 50, 100)
                 ->addRule(Form::FILLED, 'Nebyl vyplněn text')
                 ->addRule(Form::MIN_LENGTH, 'Hledaný text musí mít alespoň %d znaky', 4);
         ;

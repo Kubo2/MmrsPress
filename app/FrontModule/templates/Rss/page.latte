@@ -9,7 +9,7 @@
 <generator>http://nette.rellik.eu</generator>
 <language>cs</language>
 <docs>http://backend.userland.com/rss</docs>
-{foreach $menuPage->limit(10)->order('id DESC') as $data}
+{foreach $page_rss->limit(10)->order('id DESC') as $data}
 <item>
     <title>{$data->menu}</title>
     <link>{plink //:Front:Page:default, wiew => $data->id}</link>

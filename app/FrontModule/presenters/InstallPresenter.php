@@ -51,7 +51,7 @@ class InstallPresenter extends \BasePresenter {
         $form->addHidden('id')
                 ->setDefaultValue($this->getParam('id'));
 
-        $form->addSubmit('send', 'Nastavit');
+        $form->addSubmit('send', 'Uložit');
 
         $form->onSuccess[] = callback($this, 'newPassFormSubmitted');
 

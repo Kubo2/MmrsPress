@@ -27,7 +27,7 @@ class PhotosPresenter extends \BasePresenter {
                         ->where('folder', $this->getParam('folder'))->limit(1);
 
         $this->template->fotky = $this->model->getphotos()
-                        ->order('id ASC')->where('folder', $this->getParam('folder'));
+                        ->order('id DESC')->where('folder', $this->getParam('folder'));
     }
 
     /*     * ********** Funkce na mazání fotek *********** */

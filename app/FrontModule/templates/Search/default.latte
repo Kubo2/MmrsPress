@@ -3,6 +3,9 @@
 <h1>Výsledky hledání</h1>
 <strong>Hledaný text:</strong> {!$findText}
 <h2>Počet nalezených výsledků: {$finds->count('*')}</h2>
+{if $finds->count('*') == 0}<p>Pokud jste nenašli co jste hledali, vyzkoušejte jiný zápis hledaného textu. 
+    Například místo slova "<i>Vyhledat</i>" napište "<i>vyhledat</i>". Systém vyhledávání je citlivý na přesnost textu aby 
+    výsledky vyhledávání byly co nejblíže hledanému slovu nebo frázi.</p>{/if}
 {foreach $finds as $find}
 <a href="{link Page:default wiew=>$find->id}"><h3>{$find->menu}</h3></a>
     

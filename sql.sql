@@ -133,6 +133,7 @@ CREATE TABLE IF NOT EXISTS `mmrs_news` (
 
 CREATE TABLE IF NOT EXISTS `mmrs_photos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(35) COLLATE utf8_bin NOT NULL,
   `label` varchar(300) COLLATE utf8_bin NOT NULL,
   `photo` varchar(30) COLLATE utf8_bin NOT NULL,
   `folder` varchar(35) COLLATE utf8_bin NOT NULL,

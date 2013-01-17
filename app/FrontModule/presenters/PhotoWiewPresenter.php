@@ -15,10 +15,10 @@ class PhotoWiewPresenter extends \BasePresenter {
 
     public function beforeRender() {
         parent::beforeRender();
-        $this->template->gallery = $this->model->getGallery()
-                        ->order('id ASC')->where('folder', $this->getParam('gallery'));
+        $this->template->gallery = $this->model->getGallery()->order('id ASC')->where('name', $this->getParam('gallery'));
+        $this->template->galleryName = $this->model->getGallery()->where('name', $this->getParam('gallery'));
+        $folder = $this->template->gallery = $this->model->getGallery()->where('name', $this->getParam('gallery'))->fetch();
 
-        $this->template->photos = $this->model->getPhotos()
-                        ->order('id ASC')->where("folder", $this->getParam('gallery'));
+        $this->template->photos = $this->model->getPhotos()->order('id DESC')->where("folder", $folder->folder);
     }
 }

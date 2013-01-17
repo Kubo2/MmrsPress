@@ -61,6 +61,7 @@ class SetLayoutPresenter extends \BasePresenter {
             '90%' => '90%',
             '80%' => '80%',
             '70%' => '70%',
+            '960px' => '960px',
             '920px' => '920px',
             '900px' => '900px',
             '850px' => '850px',

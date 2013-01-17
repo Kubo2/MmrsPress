@@ -1,34 +1,8 @@
 {var title='Kniha návštěv'} {* nastavení měnícího se titulku stránky*}
 
 {block content}
-<script>
-    $.fx.speeds._default = 1000;
-$(function(){
-        // Dialog
-        $('#dialog').dialog({
-                autoOpen: false,
-                
-                width: 650,
-                height: 650,
-                show: "scale",
-                hide: "blind",
-                buttons: {
-                        "Zavřít": function() {
-                                $(this).dialog("close");
-                        },
-                }
-        });
-                        
-        // Dialog Link
-        $('#dialog_lnk').click(function(){
-                $('#dialog').dialog('open');
-                return false;
-        });
-
-});
-</script>
 <h1>Kniha návštěv</h1>
-<a href="#" id="dialog_lnk">Přidat příspěvek</a><br /><br />
+<a href="#" id="dialog_lnk" class="ui-state-default ui-corner-all">Přidat příspěvek</a><br /><br />
 <div id="dialog" title="Nový příspěvek">
     {form bookForm}
     <fieldset>

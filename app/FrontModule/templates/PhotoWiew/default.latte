@@ -3,8 +3,9 @@
 {if $settings_fb->where('select','facebook')->count('*') >= 1 AND $settings_fb->where(array('select' => 'facebook', 'public' => '1'))->count('*') == 1}
 <div class="fb-like fb" data-href="http://{$_SERVER['SERVER_NAME'].'/?'.$_SERVER['QUERY_STRING']}" data-send="true" data-layout="button_count" data-width="210" data-show-faces="true" data-colorscheme="dark"></div>
 {/if}
-{foreach $gallery as $gal}
+{foreach $galleryName as $gal}
 <h1>{$gal->name}</h1>
+<p>{$gal->label}</p>
 {/foreach}
 <table class="galerie">
     <tr>
