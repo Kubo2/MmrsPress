@@ -23,7 +23,7 @@
     {foreach $tasks as $task}
     {if $task->autor == $user->identity->users or $userRole == 1}
     <tr n:class="$iterator->isOdd() ? odd : even">
-        <td><a href="{link :Front:PhotoWiew:default gallery=>$task->folder}" title="Náhled"><i class="mmrs-icon-20-preview"></i>{$task->name}</a></td>
+        <td><a href="{link :Front:PhotoWiew:default gallery=>$task->name}" title="Náhled"><i class="mmrs-icon-20-preview"></i>{$task->name}</a></td>
         <td>{pocetImage($task->folder)}</td>
             {if $task->public == '1'}<td>Veřejná<i class="mmrs-icon-20-ok"></i>{else}<td>Skrytá<i class="mmrs-icon-20-disabled"></i>{/if}</td>
         <td>
@@ -34,7 +34,7 @@
             <a href="{link skryta! $task->id}" onclick="return confirm('Nastavit galerii jako skrytou?\nGalerie nebude na stránce dostupná.')" title="Nastavit jako skrytou"><i class="mmrs-icon-20-eye-disabled"></i></a> 
                 {/if}
             {/if}
-            <a href="{link :Front:PhotoWiew:default gallery=>$task->folder}" title="Náhled"><i class="mmrs-icon-20-preview"></i></a>
+            <a href="{link :Front:PhotoWiew:default gallery=>$task->name}" title="Náhled"><i class="mmrs-icon-20-preview"></i></a>
             <a href="{link Photos:default folder=>$task->folder}" title="Fotky"><i class="mmrs-icon-20-foto"></i></a> 
             <a href="{link Uploader:default folder=>$task->folder}" title="Přidat fotky"><i class="mmrs-icon-20-foto-plus"></i></a> 
             <a href="{link EditGallery:default id=>$task->id}" title="Editovat"><i class="mmrs-icon-20-edit"></i></a> 

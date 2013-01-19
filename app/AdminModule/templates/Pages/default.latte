@@ -26,7 +26,7 @@
     {if $task->autor == $user->identity->users or $userRole == 1}
     <tr n:class="$iterator->odd ? odd, $iterator->last ? even">
         <td>
-            <a href="{link :Front:Page:default wiew=>$task->id}" title="Náhled"><i class="mmrs-icon-20-preview"></i>{$task->menu}</a>
+            <a href="{link :Front:Page:default wiew=>$task->menu}" title="Náhled"><i class="mmrs-icon-20-preview"></i>{$task->menu}</a>
         </td>
         <td>
             {var $rubrika_wiew = $task->section}
@@ -43,7 +43,7 @@
             <a href="{link hidden! $task->id}" onclick="return confirm('Nastavit stránku jako skrytou?\nStránka nebude dostupná.')" title="Nastavit jako skrytou"><i class="mmrs-icon-20-eye-disabled"></i></a> 
                     {/if}
                 {/if}
-            <a href="{link :Front:Page:default wiew=>$task->id}" title="Náhled"><i class="mmrs-icon-20-preview"></i></a>
+            <a href="{link :Front:Page:default wiew=>$task->menu}" title="Náhled"><i class="mmrs-icon-20-preview"></i></a>
             <a href="{link AddNews:page id=>$task->id}" title="Editovat"><i class="mmrs-icon-20-edit"></i></a> 
             <a href="{link delete! $task->id}" onclick="return confirm('Smazat?')" title="Smazat"><i class="mmrs-icon-20-delete"></i></a> 
             {/if}
