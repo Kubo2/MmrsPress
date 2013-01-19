@@ -78,7 +78,8 @@
         {foreach $doc as $document}
             {if $document != ""}
                     {var $type = mime_content_type(WWW_DIR.'/pages/'.$document)}
-                    <td>{if $type == 'application/pdf'}
+                    {var $podpora = array('application/msword', 'application/pdf', 'application/vnd.ms-excel','application/vnd.ms-powerpoint')}
+                    <td>{if in_array($type, $podpora)}
                             <a href="#" onclick="tinyMCE.execCommand('mceInsertContent',false,'<a href=\'{!$basePath}/pdf.php?dir=page&amp;file={!$document}\'>{!$document}</a> (<a href=\'{!$basePath}/pages/{!$document}\'>Stáhnout</a>)');">{$document}</a>
                         {else}
                             <a href="#" onclick="tinyMCE.execCommand('mceInsertContent',false,'<a href=\'{!$basePath}/pages/{!$document}\'>{!$document}</a>');">{$document}</a>

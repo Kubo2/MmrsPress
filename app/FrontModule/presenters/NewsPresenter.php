@@ -58,7 +58,7 @@ class NewsPresenter extends \BasePresenter {
                 }
             } else {
                 $page_id = $this->model->getNews()->where(array('section <> ?' => 'news', 'public' => 1))->fetch();
-                $idPage = $page_id->id;
+                $idPage = $page_id->menu;
                 $this->redirect('Page:default', array('wiew' => $idPage));
             }
         }

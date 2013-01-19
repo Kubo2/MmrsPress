@@ -20,7 +20,7 @@
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css" type="text/css">
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/back.php?css={$css64}" type="text/css">
         <link rel="stylesheet" media="print" href="{$basePath}/css/print.css" type="text/css">
-        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/mmrs-icons.css" type="text/css">
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/mmrs-icons-20-20.css" type="text/css">
         <link rel="shortcut icon" href="{$basePath}/images/web.gif" type="image/x-icon">
         <link rel="stylesheet" href="{$basePath}/css/lightbox.css" type="text/css" media="screen">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
@@ -227,7 +227,7 @@ $(function(){
                         <li {ifCurrent News:news}class="current"{/ifCurrent}><a href="{link News:news}">Aktuality</a></li>                           
                         {/if}
                         {foreach $menuPage as $set}
-                        <li {ifCurrent Page: wiew=>$set->id}class="current"{/ifCurrent}><a n:href="Page: wiew=>$set->id">{$set->menu}</a></li>
+                        <li {ifCurrent Page: wiew=>$set->menu}class="current"{/ifCurrent}><a n:href="Page: wiew=>$set->menu">{$set->menu}</a></li>
                         {/foreach}
                         {foreach $rubriky as $rubriky_pages}
                                 {var $pages = $rubriky_pages->section}
@@ -237,7 +237,7 @@ $(function(){
                             {if $rubriky_nazev == $rubriky_pages->section or $podmenu == $rubriky_pages->section}
                             <ul>   
                                 {foreach $rubriky_menu->where('section', $rubriky_pages->section) as $podmenu}
-                                <li {ifCurrent Page: wiew=>$podmenu->id}class="current"{/ifCurrent}><a n:href="Page: wiew=>$podmenu->id">{$podmenu->menu}</a></li>
+                                <li {ifCurrent Page: wiew=>$podmenu->menu}class="current"{/ifCurrent}><a n:href="Page: wiew=>$podmenu->menu">{$podmenu->menu}</a></li>
                                 {/foreach}
                             </ul>
                         </li>

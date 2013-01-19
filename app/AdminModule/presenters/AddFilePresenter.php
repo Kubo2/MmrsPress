@@ -84,7 +84,7 @@ class AddFilePresenter extends \BasePresenter {
                         $podpora = array('application/msword', 'application/pdf', 'image/jpeg',
                             'image/gif', 'image/png', 'application/vnd.oasis.opendocument.text',
                             'application/vnd.ms-excel', 'application/vnd.oasis.opendocument.spreadsheet',
-                            'text/plain', 'application/zip');
+                            'text/plain', 'application/zip','application/vnd.ms-powerpoint');
                         if (in_array($type, $podpora)) {
                             if (file_exists($isExist) == 0) {
                                 if (in_array($type, $img)) {

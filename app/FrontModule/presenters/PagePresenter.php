@@ -12,14 +12,14 @@ class PagePresenter extends \BasePresenter {
     public function beforeRender() {
         parent::beforeRender();
         $wiews = $this->getParam('wiew');
-        $this->template->wiewMenu = $this->model->getNews()->where("id", $wiews);
+        $this->template->wiewMenu = $this->model->getNews()->where("menu", $wiews);
     }
 
     public function handleDelete($id) {
         $value = $this->getParam('id');
         if (isset($value)) {
             if ($this->getUser()->loggedIn) {
-                $this->model->getNews()->where('id', $id)->delete();
+                $this->model->getNews()->where('menu', $id)->delete();
                 $this->flashMessage('Stránka byla smazána.');
                 $this->redirect(':Admin:Info:');
             } else {

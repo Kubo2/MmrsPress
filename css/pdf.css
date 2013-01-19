@@ -1,11 +1,3 @@
-/* 
-    Document   : pdf.css
-    Created on : 25.2.2012, 10:22:35
-    Author     : Dušan Vala as rellik
-    Home page  : http://mmrspress.eu
-    Description: PDF viewer.
-*/
-
 * {
     margin: 0px;
     padding: 0px;
@@ -27,52 +19,20 @@ body {
     position: fixed;
     background-color: #ccc;
 }
-#menu {
-    float: left;
-    width: 180px;
-    height: 90%;
-    position: fixed;
-    overflow-y: scroll;
-    margin: 60px 0px 100px 0px;
-    padding-left: 5px;
-}
-#menu ul {
+li {
     list-style: none;
 }
-#mainMenu a {
-    padding-left: 5px;
+a {
     text-decoration: none;
     margin: 5px;
-    display: block;
-    border-left: 3px solid #ddd;
-    border-bottom: 1px solid #ddd;
     color: #333;
 }
-#mainMenu a:hover {
-    border-left: 3px solid #333;
-    border-bottom: 1px solid #333;
-}
-#textzoom {
-    margin-left: 50px;
-}
-#textzoom a {
-        outline: 0;
-}
-#menu img {
-    text-align: center;
-    border: 1px solid #aaa;
-    background-color: #eee;
-}
-#menu p {
-    margin: 5px;
-    display: block;
-    border-bottom: 2px solid #ddd;
+a:hover {
+    color: #000000;
 }
 #text {
     padding: 75px 5px 5px 5px;
-    text-align: left;
     text-align: center;
-    border-left: 185px solid #ccc;
 }
 #text img {
     border: 1px solid #aaa;

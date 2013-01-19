@@ -11,8 +11,8 @@
                 {if $user->loggedIn}
                 {if $user->identity->users == $task->autor or $user->identity->role == 1}
             <span class="right">Vložil: <strong>{$task->autor}</strong> {$task->date|date:'j. n. Y'}
-                <a href="{link :Admin:AddNews:news id=>$task->id}" title="Editovat"><i class="mmrs-icon-edit"></i></a>  
-                <a href="{link delete! $task->id}" onclick="return confirm('Smazat?')" title="Smazat"><i class="mmrs-icon-delete"></i></a>
+                <a href="{link :Admin:AddNews:news id=>$task->id}" title="Editovat"><i class="mmrs-icon-20-edit"></i></a>  
+                <a href="{link delete! $task->id}" onclick="return confirm('Smazat?')" title="Smazat"><i class="mmrs-icon-20-delete"></i></a>
             </span>
                 {/if}
                 {else}

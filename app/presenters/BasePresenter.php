@@ -166,7 +166,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->template->rubriky_menu = $this->model->getNews()->where('public', '1');
         $this->template->rubriky_nazev = '';
         if ($this->getParam('wiew') != '') {
-            $setPodmenuWiew = $this->model->getNews()->where('id', $this->getParam('wiew'))->fetch();
+            $setPodmenuWiew = $this->model->getNews()->where('menu', $this->getParam('wiew'))->fetch();
             $this->template->podmenu = $setPodmenuWiew->section;
         } else {
             $this->template->podmenu = 'not';
