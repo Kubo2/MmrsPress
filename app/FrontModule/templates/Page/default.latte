@@ -16,7 +16,7 @@
                 {else}
                  {/if}
                 {var $news = html_entity_decode($task->content)}
-                {var $news = str_replace('../../','http://'.$_SERVER['SERVER_NAME'].'/',$news)}
+                {var $news = str_replace('../../',$basePath.'/',$news)}
                 {!$news}
     {/foreach}
 {/block}
