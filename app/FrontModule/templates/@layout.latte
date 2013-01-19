@@ -293,16 +293,17 @@ $(function(){
                         {*Konec menu*}
                         {if $isGallery->count('*') >= 1}
                         <div class="rubriky_layout">
-                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt="" /> Z fotogalerie</span>
+                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt=""> Z fotogalerie</span>
                             {foreach $photosMenu as $link}
-                            <a href="{link PhotoWiew: gallery=>$link->name}" class="center"><img src="{$basePath}/gallery/{$link->folder}/nahledy/{$link->photo}" alt="{$link->photo}"></a>
+                                {var $links = $isGallery->where('folder', $link->folder)->fetch()}
+                            <a href="{link PhotoWiew: gallery=>$links->name}" class="center"><img src="{$basePath}/gallery/{$link->folder}/nahledy/{$link->photo}" alt="{$link->photo}"></a>
                             {/foreach}
 
                         </div>
                         {/if}
                         {if $settings_counter->where(array('select'=>'counter','public'=>'1'))->count('*') == 1 }
                         <div class="rubriky_layout">
-                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt="" /> Návštěvy</span>
+                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt=""> Návštěvy</span>
                             <table class="counter">
                                 <tr>
                                     <td>Celkem: {$counter_all}</td>
@@ -314,7 +315,7 @@ $(function(){
                         </div>
                         {/if}
                         <div class="rubriky_layout">
-                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt="" /> Různé</span>
+                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt=""> Různé</span>
                                 {if $user->loggedIn}
                             {if !empty($user->identity->avatar)}
                             <img src="{$basePath}/avatar/{$user->identity->avatar}" alt="">
@@ -347,7 +348,7 @@ $(function(){
                     <div class="task-lists">
                         {if $isNews->count('*') > 0 AND $set_aktual > 0}
                         <div class="rubriky_layout">
-                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt="" /> Nové příspěvky</span>
+                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt=""> Nové příspěvky</span>
                             <ul class="mainMenu">
                             {foreach $isNews->limit(4)->order('id DESC') as $last}    
                                 <li><a n:href="Page: wiew=>$last->id">{$last->menu}</a></li>
@@ -357,7 +358,7 @@ $(function(){
                         {/if}
                         {if $isGallery->count('*') >= 1}
                         <div class="rubriky_layout">
-                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt="" /> Nové galerie</span>
+                            <span class="rubriky"><img src="{$basePath}/images/info.png" alt=""> Nové galerie</span>
                             <ul class="mainMenu">
                             {foreach $isGallery->limit(4)->order('id DESC') as $galleryMenu}
                                 <li><a href="{link PhotoWiew: gallery=>$galleryMenu->folder}">{$galleryMenu->name}</a><li>
