@@ -41,7 +41,7 @@
             $file = htmlspecialchars($_GET['file']);
             $page = htmlspecialchars($_GET['page']);
             $slozka = trim(htmlspecialchars($_GET['dir']));
-            echo '<li><a href="'.$_SERVER['SERVER_NAME'].'/' . $slozka . '/' . $file . '" class="embed back">Stáhnout soubor</a></li>';
+            echo '<li><a href="http://'.$_SERVER['SERVER_NAME'].'/' . $slozka . '/' . $file . '" class="embed back">Stáhnout soubor</a></li>';
             ?>
             </ul>
         </div> <!-- text konec -->
