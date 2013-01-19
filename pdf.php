@@ -37,13 +37,31 @@
         <div id="text"> <!-- text -->
             <ul>
                 <li><a href="./" class="back">Zpět na stránky</a></li>
-            <?php
-            $file = htmlspecialchars($_GET['file']);
-            $page = htmlspecialchars($_GET['page']);
-            $slozka = trim(htmlspecialchars($_GET['dir']));
-            echo '<li><a href="http://'.$_SERVER['SERVER_NAME'].'/' . $slozka . '/' . $file . '" class="embed back">Stáhnout soubor</a></li>';
-            ?>
+                <?php
+
+                function get_path_info() {
+                    $B = substr(__FILE__, 0, strrpos(__FILE__, '/'));
+                    $A = substr($_SERVER['DOCUMENT_ROOT'], strrpos($_SERVER['DOCUMENT_ROOT'], $_SERVER['PHP_SELF']));
+                    $C = substr($B, strlen($A));
+                    $posconf = strlen($C);
+                    $D = substr($C, 1, $posconf);
+                    if (empty($D)) {
+                        return 'http://' . $_SERVER['SERVER_NAME'] . '/';
+                    } else {
+                        return 'http://' . $_SERVER['SERVER_NAME'] . '/' . $D . '/';
+                    }
+                }
+
+                $file = htmlspecialchars($_GET['file']);
+                $slozka = trim(htmlspecialchars($_GET['dir']));
+                echo '<li><a href="' . get_path_info() . $slozka . '/' . $file . '" class="embed back">Stáhnout soubor</a></li>';
+                ?>
             </ul>
+            <p>
+                2005-<?php echo date('Y'); ?>
+                © <a href="http://mmrspress.eu">MmrsPress</a> by 
+                <a href="mailto:rellik@rellik.eu">Rellik</a> 
+            </p> 
         </div> <!-- text konec -->
     </body>
 </html>
