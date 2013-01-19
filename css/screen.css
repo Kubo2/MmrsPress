@@ -595,6 +595,7 @@ a[href^="error:"] {
     padding: .5em 1em;
     text-decoration: none;
     float: left;
+    position: absolute;
 }
 #button_close {
     padding: .5em 1em;
