@@ -171,11 +171,6 @@
   padding-bottom: 0.7em;
   outline: none;
 }
-.lb-close {
-    background-image: url(../images/close.png);
-    background-repeat: no-repeat;
-    height: 25px;
-}
 /* line 117, ../sass/lightbox.sass */
 .lb-data .lb-close:hover {
   cursor: pointer;
