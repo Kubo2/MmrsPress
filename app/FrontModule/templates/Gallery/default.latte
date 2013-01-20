@@ -8,7 +8,7 @@
 <h1>Nejnovější fotky z galerie</h1>
 <table class="galerie">
     <tr>
-    {foreach $wiews_last as $key => $value}
+    {foreach $wiews_last as $value}
         {foreach $value as $folder => $dir} 
             {foreach $dir as $image => $name}
                 <td><a href="{link PhotoWiew: gallery=>$name}"><img src="{$basePath}/gallery/{$folder}/nahledy/{$image}" alt="{$image}"></a></td>
