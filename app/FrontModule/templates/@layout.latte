@@ -206,8 +206,6 @@ $(function(){
                         </div>
                         {if $menuLeft == 0}
                         <div id="login">
-                            <a href="#" id="search_lnk" class="search">Vyhledat</a>
-                            <div id="search" title="Vyhledávání">{control searchForm}</div>
                         {if $user->loggedIn}
                             {if !empty($user->identity->avatar)}
                             <img src="{$basePath}/avatar/{$user->identity->avatar}" alt="">
@@ -215,6 +213,14 @@ $(function(){
                            {else}
                             {if $set_registration == 1}<a n:href="Sign:">Přihlásit</a>  <a n:href="Registration:">Registrovat</a>{/if}
                          {/if}
+                            {form searchForm}
+                            <table>
+                                <td>
+                                    {input search} {label search /}
+                                    {input create} {label create /}
+                                </td>
+                            </table>
+                                    {/form}
                         </div>
                         {/if}                        
                     </div></a>               
@@ -337,8 +343,7 @@ $(function(){
                             <a n:href="Rss:book" class="rss_menu">RSS Kniha návštěv</a>
                             {/if}
                             {/foreach}
-                            <a href="#" id="search_lnk">Vyhledat</a>
-                            <div id="search" title="Vyhledávání">{control searchForm}</div>
+                            {control searchForm}
                         </div>
                     </div>
                 </div>
