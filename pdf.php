@@ -36,7 +36,7 @@
         </div> <!-- hlavicka konec -->
         <div id="text"> <!-- text -->
             <ul>
-                <li><a href="./" class="back">Zpět na stránky</a></li>
+                <li><a href="javascript:self.history.back();" class="back">Zpět na stránky</a></li>
                 <?php
 
                 function get_path_info() {
