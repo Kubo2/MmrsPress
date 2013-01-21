@@ -42,7 +42,7 @@ if (isset($_SERVER['NETTE_HTACCESS'])) { // FastCGI
     $adminRouter[] = new Route('admin/<presenter>/<action>', 'Info:default'); // [/<id>]
 
     $container->router[] = $frontRouter = new RouteList('Front');
-    $frontRouter[] = new Route('<presenter>/<action>[/<id>]', 'News:news');
+    $frontRouter[] = new Route('<presenter>/<action>[/<wiew>]', 'News:news'); //[/<page>][/<id>]
 } else {
     $container->router = new SimpleRouter('Front:News:news');
 }
