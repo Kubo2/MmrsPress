@@ -276,7 +276,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
                 ->setEmptyValue('http://')
                 ->addCondition($form::FILLED)
                 ->addRule($form::URL, 'Nesprávně uvedená adresa webu!');
-        $form->addTextArea('text', 'Zpráva', 40, 6);
+        $form->addTextArea('text', 'Zpráva', 40, 6)
+                ->setRequired('Zpráva musí být vyplněna!');
 
         $form->addGroup('Ochrana');
 
