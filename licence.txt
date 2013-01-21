@@ -323,4 +323,4 @@ WRITTEN OFFER
 The source code for any program binaries or compressed scripts that are
 included with MmrsPress can be freely obtained at the following URL:
 
-	http://mmrs.rellik.eu
+	http://mmrspress.eu
