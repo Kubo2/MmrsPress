@@ -26,7 +26,8 @@
             </tr>
             <tr>
                 <th>Formátování:</th>
-                <td><a href="#" onclick="return insertSmiley(1002);"><img class="smaj-i" name="PS2" src="{$basePath}/images/bold.png" border="0" alt="[b]"></a>
+                <td><a href="#" onclick="return insertSmiley(1000);"><img class="smaj-i" name="PS0" src="{$basePath}/images/code.png" border="0" alt="[b]"></a>
+                    <a href="#" onclick="return insertSmiley(1002);"><img class="smaj-i" name="PS2" src="{$basePath}/images/bold.png" border="0" alt="[b]"></a>
                     <a href="#" onclick="return insertSmiley(1004);"><img class="smaj-i" name="PS4" src="{$basePath}/images/i.png" border="0" alt="[i]"></a>
                     <a href="#" onclick="return insertSmiley(1006);"><img class="smaj-i" name="PS6" src="{$basePath}/images/r.png" border="0" alt="[red]"></a>
                     <a href="#" onclick="return insertSmiley(1008);"><img class="smaj-i" name="PS8" src="{$basePath}/images/g.png" border="0" alt="[green]"></a>
@@ -90,7 +91,7 @@
     </div>
     <div class="bookWiew">
         {if $user->loggedIn}
-                        {if $user->identity->role == 1}<span class="right"><a href="{link delete! $task->id}" onclick="return confirm('Smazat?')"><i class="mmrs-icon-delete"></i></a></span>{/if}
+                        {if $user->identity->role == 1}<span class="right"><a href="{link delete! $task->id}" onclick="return confirm('Smazat?')"><i class="mmrs-icon-20-delete"></i></a></span>{/if}
                     {/if}
                 {! formatovani($task->mesage) |nl2br}
     </div>
