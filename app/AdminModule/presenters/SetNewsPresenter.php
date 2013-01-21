@@ -31,7 +31,7 @@ class SetNewsPresenter extends \BasePresenter {
         $form = new Form();
         if (!empty($pocet->count)) {
             $form->addSelect('pocet', 'Počet aktualit na stránku', $num)
-            ->setDefaultValue($pocet->count);
+                    ->setDefaultValue($pocet->count);
         } else {
             $form->addSelect('pocet', 'Počet aktualit na stránku', $num);
         }
@@ -44,49 +44,64 @@ class SetNewsPresenter extends \BasePresenter {
     }
 
     public function setNewsFormSubmitted(Form $form) {
-        $isExist = $this->model->getSettings()->where('select', 'news')->count('*');
-        if ($isExist == 0) {
-            $this->model->getSettings()->insert(array(
-                'select' => 'news',
-                'count' => intval($form->values->pocet)
-            ));
-            $this->flashMessage('Počet aktualit byl nastaven.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->where('select', 'news')->update(array(
-                'count' => intval($form->values->pocet)
-            ));
-            $this->flashMessage('Počet aktualit byl nastaven.');
-            $this->redirect('this');
+            $isExist = $this->model->getSettings()->where('select', 'news')->count('*');
+            if ($isExist == 0) {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'news',
+                    'count' => intval($form->values->pocet)
+                ));
+                $this->flashMessage('Počet aktualit byl nastaven.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->where('select', 'news')->update(array(
+                    'count' => intval($form->values->pocet)
+                ));
+                $this->flashMessage('Počet aktualit byl nastaven.');
+                $this->redirect('this');
+            }
         }
     }
 
     // nastavení knihy jako veřejné
     public function handlePublic($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '1'
-            ));
-            $this->flashMessage('Aktuality byly nastaveny jako veřejné.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'news',
-                'public' => '1'
-            ));
-            $this->flashMessage('Aktuality byly nastaveny jako veřejné.');
-            $this->redirect('this');
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '1'
+                ));
+                $this->flashMessage('Aktuality byly nastaveny jako veřejné.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'news',
+                    'public' => '1'
+                ));
+                $this->flashMessage('Aktuality byly nastaveny jako veřejné.');
+                $this->redirect('this');
+            }
         }
     }
 
 // nastavení knihy jako skryté
     public function handleHidden($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '0'
-            ));
-            $this->flashMessage('Aktuality byly nastaveny jako skryté.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
+        } else {
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '0'
+                ));
+                $this->flashMessage('Aktuality byly nastaveny jako skryté.');
+                $this->redirect('this');
+            }
         }
     }
 

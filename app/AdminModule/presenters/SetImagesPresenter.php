@@ -1,5 +1,7 @@
 <?php
+
 namespace AdminModule;
+
 /**
  *
  * @author Dušan Vala as rellik
@@ -28,7 +30,7 @@ class SetImagesPresenter extends \BasePresenter {
 
     protected function createComponentSetImgForm() {
         $isExistSet = $this->model->getSetImg()->count('*');
-        if($isExistSet != 0) {
+        if ($isExistSet != 0) {
             foreach ($this->model->getSetImg() as $galImg) {
                 $thumb = $galImg->thumbImg;
                 $wiews = $galImg->wiewImg;
@@ -44,19 +46,19 @@ class SetImagesPresenter extends \BasePresenter {
 
         $form->addGroup('Velikost fotografií ve fotogalerii');
 
-        $form->addText('thumbImg', 'Maximální šířka miniatury ve fotogalerii:',3,3)
+        $form->addText('thumbImg', 'Maximální šířka miniatury ve fotogalerii:', 3, 3)
                 ->setValue($thumb)
                 ->addRule(Form::INTEGER, 'Velikost musí být číslo')
                 ->addRule(Form::RANGE, 'Velikost musí být od %d do %d', array(50, 200));
 
-        $form->addText('wiewImg', 'Maximální šířka původní fotografie:', 4,4)
+        $form->addText('wiewImg', 'Maximální šířka původní fotografie:', 4, 4)
                 ->setValue($wiews)
                 ->addRule(Form::INTEGER, 'Velikost musí být číslo')
                 ->addRule(Form::RANGE, 'Velikost musí být od %d do %d', array(300, 1024));
-        
+
         $form->addGroup('Velikost obrázkových příloh článků');
 
-        $form->addText('newsImg', 'Maximální šířka obrázkové přílohy:',4,4)
+        $form->addText('newsImg', 'Maximální šířka obrázkové přílohy:', 4, 4)
                 ->setValue($news)
                 ->addRule(Form::INTEGER, 'Velikost musí být číslo')
                 ->addRule(Form::RANGE, 'Velikost musí být od %d do %d', array(50, 1024));
@@ -69,59 +71,74 @@ class SetImagesPresenter extends \BasePresenter {
     }
 
     public function setImgFormSubmitted(Form $form) {
-        $isExist = $this->model->getSetImg()->count('*');
-        if ($isExist == 0) {
-            $this->model->getSetImg()->insert(array(
-                'thumbImg' => intval($form->values->thumbImg),
-                'wiewImg' => intval($form->values->wiewImg),
-                'newsImg' => intval($form->values->newsImg)
-            ));
-            $this->flashMessage('Velikost obrázků byla nastavena.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSetImg()->update(array(
-                'thumbImg' => intval($form->values->thumbImg),
-                'wiewImg' => intval($form->values->wiewImg),
-                'newsImg' => intval($form->values->newsImg)
-            ));
-            $this->flashMessage('Velikost obrázků byla nastavena.');
-            $this->redirect('this');
+            $isExist = $this->model->getSetImg()->count('*');
+            if ($isExist == 0) {
+                $this->model->getSetImg()->insert(array(
+                    'thumbImg' => intval($form->values->thumbImg),
+                    'wiewImg' => intval($form->values->wiewImg),
+                    'newsImg' => intval($form->values->newsImg)
+                ));
+                $this->flashMessage('Velikost obrázků byla nastavena.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSetImg()->update(array(
+                    'thumbImg' => intval($form->values->thumbImg),
+                    'wiewImg' => intval($form->values->wiewImg),
+                    'newsImg' => intval($form->values->newsImg)
+                ));
+                $this->flashMessage('Velikost obrázků byla nastavena.');
+                $this->redirect('this');
+            }
         }
     }
-    
+
     // nastavení panelu jako veřejné
     public function handleVerejna($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '1'
-            ));
-            $this->flashMessage('Panel byl nastaven jako veřejný.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'photoPanel',
-                'public' => '1'
-            ));
-            $this->flashMessage('Panel byl nastaven jako veřejný.');
-            $this->redirect('this');
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '1'
+                ));
+                $this->flashMessage('Panel byl nastaven jako veřejný.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'photoPanel',
+                    'public' => '1'
+                ));
+                $this->flashMessage('Panel byl nastaven jako veřejný.');
+                $this->redirect('this');
+            }
         }
     }
 
 // nastavení panelu jako skryté
     public function handleSkryta($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '0'
-            ));
-            $this->flashMessage('Panel byl nastaven jako skrytý.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'photoPanel',
-                'public' => '0'
-            ));
-            $this->flashMessage('Panel byl nastaven jako skrytý.');
-            $this->redirect('this');
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '0'
+                ));
+                $this->flashMessage('Panel byl nastaven jako skrytý.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'photoPanel',
+                    'public' => '0'
+                ));
+                $this->flashMessage('Panel byl nastaven jako skrytý.');
+                $this->redirect('this');
+            }
         }
     }
 

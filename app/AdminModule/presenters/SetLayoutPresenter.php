@@ -143,164 +143,214 @@ class SetLayoutPresenter extends \BasePresenter {
     }
 
     public function setLayoutFormSubmitted(Form $form) {
-        if (empty($form->values->float)) {
-            $float = 'r';
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
+            $this->redirect('this');
         } else {
-            $float = $form->values->float;
+            if (empty($form->values->float)) {
+                $float = 'r';
+            } else {
+                $float = $form->values->float;
+            }
+            $this->model->getLayout()->update(array(
+                'title' => $form->values->title,
+                'description' => $form->values->description,
+                'padding' => $form->values->padding,
+                'layout' => $form->values->layout,
+                'logo' => $form->values->logo,
+                'float' => $float,
+                'width' => $form->values->width,
+                'backColor' => $form->values->color,
+                'Acolor' => $form->values->Acolor,
+                'AcolorH' => $form->values->AcolorH,
+                'ContentColor' => $form->values->ContentColor,
+                'pageColor' => $form->values->pageColor,
+                'textColor' => $form->values->textColor,
+                'hColor' => $form->values->hColor,
+                'footer' => $form->values->footer,
+                'menuA' => $form->values->menuA,
+                'menuH' => $form->values->menuH,
+                'galleryTd' => $form->values->galleryTd,
+                'galleryTdH' => $form->values->galleryTdH,
+                'tdColor' => $form->values->tdColor,
+            ));
+            $this->flashMessage('Vzhled byl nastaven.');
+            $this->redirect('this');
         }
-        $this->model->getLayout()->update(array(
-            'title' => $form->values->title,
-            'description' => $form->values->description,
-            'padding' => $form->values->padding,
-            'layout' => $form->values->layout,
-            'logo' => $form->values->logo,
-            'float' => $float,
-            'width' => $form->values->width,
-            'backColor' => $form->values->color,
-            'Acolor' => $form->values->Acolor,
-            'AcolorH' => $form->values->AcolorH,
-            'ContentColor' => $form->values->ContentColor,
-            'pageColor' => $form->values->pageColor,
-            'textColor' => $form->values->textColor,
-            'hColor' => $form->values->hColor,
-            'footer' => $form->values->footer,
-            'menuA' => $form->values->menuA,
-            'menuH' => $form->values->menuH,
-            'galleryTd' => $form->values->galleryTd,
-            'galleryTdH' => $form->values->galleryTdH,
-            'tdColor' => $form->values->tdColor,
-        ));
-        $this->flashMessage('Vzhled byl nastaven.');
-        $this->redirect('this');
     }
 
     // nastavení facebook
     public function handleFbv($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '1'
-            ));
-            $this->flashMessage('Panel facebooku byl nastaven jako viditelný.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'facebook',
-                'public' => '1'
-            ));
-            $this->flashMessage('Panel facebooku byl nastaven jako viditelný.');
-            $this->redirect('this');
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '1'
+                ));
+                $this->flashMessage('Panel facebooku byl nastaven jako viditelný.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'facebook',
+                    'public' => '1'
+                ));
+                $this->flashMessage('Panel facebooku byl nastaven jako viditelný.');
+                $this->redirect('this');
+            }
         }
     }
 
 // nastavení facebook
     public function handleFbs($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '0'
-            ));
-            $this->flashMessage('Panel facebooku byl nastaven jako skrytý.');
-            $this->redirect('this');
-        }
-    }
-    
-// nastavení pravého panelu
-    public function handleVerejna($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '1'
-            ));
-            $this->flashMessage('Panel byl nastaven jako viditelný.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'right_block',
-                'public' => '1'
-            ));
-            $this->flashMessage('Panel byl nastaven jako viditelný.');
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '0'
+                ));
+                $this->flashMessage('Panel facebooku byl nastaven jako skrytý.');
+                $this->redirect('this');
+            }
+        }
+    }
+
+// nastavení pravého panelu
+    public function handleVerejna($id) {
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
+        } else {
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '1'
+                ));
+                $this->flashMessage('Panel byl nastaven jako viditelný.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'right_block',
+                    'public' => '1'
+                ));
+                $this->flashMessage('Panel byl nastaven jako viditelný.');
+                $this->redirect('this');
+            }
         }
     }
 
 // nastavení pravého panelu
     public function handleSkryta($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '0'
-            ));
-            $this->flashMessage('Panel byl nastaven jako skrytý.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
+        } else {
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '0'
+                ));
+                $this->flashMessage('Panel byl nastaven jako skrytý.');
+                $this->redirect('this');
+            }
         }
     }
 
 // nastavení levého panelu
     public function handleLverejna($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '1'
-            ));
-            $this->flashMessage('Panel byl nastaven jako viditelný.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'left_block',
-                'public' => '1'
-            ));
-            $this->flashMessage('Panel byl nastaven jako viditelný.');
-            $this->redirect('this');
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '1'
+                ));
+                $this->flashMessage('Panel byl nastaven jako viditelný.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'left_block',
+                    'public' => '1'
+                ));
+                $this->flashMessage('Panel byl nastaven jako viditelný.');
+                $this->redirect('this');
+            }
         }
     }
 
 // nastavení levého panelu
     public function handleLskryta($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '0'
-            ));
-            $this->flashMessage('Panel byl nastaven jako skrytý.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
+        } else {
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '0'
+                ));
+                $this->flashMessage('Panel byl nastaven jako skrytý.');
+                $this->redirect('this');
+            }
         }
     }
 
     // nastavení menu - nahoře
     public function handleTop($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '1'
-            ));
-            $this->flashMessage('Menu bylo nastaveno nahoru.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'menu',
-                'public' => '1'
-            ));
-            $this->flashMessage('Menu bylo nastaveno nahoru.');
-            $this->redirect('this');
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '1'
+                ));
+                $this->flashMessage('Menu bylo nastaveno nahoru.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'menu',
+                    'public' => '1'
+                ));
+                $this->flashMessage('Menu bylo nastaveno nahoru.');
+                $this->redirect('this');
+            }
         }
     }
 
     // nastavení menu - dole
     public function handleLeft($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '0'
-            ));
-            $this->flashMessage('Menu bylo nastaveno vlevo.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'menu',
-                'public' => '0'
-            ));
-            $this->flashMessage('Menu bylo nastaveno vlevo.');
-            $this->redirect('this');
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '0'
+                ));
+                $this->flashMessage('Menu bylo nastaveno vlevo.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'menu',
+                    'public' => '0'
+                ));
+                $this->flashMessage('Menu bylo nastaveno vlevo.');
+                $this->redirect('this');
+            }
         }
     }
 
     public function handleReset() {
-        $this->model->getLayout()->delete();
-        $this->flashMessage('Nastavení layoutu bylo resetováno do výchozího nastavení.');
-        $this->redirect('this');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
+            $this->redirect('this');
+        } else {
+            $this->model->getLayout()->delete();
+            $this->flashMessage('Nastavení layoutu bylo resetováno do výchozího nastavení.');
+            $this->redirect('this');
+        }
     }
 
 }

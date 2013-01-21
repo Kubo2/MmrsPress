@@ -20,37 +20,47 @@ class SetCounterPresenter extends \BasePresenter {
 
 // nastavení počitadla jako veřejné
     public function handleVerejna($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '1'
-            ));
-            $this->flashMessage('Počitadlo návštěv bylo nastaveno jako veřejné.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'counter',
-                'public' => '1'
-            ));
-            $this->flashMessage('Počitadlo návštěv bylo nastaveno jako veřejné.');
-            $this->redirect('this');
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '1'
+                ));
+                $this->flashMessage('Počitadlo návštěv bylo nastaveno jako veřejné.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'counter',
+                    'public' => '1'
+                ));
+                $this->flashMessage('Počitadlo návštěv bylo nastaveno jako veřejné.');
+                $this->redirect('this');
+            }
         }
     }
 
 // nastavení počitadla jako skryté
     public function handleSkryta($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '0'
-            ));
-            $this->flashMessage('Počitadlo návštěv bylo nastaveno jako skryté.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'counter',
-                'public' => '0'
-            ));
-            $this->flashMessage('Počitadlo návštěv bylo nastaveno jako skryté.');
-            $this->redirect('this');
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '0'
+                ));
+                $this->flashMessage('Počitadlo návštěv bylo nastaveno jako skryté.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'counter',
+                    'public' => '0'
+                ));
+                $this->flashMessage('Počitadlo návštěv bylo nastaveno jako skryté.');
+                $this->redirect('this');
+            }
         }
     }
 

@@ -1,5 +1,7 @@
 <?php
+
 namespace AdminModule;
+
 /**
  *
  * @author Dušan Vala as rellik
@@ -57,23 +59,28 @@ class RssPresenter extends \BasePresenter {
     }
 
     public function setRssFormSubmitted(Form $form) {
-        $isRss = $this->model->getSetRss()->count('*');
-        if ($isRss == 0) {
-            $this->model->getSetRss()->insert(array(
-                'news' => $form->values->news,
-                'pages' => $form->values->pages,
-                'book' => $form->values->book
-            ));
-            $this->flashMessage('Odběr Rss byl nastaven.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSetRss()->update(array(
-                'news' => $form->values->news,
-                'pages' => $form->values->pages,
-                'book' => $form->values->book
-            ));
-            $this->flashMessage('Odběr Rss byl nastaven.');
-            $this->redirect('this');
+            $isRss = $this->model->getSetRss()->count('*');
+            if ($isRss == 0) {
+                $this->model->getSetRss()->insert(array(
+                    'news' => $form->values->news,
+                    'pages' => $form->values->pages,
+                    'book' => $form->values->book
+                ));
+                $this->flashMessage('Odběr Rss byl nastaven.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSetRss()->update(array(
+                    'news' => $form->values->news,
+                    'pages' => $form->values->pages,
+                    'book' => $form->values->book
+                ));
+                $this->flashMessage('Odběr Rss byl nastaven.');
+                $this->redirect('this');
+            }
         }
     }
 

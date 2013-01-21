@@ -79,8 +79,7 @@ class UploaderPresenter extends \BasePresenter {
                                 $this->model->getPhotos()->insert(array(
                                     'photo' => $rename_foto,
                                     'folder' => $form->values->folder,
-                                    'label' => $form->values->foto['label' . $cykle],
-                                    'name' => $galleryName->name
+                                    'label' => $form->values->foto['label' . $cykle]
                                 ));
                                 // vytvoření miniatur a zmenšení fotek
                                 if ($width >= $wiews or $height >= $wiews) {

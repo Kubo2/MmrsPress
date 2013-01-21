@@ -1,5 +1,7 @@
 <?php
+
 namespace AdminModule;
+
 /**
  *
  * @author Dušan Vala as rellik
@@ -18,37 +20,47 @@ class SetBookPresenter extends \BasePresenter {
 
 // nastavení knihy jako veřejné
     public function handleVerejna($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '1'
-            ));
-            $this->flashMessage('Kniha návštěv byla nastavena jako veřejná.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'book',
-                'public' => '1'
-            ));
-            $this->flashMessage('Kniha návštěv byla nastavena jako veřejná.');
-            $this->redirect('this');
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '1'
+                ));
+                $this->flashMessage('Kniha návštěv byla nastavena jako veřejná.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'book',
+                    'public' => '1'
+                ));
+                $this->flashMessage('Kniha návštěv byla nastavena jako veřejná.');
+                $this->redirect('this');
+            }
         }
     }
 
 // nastavení knihy jako skryté
     public function handleSkryta($id) {
-        if (isset($id)) {
-            $this->model->getSettings()->where('id', $id)->update(array(
-                'public' => '0'
-            ));
-            $this->flashMessage('Kniha návštěv byla nastavena jako skrytá.');
+        if ($this->user_role == 3) {
+            $this->flashMessage('Tato  operace není v demo módu dostupná.');
             $this->redirect('this');
         } else {
-            $this->model->getSettings()->insert(array(
-                'select' => 'book',
-                'public' => '0'
-            ));
-            $this->flashMessage('Kniha návštěv byla nastavena jako skrytá.');
-            $this->redirect('this');
+            if (isset($id)) {
+                $this->model->getSettings()->where('id', $id)->update(array(
+                    'public' => '0'
+                ));
+                $this->flashMessage('Kniha návštěv byla nastavena jako skrytá.');
+                $this->redirect('this');
+            } else {
+                $this->model->getSettings()->insert(array(
+                    'select' => 'book',
+                    'public' => '0'
+                ));
+                $this->flashMessage('Kniha návštěv byla nastavena jako skrytá.');
+                $this->redirect('this');
+            }
         }
     }
 
