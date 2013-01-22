@@ -4,7 +4,7 @@
 <h1><i class="mmrs-icon-25-geometry"></i> Nastavení vzhledu</h1>
 <p>Momentálně je na výběr ze sedmi barevných témat. Postupně jich možná přibude a budou i graficky jiná.</p>
     {control setLayoutForm}
-<a href="{link reset!}" onclick="return confirm('Resetovat nastavení barev?\nPři resetu bude layout a barvy webu ve výchozím nastavení.')"><i class="mmrs-icon-20-alert"></i>Resetovat veškeré nastavení layoutu</a>
+<a href="{link reset!}" onclick="return confirm('Resetovat nastavení barev?\nPři resetu bude layout a barvy webu ve výchozím nastavení.')" class="button"><i class="mmrs-icon-20-alert"></i>Resetovat veškeré nastavení layoutu</a>
 </i>
 <h2>Nastavení rozložení stránky</h2>
 <p>Na stránce je možné vypnout pravý informační blok.</p>
@@ -21,17 +21,17 @@
         {if $task_panel->public == '1'}
         <td>Pravý panel viditelný<i class="mmrs-icon-20-ok"></i></td>
         <td><img src="{$basePath}/images/layout_full.png" alt=""></td>
-        <td><a href="{link skryta! $task_panel->id}" onclick="return confirm('Nastavit pravý panel skrytý?\nPanel nebude na stránce dostupný.')">PANEL SKRÝT</a></td>
+        <td><a href="{link skryta! $task_panel->id}" onclick="return confirm('Nastavit pravý panel skrytý?\nPanel nebude na stránce dostupný.')" class="button">PANEL SKRÝT</a></td>
         {else}
         <td>Pravý panel skrytý<i class="mmrs-icon-20-disabled"></i></td>
         <td><img src="{$basePath}/images/layout_simple.png" alt=""></td>
-        <td><a href="{link verejna! $task_panel->id}" onclick="return confirm('Nastavit pravý panel viditelný?\n')">PANEL VIDITELNÝ</a></td>
+        <td><a href="{link verejna! $task_panel->id}" onclick="return confirm('Nastavit pravý panel viditelný?\n')" class="button">PANEL VIDITELNÝ</a></td>
         {/if}
     {/foreach}
 {else}
         <td>Pravý panel skrytý<i class="mmrs-icon-20-disabled"></i></td>
         <td><img src="{$basePath}/images/layout_simple.png" alt=""></td>
-        <td><a href="{link verejna!}" onclick="return confirm('Nastavit pravý panel viditelný?\n')">PANEL VIDITELNÝ</a></td>
+        <td><a href="{link verejna!}" onclick="return confirm('Nastavit pravý panel viditelný?\n')" class="button">PANEL VIDITELNÝ</a></td>
 {/if}  
         <td>
             {if $css->count('*') >= 1}
@@ -47,17 +47,17 @@
         {if $task_panel->public == '1'}
         <td>Levý panel viditelný<i class="mmrs-icon-20-ok"></i></td>
         <td><img src="{$basePath}/images/layout_menu_left.png" alt=""></td>
-        <td><a href="{link lskryta! $task_panel->id}" onclick="return confirm('Nastavit levý panel skrytý?\nPanel nebude na stránce dostupný.\nMenu se automaticky nastaví na horizontální')">PANEL SKRÝT</a></td>
+        <td><a href="{link lskryta! $task_panel->id}" onclick="return confirm('Nastavit levý panel skrytý?\nPanel nebude na stránce dostupný.\nMenu se automaticky nastaví na horizontální')" class="button">PANEL SKRÝT</a></td>
         {else}
         <td>levý panel skrytý<i class="mmrs-icon-20-disabled"></i></td>
         <td><img src="{$basePath}/images/layout_no_left.png" alt=""></td>
-        <td><a href="{link lverejna! $task_panel->id}" onclick="return confirm('Nastavit levý panel viditelný?\n')">PANEL VIDITELNÝ</a></td>
+        <td><a href="{link lverejna! $task_panel->id}" onclick="return confirm('Nastavit levý panel viditelný?\n')" class="button">PANEL VIDITELNÝ</a></td>
         {/if}
     {/foreach}
 {else}
         <td>levý panel skrytý<i class="mmrs-icon-20-disabled"></i></td>
         <td><img src="{$basePath}/images/layout_no_left.png" alt=""></td>
-        <td><a href="{link lverejna!}" onclick="return confirm('Nastavit levý panel viditelný?\n')">PANEL VIDITELNÝ</a></td>
+        <td><a href="{link lverejna!}" onclick="return confirm('Nastavit levý panel viditelný?\n')" class="button">PANEL VIDITELNÝ</a></td>
 {/if}  
         <td></td>
     </tr>
@@ -67,18 +67,18 @@
         {if $set->public == 0}
         <td>Menu na levé straně</td>
         <td><img src="{$basePath}/images/layout_menu_left.png" alt=""></td>
-        <td><a href="{link top! $set->id}" onclick="return confirm('Nastavit menu na levou stranu?\nToto nastavení je doporučené, pokud bude na webu maximálně 5 odkazů.')">NASTAVIT MENU NAHORU</a></td>
+        <td><a href="{link top! $set->id}" onclick="return confirm('Nastavit menu na levou stranu?\nToto nastavení je doporučené, pokud bude na webu maximálně 5 odkazů.')" class="button">NASTAVIT MENU NAHORU</a></td>
         {else}
         <td>Menu nahoře</td>
         <td><img src="{$basePath}/images/layout_menu_top.png" alt=""></td>
-        <td><a href="{link left! $set->id}" onclick="return confirm('Nastavit menu nahoru?\nToto nastavení je doporučené, pokud bude na webu více než 5 odkazů.')">NASTAVIT NMENU VLEVO</a></td>
+        <td><a href="{link left! $set->id}" onclick="return confirm('Nastavit menu nahoru?\nToto nastavení je doporučené, pokud bude na webu více než 5 odkazů.')" class="button">NASTAVIT NMENU VLEVO</a></td>
         <td></td>
         {/if}
     {/foreach}
 {else}
         <td>Menu na levé straně</td>
         <td><img src="{$basePath}/images/layout_menu_left.png" alt=""></td>
-        <td><a href="{link left!}" onclick="return confirm('Nastavit menu nahoru?\nToto nastavení je doporučené, pokud bude na webu maximálně 5 odkazů.')">NASTAVIT MENU NAHORU</a> </td>
+        <td><a href="{link left!}" onclick="return confirm('Nastavit menu nahoru?\nToto nastavení je doporučené, pokud bude na webu maximálně 5 odkazů.')" class="button">NASTAVIT MENU NAHORU</a> </td>
         <td></td>
 {/if}
     </tr>
@@ -88,13 +88,13 @@
     {foreach $settings_fb->where('select','facebook') as $fbavailable}
         {if $fbavailable->public == 0}
             <p><strong class="red">Panel facebooku je nastaven jako skrytý</strong><i class="mmrs-icon-20-disabled"></i></p> 
-            <a href="{link fbv! $fbavailable->id}" onclick="return confirm('Nastavit panel jako veřejné?\nPanel bude na webu dostupný.')">NASTAVIT PANEL JAKO VEŘEJNÝ</a> 
+            <a href="{link fbv! $fbavailable->id}" onclick="return confirm('Nastavit panel jako veřejné?\nPanel bude na webu dostupný.')"  class="button"><i class="mmrs-icon-20-plus"></i>NASTAVIT PANEL JAKO VEŘEJNÝ</a> 
         {else}
             <p><strong  class="green">Panel facebooku je nastaven jako veřejný</strong><i class="mmrs-icon-20-ok"></i></p>
-            <a href="{link fbs! $fbavailable->id}" onclick="return confirm('Nastavit panel jako skryté?\nPanel nebude na stránce dostupný.')">NASTAVIT PANEL JAKO SKRYTÝ</a> 
+            <a href="{link fbs! $fbavailable->id}" onclick="return confirm('Nastavit panel jako skryté?\nPanel nebude na stránce dostupný.')" class="button"><i class="mmrs-icon-20-disabled"></i>NASTAVIT PANEL JAKO SKRYTÝ</a> 
         {/if}
     {/foreach}
 {else}
     <p><strong class="red">Panel facebooku je nastaven jako skrytý</strong><i class="mmrs-icon-20-disabled"></i></p> 
-            <a href="{link fbv!}" onclick="return confirm('Nastavit panel jako veřejné?\npanel bude na webu dostupný.')">NASTAVIT PANEL JAKO VEŘEJNÝ</a>{/if}
+            <a href="{link fbv!}" onclick="return confirm('Nastavit panel jako veřejné?\npanel bude na webu dostupný.')" class="button"><i class="mmrs-icon-20-plus"></i>NASTAVIT PANEL JAKO VEŘEJNÝ</a>{/if}
 {/block}

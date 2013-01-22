@@ -9,15 +9,15 @@
     {foreach $settings->where('select','counter') as $set}
         {if $set->public == 0}
 <p><strong class="red">Počitadlo je skryté</strong><i class="mmrs-icon-20-disabled"></i></p> 
-<a href="{link verejna! $set->id}" onclick="return confirm('Nastavit počitadlo jako veřejné?\nPočitadlo bude na webu dostupné.')">NASTAVIT POČITADLO JAKO VEŘEJNÉ</a> 
+<a href="{link verejna! $set->id}" onclick="return confirm('Nastavit počitadlo jako veřejné?\nPočitadlo bude na webu dostupné.')" class="button"><i class="mmrs-icon-20-plus"></i>NASTAVIT POČITADLO JAKO VEŘEJNÉ</a> 
         {else}
 <p><strong  class="green">Počitadlo je veřejné</strong><i class="mmrs-icon-20-ok"></i></p>
-<a href="{link skryta! $set->id}" onclick="return confirm('Nastavit počitadlo jako skryté?\nPočitadlo nebude na webu dostupné.')">NASTAVIT POČITADLO JAKO SKRYTÉ</a> 
+<a href="{link skryta! $set->id}" onclick="return confirm('Nastavit počitadlo jako skryté?\nPočitadlo nebude na webu dostupné.')" class="button"><i class="mmrs-icon-20-disabled"></i>NASTAVIT POČITADLO JAKO SKRYTÉ</a> 
         {/if}
     {/foreach}
 {else}
 <p><strong class="red">Počitadlo je skryté</strong><i class="mmrs-icon-20-disabled"></i></p> 
-<a href="{link verejna!}" onclick="return confirm('Nastavit počitadlo jako veřejné?\nPočitadlo bude na webu dostupné.')">NASTAVIT POČITADLO JAKO VEŘEJNÉ</a>{/if}
+<a href="{link verejna!}" onclick="return confirm('Nastavit počitadlo jako veřejné?\nPočitadlo bude na webu dostupné.')" class="button"><i class="mmrs-icon-20-plus"></i>NASTAVIT POČITADLO JAKO VEŘEJNÉ</a>{/if}
 
 <p>
     <span class="rubriky"><i class="mmrs-icon-20-users"></i>Návštěvy</span>
@@ -31,6 +31,6 @@
     </table>
 </p>
 
-<a href="{link counter!}" onclick="return confirm('Opravdu chcete vymazat údaje o návštěvách?')">VYNULOVAT POČITADLO</a> 
+<a href="{link counter!}" onclick="return confirm('Opravdu chcete vymazat údaje o návštěvách?')" class="button"><i class="mmrs-icon-20-delete"></i>VYNULOVAT POČITADLO</a> 
 
 {/block}

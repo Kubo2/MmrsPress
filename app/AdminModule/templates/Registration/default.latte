@@ -21,15 +21,15 @@
     {foreach $settings->where('select','user') as $set}
         {if $set->public == 0}
             <p><strong class="red">Registrace uživateů je zakázána</strong><i class="mmrs-icon-20-disabled"></i></p> 
-            <a href="{link verejna! $set->id}" onclick="return confirm('Povolit registraci nových uživatelů?')">Povolit registraci</a> 
+            <a href="{link verejna! $set->id}" onclick="return confirm('Povolit registraci nových uživatelů?')" class="button"><i class="mmrs-icon-20-plus"></i>Povolit registraci</a> 
         {else}
             <p><strong  class="green">Registrace uživateů je povolena</strong><i class="mmrs-icon-20-ok"></i></p>
-            <a href="{link skryta! $set->id}" onclick="return confirm('Zakázat registraci nových uživatelů?')">Zakázat registraci</a> 
+            <a href="{link skryta! $set->id}" onclick="return confirm('Zakázat registraci nových uživatelů?')" class="button"><i class="mmrs-icon-20-disabled"></i>Zakázat registraci</a> 
         {/if}
     {/foreach}
 {else}
     <p><strong class="red">Registrace uživateů je zakázánaá</strong><i class="mmrs-icon-20-disabled"></i></p> 
-            <a href="{link verejna!}" onclick="return confirm('Povolit registraci nových uživatelů?')">Povolit registraci</a>{/if}
+            <a href="{link verejna!}" onclick="return confirm('Povolit registraci nových uživatelů?')" class="button"><i class="mmrs-icon-20-plus"></i>Povolit registraci</a>{/if}
 <p>Kompletní oprávnění udělujte jen kompetentním uživatelům!</p>
     {control registrationForm}
 

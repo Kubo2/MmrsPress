@@ -7,13 +7,13 @@
     {foreach $settings->where('select','book') as $set}
         {if $set->public == 0}
             <p><strong class="red">Kniha je nastavena jako skrytá</strong><i class="mmrs-icon-20-disabled"></i></p> 
-            <a href="{link verejna! $set->id}" onclick="return confirm('Nastavit knihu návštěv jako veřejnou?\nKniha bude na webu dostupná.')">NASTAVIT KNIHU JAKO VEŘEJNOU</a> 
+            <a href="{link verejna! $set->id}" onclick="return confirm('Nastavit knihu návštěv jako veřejnou?\nKniha bude na webu dostupná.')" class="button"><i class="mmrs-icon-20-plus"></i>NASTAVIT KNIHU JAKO VEŘEJNOU</a> 
         {else}
             <p><strong  class="green">Kniha je nastavena jako veřejná</strong><i class="mmrs-icon-20-ok"></i></p>
-            <a href="{link skryta! $set->id}" onclick="return confirm('Nastavit knihu návštěv jako skrytou?\nKniha nebude na stránce dostupná.')">NASTAVIT KNIHU JAKO SKRYTOU</a> 
+            <a href="{link skryta! $set->id}" onclick="return confirm('Nastavit knihu návštěv jako skrytou?\nKniha nebude na stránce dostupná.')" class="button"><i class="mmrs-icon-20-disabled"></i>NASTAVIT KNIHU JAKO SKRYTOU</a> 
         {/if}
     {/foreach}
 {else}
     <p><strong class="red">Kniha je nastavena jako skrytá</strong><i class="mmrs-icon-20-disabled"></i></p> 
-            <a href="{link verejna!}" onclick="return confirm('Nastavit knihu návštěv jako veřejnou?\nKniha bude na webu dostupná.')">NASTAVIT KNIHU JAKO VEŘEJNOU</a>{/if}
+            <a href="{link verejna!}" onclick="return confirm('Nastavit knihu návštěv jako veřejnou?\nKniha bude na webu dostupná.')" class="button"><i class="mmrs-icon-20-plus"></i>NASTAVIT KNIHU JAKO VEŘEJNOU</a>{/if}
 {/block}
