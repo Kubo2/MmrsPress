@@ -1,5 +1,6 @@
 {var $title = "Registrace"}
 {block content}
+{if $set_registration == 1}
 <script>
 $(function(){
     // Tabs
@@ -30,13 +31,15 @@ $(function(){
 });
 
 </script>
+{/if}
 {if $user->loggedIn}
 <h1>Editace profilu</h1>
     {control editUserForm}
 {else}
+{if $set_registration == 1}
 <h1>Registrace</h1>
     {control newUserForm}
-{/if}
+
 <a href="#" id="dialog_lnk">Podmínky</a>
 <div id="dialog" title="Podmínky">
  
@@ -81,4 +84,10 @@ $(function(){
             <li>1.5.5 - Do galerie lze přidávat pouze své vlastní fotografie. Při zjištění porušení autorských práv uploadováním fotografie, na kterou nemá dotyčný autorská práva, dojde k jejímu smazání a udělení trestných bodů dotyčnému uživateli, což může vyústit v dočasné omezení jeho aktivit na těchto stránkách.</li>
         </ul>
 </div>
+{else}
+<script>
+parent.location.href='http://<?php echo $_SERVER["HTTP_HOST"]."/registation";?>';
+</script> 
+{/if}
+{/if}
 {/block}
