@@ -141,41 +141,39 @@ class RegistrationPresenter extends \BasePresenter {
         $captchaArray = array('Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipisicing', 'elit', 'eiusmod', 'tempor', 'incididunt', 'labore');
         $cpta = $captchaArray[rand(0, 11)];
 
-        $form = new Form;
-        $form->addGroup('Editace profilu');
-        $form->addText('nick', 'Jméno:', NULL, 15)
+        $forme = new Form;
+        $forme->addGroup('Editace profilu');
+        $forme->addText('nick', 'Jméno:', NULL, 15)
                 ->setDefaultValue($this->getUser()->getIdentity()->users)
                 ->setRequired('Zvolte si přihlašovací jméno')
                 ->addRule(Form::MIN_LENGTH, 'Jméno musí mít alespoň %d znaky', 4);
 
-        $form->addText('email', 'E-mail:')
+        $forme->addText('email', 'E-mail:')
                 ->setDefaultValue($this->getUser()->getIdentity()->email)
-                ->addRule($form::FILLED, 'Email musí být vyplněn!')
-                ->addRule($form::EMAIL, 'Nesprávně uvedený email!');
+                ->addRule($forme::FILLED, 'Email musí být vyplněn!')
+                ->addRule($forme::EMAIL, 'Nesprávně uvedený email!');
 
-        $form->addUpload('avatar', 'Avatar:')
+        $forme->addUpload('avatar', 'Avatar:')
                 ->addCondition(Form::IMAGE, 'Avatar musí být JPEG nebo PNG.')
                 ->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost souboru je 1500 kB.', 1500 * 1024 /* v bytech */);
 
-        $form->addText('web', 'Web:')
+        $forme->addText('webAdr', 'Web:')
                 ->setDefaultValue($this->getUser()->getIdentity()->web)
-                ->setEmptyValue('http://')
-                ->addCondition($form::FILLED)
-                ->addRule($form::URL, 'Nesprávně uvedená adresa webu!');
+                // ->setEmptyValue('http://')
+                ->addCondition($forme::FILLED)
+                ->addRule($forme::URL, 'Nesprávně uvedená adresa webu!');
 
-        $form->addSubmit('send', 'Uložit');
+        $forme->addSubmit('send', 'Uložit');
 
-        $form->onSuccess[] = callback($this, 'editUserFormSubmitted');
+        $forme->onSuccess[] = callback($this, 'editUserFormSubmitted');
 
-        return $form;
+        return $forme;
     }
 
-    public function editUserFormSubmitted($form) {
+    public function editUserFormSubmitted($forme) {
         $file_type = array("image/jpeg", "image/png");
-        $this->model->getUsers()->where('users', $this->getUser()->getIdentity()->users)->update(array(
-            'email' => $form->values->email,
-            'web' => $form->values->web,
-        ));
+
+        // pokud je poslaný obrázek avataru, přejmenuje se
         if (!empty($_FILES["avatar"]["type"])) {
             if (empty($user->identity->avatar)) {
                 $avatar = $this->getUser()->getIdentity()->users . $this->webalize($_FILES["avatar"]["name"]);
@@ -185,6 +183,8 @@ class RegistrationPresenter extends \BasePresenter {
         } else {
             $avatar = NULL;
         }
+
+
         if (!empty($_FILES["avatar"]["type"])) {
             if (in_array($_FILES["avatar"]["type"], $file_type)) {
                 $image_thumb = Image::fromFile($_FILES['avatar']['tmp_name']);
@@ -192,6 +192,8 @@ class RegistrationPresenter extends \BasePresenter {
                 $image_thumb->sharpen();
                 $image_thumb->save(WWW_DIR . '/avatar/' . $avatar, 80);
                 $this->model->getUsers()->where('users', $this->getUser()->getIdentity()->users)->update(array(
+                    'email' => $forme->values->email,
+                    'web' => $forme->values->webAdr,
                     'avatar' => $avatar,
                 ));
                 $this->flashMessage('Profil byl změněn. Některé změny se projeví až po novém přihlášení.');
@@ -200,6 +202,13 @@ class RegistrationPresenter extends \BasePresenter {
                 $this->flashMessage('Avatar může být pouze obrázek jpg nebo png!.');
                 $this->redirect('MyInfo:');
             }
+        } else {
+            $this->model->getUsers()->where('users', $this->getUser()->getIdentity()->users)->update(array(
+                'email' => $forme->values->email,
+                'web' => $forme->values->webAdr
+            ));
+            $this->flashMessage('Profil byl změněn. Některé změny se projeví až po novém přihlášení.');
+            $this->redirect('MyInfo:');
         }
     }
 
