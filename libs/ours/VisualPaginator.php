@@ -1,4 +1,5 @@
 <?php
+
 use Nette\Utils\Paginator;
 use Nette\Application\UI\Control;
 
