@@ -1,0 +1,8 @@
+{
+	"config": {
+		"vendor-dir": "libs"
+	},
+	"require": {
+		"nette/nette": "2.0.7"
+	}
+}
