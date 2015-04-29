@@ -1,0 +1,13 @@
+{
+	"config": {
+		"vendor-dir": "libs"
+	},
+	"autoload": {
+		"files": [
+			"libs/ours/hightlight.php"
+		]
+	},
+	"require": {
+		"nette/nette": "2.0.7"
+	}
+}

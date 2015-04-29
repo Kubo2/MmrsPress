@@ -1,0 +1,4 @@
+# composer libs directory
+libs/*
+# our static libs directory
+!libs/ours
